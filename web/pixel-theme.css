@@ -1,0 +1,967 @@
+/* ============================================================================
+   pixel-theme.css  —  晶脉文旅 游戏内网页 · 像素风主题
+   ----------------------------------------------------------------------------
+   风格来源：《网页素材》参考图 14209276044537.jpg 的实测结果
+     · 纯黑底            #000000      占画面 66%
+     · 金色面板          #c18225      占画面 16%（主色）
+     · 深棕内嵌纹理      #4b2a0b      占画面 2%
+     · 亮部斜面          #e3ac4e / #b8862b
+     · 暗部斜面          #7e5410
+     · 字体              白色像素点阵，字形高 12px，字距 13px（= Zpix 12px 网格）
+     · 边框结构          黑底 → 金色 3px 框 → 内侧暗斜面 → 内凹面色
+   设计令牌集中在 :root，全站 25 个页面共用本文件。
+   优先级策略：全部使用 !important 覆写各页面自身的行内 <style>（不修改 HTML 结构）。
+   ========================================================================= */
+
+/* ----------------------------------------------------------------- 字体 */
+@font-face {
+  font-family: 'Zpix';
+  src: url('assets/zpix.woff2') format('woff2'),
+       url('assets/zpix.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Zpix';
+  src: url('assets/zpix.woff2') format('woff2'),
+       url('assets/zpix.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+/* ----------------------------------------------------------------- 令牌 */
+:root {
+  --px-black:     #000000;
+  --px-ink:       #0a0703;
+
+  --px-panel:     #c18225;   /* 参考图主面板金 */
+  --px-panel-hi:  #e3ac4e;   /* 亮斜面 */
+  --px-panel-lo:  #7e5410;   /* 暗斜面 */
+  --px-panel-dp:  #8a5a14;
+
+  --px-surface:   #1e1508;   /* 内容面板底 */
+  --px-surface-2: #2b1e0c;   /* 次级 / 嵌套 */
+  --px-surface-3: #3a2810;   /* 表头 / 悬停 */
+
+  --px-text:      #ffffff;
+  --px-text-2:    #e2cfa4;
+  --px-text-3:    #a8895a;
+  --px-link:      #ffd27a;
+  --px-link-hi:   #fff6d8;
+
+  --px-ok:        #86b34a;
+  --px-warn:      #d9a13c;
+  --px-danger:    #d24a3a;
+  --px-blue:      #6fa8d6;
+  --px-violet:    #a98fd0;
+
+  --px-shadow-ink: 1px 1px 0 rgba(48,28,4,.95);
+  --px-on-gold:    #241605;   /* 金底上的文字：深棕，对比度 4.9:1 */
+  --px-on-gold-2:  #3d2607;   /* 金底上的次级文字，对比度 3.1:1 */
+
+  /* 复古等宽兜底（字体未加载时也不至于崩版） */
+  --px-mono: 'Zpix', 'Zpix12', 'Fusion Pixel 12px', 'Courier New', monospace;
+}
+
+/* ----------------------------------------------------------------- 全局归零
+   像素风三要素：无圆角、无渐变、无模糊。整站一次性归零。            */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition-property: background-color, color, border-color, left, top !important;
+}
+/* 文字发光/模糊阴影统一清掉，稍后换成硬阴影 */
+*,
+*::before,
+*::after { text-shadow: none !important; }
+
+/* 放大图片时保持硬边（背景图同样生效） */
+*,
+*::before,
+*::after { image-rendering: pixelated !important; }
+
+html {
+  background: var(--px-black) !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--px-mono) !important;
+  color: var(--px-text-2) !important;
+  background-color: var(--px-black) !important;
+  /* 4px 像素网格底纹，呼应参考图的点阵质感 */
+  background-image:
+    linear-gradient(rgba(193,130,37,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(193,130,37,.055) 1px, transparent 1px) !important;
+  background-size: 4px 4px !important;
+  background-attachment: fixed !important;
+  font-size: 12px !important;
+  line-height: 22px !important;
+  letter-spacing: 0 !important;
+  /* 点阵字体关键：关闭一切亚像素定位与字形合成 */
+  font-kerning: none !important;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "kern" 0, "liga" 0, "calt" 0 !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: none !important;
+  font-smooth: never !important;
+  text-rendering: optimizeSpeed !important;
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
+}
+
+/* 点阵字体在任意元素上：关闭字距调整、字形合成与倾斜
+   实测依据：Zpix 只有 400 字重，italic 会触发合成倾斜
+   （灰阶占比 34.0% → 58.4%，笔画被糊）；bold 实测无影响，故保留。 */
+body, body * {
+  font-kerning: none !important;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "kern" 0, "liga" 0, "calt" 0 !important;
+  font-synthesis: none !important;
+  font-style: normal !important;
+}
+i, em, cite, address, dfn, var { font-style: normal !important; }
+
+/* 选中态 */
+::selection { background: var(--px-panel) !important; color: #201603 !important; }
+::-moz-selection { background: var(--px-panel) !important; color: #201603 !important; }
+
+/* 像素滚动条 */
+* { scrollbar-color: var(--px-panel) #120c04; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: #120c04; border-left: 2px solid #2b1e0c; }
+::-webkit-scrollbar-thumb {
+  background: var(--px-panel);
+  border: 2px solid #120c04;
+  box-shadow: inset 2px 2px 0 var(--px-panel-hi), inset -2px -2px 0 var(--px-panel-lo);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--px-panel-hi); }
+
+img { image-rendering: pixelated !important; }
+
+/* ================================================================ 外壳：标题栏
+   参考图的金色面板 + 上下亮暗斜面，用于所有顶部条 / 卡片头 / 分组头     */
+.top, .top-in, .topbar, .navbar, .nav, .subnav, .subbar, .toolbar, .utility,
+.masthead, .tabbar, .top-nav, .header, .main-head, .board-head, .card-head,
+.group-head, .result-head, .page-nav, .top-in, .search-head, .panel-head,
+.section-head {
+  background: var(--px-panel) !important;
+  background-image: none !important;
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.30) !important;
+  border: 0 !important;
+  border-bottom: 3px solid var(--px-panel-lo) !important;
+  box-shadow:
+    inset 0 3px 0 0 var(--px-panel-hi),
+    inset 3px 0 0 0 rgba(255,255,255,.16),
+    0 3px 0 0 var(--px-black) !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+}
+/* 金色条内的一切文字都走深棕 —— 白色/浅色在金上对比度不足，
+   参考图里白字只出现在黑底内嵌框上，金只做边框。 */
+.top *, .top-in *, .topbar *, .navbar *, .nav *, .subnav *, .subbar *, .toolbar *, .utility,
+.masthead *, .tabbar *, .top-nav *, .header *, .main-head *, .board-head *, .card-head,
+.group-head *, .result-head *, .page-nav *, .top-in *, .search-head *, .panel-head,
+.section-head * {
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.26) !important;
+}
+/* 但深色底上的选中项/徽标要恢复浅色字 */
+.menu a.on, .nav a.on, .subnav a.on, .tabs a.on, .tabbar a.on,
+.page-nav a.on, .top-nav a.on, .nav a.on, .menu a:hover, .nav a:hover,
+.subnav a:hover, .navbar a:hover, .top-nav a:hover, .page-nav a:hover,
+.board-head .follow, .card-head .badge, .group-head .badge, .group-head .cnt,
+.src, .top-tag, .essence-tag, .brand-mark {
+  color: var(--px-link) !important;
+  text-shadow: none !important;
+}
+/* 顶部条内部的次级容器不要再套一层金底 */
+.top-in, .nav-in, .topbar-in, .subbar-in, .toolbar-in, .utility-in, .header-in {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+}
+
+/* 粘性导航：gold 条 + 硬阴影 */
+.navbar, .nav, .subnav, .subbar, .toolbar { position: relative; z-index: 50; }
+.navbar { position: sticky !important; top: 0 !important; }
+
+/* 标题栏里的链接与选中项 */
+.top a, .topbar a, .navbar a, .nav a, .subnav a, .subbar a,
+.toolbar a, .top-nav a, .masthead a, .page-nav a, .nav-in a {
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.26) !important;
+}
+.menu a { color: var(--px-on-gold) !important; letter-spacing: 1px !important; }
+.menu a:hover,
+.top a:hover, .navbar a:hover, .subnav a:hover, .subbar a:hover, .nav a:hover,
+.top-nav a:hover, .page-nav a:hover {
+  background: var(--px-surface) !important;
+  color: var(--px-link) !important;
+  text-shadow: none !important;
+}
+.menu a.on, .nav a.on, .subnav a.on, .tabs a.on, .tabbar a.on,
+.page-nav a.on, .top-nav a.on {
+  background: var(--px-surface) !important;
+  color: var(--px-link) !important;
+  text-shadow: none !important;
+  box-shadow: inset 0 -3px 0 0 var(--px-panel-hi), inset 0 3px 0 0 var(--px-panel-lo) !important;
+  border-bottom-color: transparent !important;
+}
+
+/* 导航里的 logo 文字 */
+.logo, .logo-txt b, .board-info h1, .company-header h1, .masthead h1 {
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.35) !important;
+  letter-spacing: 1px !important;
+}
+.logo-txt span, .logo .en, .top .sub, .masthead .en {
+  color: var(--px-on-gold-2) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.22) !important;
+  letter-spacing: 2px !important;
+}
+
+/* 搜索输入条 */
+.searchbox, .searchbox button, .searchbar, .search-bar, .query-box, .input-bar {
+  border: 3px solid var(--px-panel-lo) !important;
+  box-shadow: 0 2px 0 0 var(--px-black) !important;
+}
+
+/* ================================================================ 面板
+   深色内凹面 + 金色描边 + 内侧亮暗斜面（参考图的窗口结构）            */
+.card, .card-body, .group, .section, .sec, .board, .side-card,
+.sidebar-note, .article, .article-content, .post, .thread, .proj,
+.news-item, .result, .result-card, .result-box, .detail-box,
+.form-card, .job-card, .job-list, .company-card, .rank, .rank-item,
+.risk-item, .risk-detail, .item, .timeline, .doc, .msg, .bubble,
+.note, .notice, .scope, .scope-box, .scope-note, .archive-note,
+.disclaimer, .form-tip, .tip, .hint, .chat, .search-card,
+.search-panel, .search-main, .tabs-card, .utility-card, .info-box,
+.paper, .evidence, .case-box, .profile, .user-card, .comp-info,
+.floor, .step, .hit, .result-item, .list-item, .data-box,
+.risk-bar, .risk-num, .risk-txt, .kv, .hl, .highlight {
+  background-color: var(--px-surface) !important;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.014) 0 2px,
+      rgba(0,0,0,0) 0 4px) !important;   /* 极淡 2px 斜纹，模拟参考图内嵌纹理 */
+  background-size: 4px 4px !important;
+  background-attachment: local !important;
+  color: var(--px-text-2) !important;
+  border: 3px solid var(--px-panel) !important;
+  box-shadow:
+    inset 2px 2px 0 0 rgba(0,0,0,.65),
+    inset -2px -2px 0 0 rgba(193,130,37,.35),
+    0 3px 0 0 var(--px-black) !important;
+  /* 布局属性只补缺失者，避免打乱原有排版 */
+}
+/* 原页面若用 padding 撑版式，这里不动 padding，只保证面板最小内边距 */
+.card, .group, .board, .section, .post, .article, .detail-box,
+.risk-detail, .scope-box, .info-box, .data-box, .profile, .paper {
+  padding: 12px !important;
+}
+
+/* 面板内的次级块：再深一档，不重复描边 */
+.card-body, .result-box, .risk-bar, .kv, .hl, .highlight, .step, .floor {
+  background-color: var(--px-surface-2) !important;
+  border: 0 !important;
+  border-top: 2px solid rgba(193,130,37,.28) !important;
+  box-shadow: none !important;
+  padding: 8px 10px !important;
+}
+
+/* 飞书/卡片类嵌套：禁止无限套框 */
+.card .card, .card-body .card, .group .card, .section .card,
+.card .group, .card .section, .board .card {
+  border-width: 2px !important;
+  box-shadow: none !important;
+  margin-bottom: 8px !important;
+}
+
+/* 侧栏 */
+.side, .side-card, .sidebar-note, .side .side-card { background-color: var(--px-surface) !important; }
+.side-card h3, .sidebar-note h4 {
+  color: #ffffff !important;
+  text-shadow: var(--px-shadow-ink) !important;
+  letter-spacing: 1px !important;
+  font-weight: 400 !important;
+}
+.side-card li, .footer li { border-bottom: 2px dotted rgba(193,130,37,.3) !important; }
+
+/* ================================================================ 段落与文字 */
+p, li, td, th, div, span, label, .abs, .body, .txt, .info, .content {
+  letter-spacing: 0px !important;
+}
+p, li, .abs, .lead, .info, .txt { color: var(--px-text-2) !important; }
+.lead { color: var(--px-text) !important; }
+.sub, .meta, .d, .desc, .foot, .footnote, .hint, .form-tip,
+.note, .notice, .disclaimer, .scope-note, .archive-note,
+.beian, .date, .time, .stat, .dateline, .article-meta, .user-meta {
+  color: var(--px-text-3) !important;
+}
+em, i, .en, .kicker { color: var(--px-text-3) !important; font-style: normal !important; }
+strong, b, .k, .kw { color: var(--px-text) !important; font-weight: 400 !important; }
+code, kbd, samp, pre, .code {
+  font-family: var(--px-mono) !important;
+  background: var(--px-surface-2) !important;
+  color: var(--px-ok) !important;
+  border: 2px solid rgba(193,130,37,.35) !important;
+  padding: 1px 5px !important;
+}
+
+/* 标题层级：白色 + 硬阴影，呼应参考图白色点阵字 */
+h1, h2, h3, h4, h5, h6, .title, .sec-head h2, .section-title,
+.article-title, .post-head, .proj-body h3, .news-item h3,
+.thread .title, .job-title, .risk-num, .comp-info h3, .paper-title {
+  color: var(--px-text) !important;
+  text-shadow: var(--px-shadow-ink) !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+}
+
+/* 链接 */
+a {
+  color: var(--px-link) !important;
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
+a:hover {
+  color: var(--px-link-hi) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+a:visited { color: var(--px-link) !important; }
+
+/* 标题内链接继承标题色 */
+h1 a, h2 a, h3 a, h4 a, .title a, .news-item h3 a, .article h3 a,
+.thread .title, .comp-info h3 a {
+  color: var(--px-text) !important;
+}
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, .article h3 a:hover {
+  color: var(--px-link) !important;
+}
+
+/* 装饰线条 / 分隔 */
+.line, .divider, hr, .bar {
+  background: var(--px-panel) !important;
+  background-image: none !important;
+  border: 0 !important;
+  height: 3px !important;
+  box-shadow: 0 0 0 1px var(--px-black) !important;
+}
+hr { margin: 14px 0 !important; }
+
+/* ================================================================ 表格
+   金色表头 + 凹面表格体 + 3px 金色十字格线                             */
+table, table.info, table.list {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  border: 3px solid var(--px-panel) !important;
+  background-color: var(--px-surface) !important;
+  box-shadow: 0 3px 0 0 var(--px-black) !important;
+}
+th, table.info th, table.list th {
+  background: var(--px-panel) !important;
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.26) !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  border: 1px solid var(--px-panel-dp) !important;
+  padding: 7px 10px !important;
+  text-align: left !important;
+}
+td, table.info td, table.list td {
+  background: transparent !important;
+  color: var(--px-text-2) !important;
+  border: 1px solid rgba(193,130,37,.42) !important;
+  padding: 7px 10px !important;
+  vertical-align: top !important;
+}
+tbody tr:hover td, tr:hover td { background: rgba(193,130,37,.1) !important; }
+table.info th { width: auto !important; }
+
+/* ================================================================ 表单 */
+input, textarea, select, option, button, .btn, .cta-button,
+.follow, .loadmore, .submit, .search-box button, .expand, .more {
+  font-family: var(--px-mono) !important;
+  letter-spacing: 1px !important;
+}
+input, textarea, select {
+  background-color: var(--px-ink) !important;
+  color: var(--px-text) !important;
+  border: 3px solid var(--px-panel) !important;
+  box-shadow: inset 2px 2px 0 0 rgba(0,0,0,.8) !important;
+  padding: 6px 10px !important;
+  outline: 0 !important;
+}
+input::placeholder, textarea::placeholder { color: var(--px-text-3) !important; }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--px-panel-hi) !important;
+  background-color: var(--px-surface-2) !important;
+}
+option { background: var(--px-surface) !important; color: var(--px-text) !important; }
+
+/* 按钮：金色 + 斜面 + 按下位移 2px（像像素游戏按键） */
+button, .btn, .cta-button, .follow, .loadmore, .submit {
+  background: var(--px-panel) !important;
+  background-image: none !important;
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.30) !important;
+  border: 3px solid var(--px-panel-lo) !important;
+  box-shadow:
+    inset 2px 2px 0 0 var(--px-panel-hi),
+    inset -2px -2px 0 0 var(--px-panel-dp),
+    0 3px 0 0 var(--px-black) !important;
+  padding: 6px 16px !important;
+  cursor: pointer !important;
+  transform: none !important;
+  font-weight: 400 !important;
+}
+button:hover, .btn:hover, .cta-button:hover, .follow:hover, .loadmore:hover, .submit:hover {
+  background: var(--px-panel-hi) !important;
+  color: #201603 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+button:active, .btn:active, .cta-button:active, .follow:active,
+.loadmore:active, .submit:active {
+  box-shadow:
+    inset 2px 2px 0 0 var(--px-panel-dp),
+    inset -2px -2px 0 0 var(--px-panel-hi) !important;
+  background: var(--px-panel-dp) !important;
+}
+/* 链接式按钮（原页 .more / .expand 等文字按钮） */
+.more, .expand { color: var(--px-link) !important; background: transparent !important; box-shadow: none !important; border: 0 !important; }
+
+/* ================================================================ 标签 / 徽标 / 状态 */
+.badge, .tag, .st, .src, .top-tag, .essence-tag, .chips span,
+.grade, .risk-num, .cnt, .type-tag, .hl-tag {
+  display: inline-block !important;
+  background: var(--px-surface-3) !important;
+  color: var(--px-text-2) !important;
+  text-shadow: none !important;
+  border: 2px solid var(--px-panel-lo) !important;
+  padding: 0 7px !important;
+  letter-spacing: 1px !important;
+  font-weight: 400 !important;
+}
+.src, .top-tag, .essence-tag { background: var(--px-panel) !important; color: #ffffff !important; text-shadow: var(--px-shadow-ink) !important; border-color: var(--px-panel-lo) !important; }
+
+/* 状态语义色 */
+.st-done, .st-blue, .st-ok, .tag-open, .status-ok { background: #24380f !important; color: #b6dd7c !important; border-color: #4d7323 !important; }
+.st-open, .st-wait, .st-org, .status-warn { background: #3d2a08 !important; color: #efc06a !important; border-color: #8a5a14 !important; }
+.st-in, .st-red, .st-close, .status-danger, .warn, .alert { background: #3d120c !important; color: #f08878 !important; border-color: #8a2a1c !important; }
+.st-out, .st-gray, .nodata, .noresult, .empty, .none, .deleted { background: #241d14 !important; color: var(--px-text-3) !important; border-color: #4a3a24 !important; }
+.b-clue, .t-clue, .tag-civil { background: #3a1830 !important; color: #f0a0c8 !important; border-color: #7a2f5c !important; }
+.b-fake, .t-fake { background: #0f2d33 !important; color: #8ad0dc !important; border-color: #2c5e68 !important; }
+.b-mix { background: #3d2a08 !important; color: #efc06a !important; border-color: #8a5a14 !important; }
+.tag-labor { background: #3d120c !important; color: #f08878 !important; border-color: #8a2a1c !important; }
+.tag-mediate { background: #24380f !important; color: #b6dd7c !important; border-color: #4d7323 !important; }
+
+/* ================================================================ 图片区块
+   所有背景图保持原定位，只保证硬边放大 + 金色描边                      */
+.logo-mark, .board-icon, .av, .avatar, .thumb, .news-fig, .proj-fig,
+.about-fig, .hero .bg, .slide .bg, .crypt-figure, .bg-animation,
+.hit-fig, .figure, .front-fig, .image, .avatar-col, .company-logo,
+.article .thumb, .figure-feature, .image-placeholder {
+  border: 3px solid var(--px-panel) !important;
+  box-shadow: 0 0 0 2px var(--px-black) !important;
+  overflow: hidden !important;
+}
+/* 头像圆形 → 方形金框（像素风不保留圆形） */
+.av, .avatar, .board-icon, .logo-mark, .company-logo {
+  border-width: 2px !important;
+  box-shadow: 0 0 0 2px var(--px-black) !important;
+}
+/* 图注遮罩：原为渐变，换成硬边黑条 */
+.thumb::after, .news-fig::after, .figure::after, .hit-fig::after,
+.proj-fig::after, .about-fig::after, .figure-feature::after,
+.crypt-figure::after, .hero .veil, .slide .veil {
+  background: rgba(0,0,0,.72) !important;
+  background-image: none !important;
+  color: var(--px-text) !important;
+  text-shadow: var(--px-shadow-ink) !important;
+  letter-spacing: 1px !important;
+}
+.crypt-figure figcaption {
+  background: rgba(0,0,0,.82) !important;
+  background-image: none !important;
+  color: var(--px-text-2) !important;
+}
+/* 图片占位块提示 */
+.image-placeholder, .figure {
+  background-color: var(--px-surface-2) !important;
+  color: var(--px-text-3) !important;
+}
+
+/* ================================================================ 参考图中的"对话"元素
+   index / shenmai 等页面中的装饰与特效，统一压成方块                    */
+.dots i { background: var(--px-panel-lo) !important; border-radius: 0 !important; height: 4px !important; width: 20px !important; }
+.dots i.on { background: var(--px-panel-hi) !important; width: 34px !important; }
+.symbol, .mystic-symbols, .ic, .icon {
+  color: var(--px-panel-hi) !important;
+  text-shadow: 2px 2px 0 rgba(48,28,4,.8) !important;
+  filter: none !important;
+}
+.symbol i, .star, .stars { filter: none !important; }
+
+/* 确定圆点/圆形装饰 → 方形 */
+.circle { background: transparent !important; }
+.step-no, .floor-no, .rank .no { background: var(--px-panel) !important; color: #201603 !important; border: 2px solid var(--px-panel-lo) !important; }
+
+/* ================================================================ 页脚 */
+.footer, footer, .foot, .footer-in {
+  background-color: var(--px-black) !important;
+  background-image: none !important;
+  color: var(--px-text-3) !important;
+  border-top: 3px solid var(--px-panel) !important;
+  box-shadow: inset 0 3px 0 0 rgba(193,130,37,.25) !important;
+}
+.footer h4, footer h4 { color: var(--px-text) !important; text-shadow: var(--px-shadow-ink) !important; }
+.footer-grid { border-bottom: 3px solid rgba(193,130,37,.45) !important; }
+.footer a, footer a { color: var(--px-text-2) !important; }
+.footer a:hover, footer a:hover { color: var(--px-link) !important; }
+
+/* ================================================================ 特殊页兜底 */
+
+/* index.html 大轮播：黑底金框，文字白色硬阴影 */
+.hero {
+  background-color: var(--px-black) !important;
+  border-top: 3px solid var(--px-panel) !important;
+  border-bottom: 3px solid var(--px-panel) !important;
+}
+.slide-txt h2 { text-shadow: 3px 3px 0 rgba(0,0,0,.9) !important; }
+.slide-txt .kicker, .slide-txt p { text-shadow: 2px 2px 0 rgba(0,0,0,.9) !important; color: #fff !important; }
+.about-fig::after, .about .lead { text-shadow: none !important; }
+.stats .stat { background-color: var(--px-surface) !important; }
+.stat b { color: var(--px-panel-hi) !important; text-shadow: 2px 2px 0 rgba(0,0,0,.8) !important; }
+.invest { background: var(--px-black) !important; background-image: none !important; }
+.invest .sec-head h2 { color: var(--px-text) !important; }
+.feat { background-color: var(--px-surface-2) !important; }
+.contact { color: var(--px-text-3) !important; }
+
+/* game-nav.html（深色调查导航） */
+.group { border-width: 3px !important; }
+.group-head .cnt, .group-head .badge { border: 2px solid var(--px-panel-lo) !important; }
+
+/* search.html 搜索结果页 */
+.searchbox, .searchbox input { background-color: var(--px-ink) !important; }
+.tabs { border-bottom: 3px solid var(--px-panel-lo) !important; }
+.r h3 { font-size: inherit; }
+.ad { background-color: var(--px-surface) !important; border: 3px solid var(--px-panel-lo) !important; }
+.sitelinks a { color: var(--px-link) !important; }
+
+/* shenmai.html 神脉教会：保留神秘感，改用黑金配色 + 硬边 */
+.shenmai-page, .cta-button { background-image: none !important; }
+.tenets li { background-color: rgba(193,130,37,.12) !important; border-left: 4px solid var(--px-panel) !important; }
+.logo, .section h2 { animation: none !important; }
+
+/* 报业复古页 newspaper.html：米黄纸 → 深色像素报 */
+.paper, .newspaper, .paper-title { background-color: var(--px-surface) !important; }
+.paper-title { border-bottom: 3px double var(--px-panel) !important; }
+
+/* 贴吧头像与楼层 */
+.thread { border-bottom: 2px solid rgba(193,130,37,.3) !important; }
+.thread:hover { background-color: var(--px-surface-2) !important; }
+.replybox { background-color: var(--px-surface-2) !important; border-bottom: 3px solid var(--px-panel-lo) !important; }
+.replies b { color: var(--px-panel-hi) !important; }
+
+/* 悬浮类效果统一成"抬起 3px"，不用阴影 */
+.stat:hover, .proj:hover, .news-item:hover, .article:hover,
+.card:hover, .thread:hover {
+  transform: none !important;
+  box-shadow:
+    inset 2px 2px 0 0 rgba(0,0,0,.65),
+    inset -2px -2px 0 0 rgba(193,130,37,.4),
+    0 0 0 2px var(--px-panel-hi),
+    0 3px 0 0 var(--px-black) !important;
+}
+
+/* ================================================================ 补漏（按 QA 实测逐条覆盖）
+   以下选择器的优先级高于通用规则（如 .sec-head .line、.avatar.ai），
+   必须按同等或更高优先级重写，否则原作样式会赢。                      */
+
+/* 1) 装饰线：原作 .sec-head .line 用了渐变 */
+.sec-head .line, .sec-head .line,
+.section-title .line, .title .line,
+.sec-head > .line { background: var(--px-panel) !important; background-image: none !important; }
+/* 内联 style 里写死渐变的那条（index.html） */
+.line[style] { background: var(--px-panel) !important; background-image: none !important; }
+
+/* 2) shenmai.html 的 <header> 元素带多层渐变 */
+header {
+  background-color: var(--px-black) !important;
+  background-image: none !important;
+  border-bottom: 3px solid var(--px-panel) !important;
+  box-shadow: inset 0 -3px 0 0 rgba(193,130,37,.3) !important;
+}
+
+/* 3) 头像方块：原作按身份用渐变底 */
+.avatar, .avatar.ai, .avatar.user, .avatar-col,
+.comp-logo, .company-logo, .logo-mark, .board-icon,
+.icon-badge, .risk-num, .grade, .rank-num {
+  background-image: none !important;
+}
+.avatar, .avatar-col { background-color: var(--px-surface-2) !important; color: var(--px-text-2) !important; }
+.avatar.ai, .comp-logo, .company-logo, .logo-mark, .board-icon {
+  background-color: var(--px-panel) !important; color: #201603 !important;
+  box-shadow: 0 0 0 2px var(--px-black), inset 2px 2px 0 0 var(--px-panel-hi) !important;
+}
+.avatar.user { background-color: var(--px-surface-3) !important; color: var(--px-text-2) !important; }
+
+/* 4) 图注 <figcaption>（chuangyeshi.html 等）——原为渐变遮罩 */
+figcaption, .image-placeholder figcaption, .figure-feature figcaption,
+.crypt-figure figcaption, .figure figcaption {
+  background: rgba(0,0,0,.75) !important;
+  background-image: none !important;
+  color: var(--px-text) !important;
+  text-shadow: var(--px-shadow-ink) !important;
+  border-top: 2px solid var(--px-panel-lo) !important;
+}
+
+/* 5) 其余零散渐变：气泡、引用、纸面、封面等 */
+.bubble, .quote, blockquote, .post, .paper, .cover, .banner,
+.notice, .tip, .thinking, .msg, .suggest, .highlight, .hl {
+  background-image: none !important;
+}
+blockquote, .quote {
+  background-color: var(--px-surface-2) !important;
+  border-left: 4px solid var(--px-panel) !important;
+  color: var(--px-text-2) !important;
+}
+.highlight, .hl { background-color: rgba(193,130,37,.22) !important; color: var(--px-text) !important; }
+
+/* 6) 动画：像素风不需要浮动/发光动画 */
+*, *::before, *::after {
+  animation-duration: .001s !important;
+  animation-iteration-count: 1 !important;
+  animation-fill-mode: none !important;
+}
+/* 但保留轮播淡入的可读性：直接切显隐 */
+.slide { transition-property: opacity !important; }
+.bg-animation { display: none !important; }
+
+/* 7) 全局过渡统一为瞬时，保证"硬切换"手感 */
+*, *::before, *::after {
+  transition-duration: .06s !important;
+  transition-timing-function: steps(2, end) !important;
+}
+
+/* 打印：交给浏览器，避免金底墨污 */
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  * { text-shadow: none !important; box-shadow: none !important; }
+}
+
+/* ============================================================================
+   最终校正段 · 文字配色层次（本段放最后，后面的覆盖前面的）
+   ----------------------------------------------------------------------------
+   参考图的色彩关系只有两条：
+     A. 黑底 / 深棕内嵌面  →  白色点阵字（画面主体，白字都在这）
+     B. 金色条（标题栏 / 表头 / 按钮）→  深棕字
+        金 #c18225 上放白字只有 1.0~2.6:1，完全不可读，必须用深棕 #2a1a05（5.6:1）
+   顺序不可调换。
+   ========================================================================= */
+
+/* ===== 第 1 层 · 全站默认：深色底 → 浅色字 ===== */
+body { color: var(--px-text-2); }
+body * { color: var(--px-text-2); }
+h1, h2, h3, h4, h5, h6, b, strong, .lead, .title, .kv b { color: var(--px-text) !important; }
+a, .more, .expand { color: var(--px-link) !important; }
+a:hover, .more:hover, .expand:hover { color: var(--px-link-hi) !important; }
+
+/* ===== 第 2 层 · 金色条：金底 + 深棕字 ===== */
+.top, .topbar, .navbar, .nav, .subnav, .subbar, .toolbar, .utility,
+.masthead, .tabbar, .top-nav, .header, .main-head, .board-head, .card-head,
+.group-head, .result-head, .page-nav, .search-head, .panel-head, .section-head,
+.top-in, .header-in, .toolbar-in, .subbar-in { background-color: var(--px-panel) !important; }
+
+.top *, .top-in *, .topbar *, .navbar *, .nav *, .subnav *, .subbar *,
+.toolbar *, .utility *, .masthead *, .tabbar *, .top-nav *, .header *,
+.header-in *, .main-head *, .board-head *, .card-head *, .group-head *,
+.result-head *, .page-nav *, .search-head *, .panel-head *, .section-head * {
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.26) !important;
+}
+
+/* ===== 第 3 层 · 金条里的内嵌件：反转为深色底 + 浅色字 =====
+   按钮 / 徽标 / 标签 / 输入框 / 表格落在金条上时必须反转，
+   否则就是"金底金字"。这正是参考图金框内部那圈深色面板的做法。 */
+.top button, .navbar button, .nav button, .subnav button, .header button,
+.main-head button, .board-head button, .card-head button, .group-head button,
+.top-in button, .search-head button, .panel-head button, .toolbar button,
+.top .badge, .navbar .badge, .header .badge, .main-head .badge,
+.top .tag, .header .tag, .main-head .tag,
+.top .src, .header .src, .main-head .src,
+.top .top-tag, .top .essence-tag, .top .follow, .top .loadmore,
+.top input, .top select, .top textarea,
+.navbar input, .search-head input, .searchbar input, .searchbox input,
+.card-head input, .main-head input, .header input, .top-in input,
+.top table, .main-head table, .header table, .card-head table,
+.top th, .main-head th, .header th, .card-head th, .group-head th,
+.top td, .main-head td, .header td, .card-head td, .group-head td {
+  color: var(--px-text) !important;
+}
+
+/* ===== 第 4 层 · 按钮：金底 + 深棕字 + 像素斜面 ===== */
+button, .btn, .cta-button, .submit, .follow, .loadmore, .searchbox button,
+.searchbar button, .search-bar button, .input-bar button, input[type=submit] {
+  background: var(--px-panel) !important;
+  background-image: none !important;
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.3) !important;
+  border: 3px solid var(--px-panel-lo) !important;
+  box-shadow:
+    inset 2px 2px 0 0 var(--px-panel-hi),
+    inset -2px -2px 0 0 var(--px-panel-dp),
+    0 3px 0 0 var(--px-black) !important;
+}
+button:hover, .btn:hover, .cta-button:hover, .submit:hover, .follow:hover,
+.loadmore:hover, .searchbox button:hover, .searchbar button:hover { background: var(--px-panel-hi) !important; color: #201603 !important; text-shadow: none !important; }
+button:active, .btn:active, .submit:active {
+  background: var(--px-panel-dp) !important; color: #f5e2ba !important;
+  box-shadow: inset 2px 2px 0 0 rgba(0,0,0,.45), inset -2px -2px 0 0 var(--px-panel-hi), 0 1px 0 0 var(--px-black) !important;
+}
+.loadmore { display: block !important; }
+
+/* ===== 第 5 层 · 徽标 / 标签 / 状态 ===== */
+.badge, .tag, .st, .src, .top-tag, .essence-tag, .grade, .cnt,
+.case-type, .chips span, .tag-civil, .tag-labor, .tag-mediate {
+  background: var(--px-surface-3) !important;
+  color: var(--px-text-2) !important;
+  border: 2px solid var(--px-panel-lo) !important;
+  text-shadow: none !important;
+}
+
+/* ===== 第 6 层 · 表头 ===== */
+th, table.info th, table.list th {
+  background: var(--px-panel) !important;
+  color: var(--px-on-gold) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.26) !important;
+}
+
+/* ===== 第 7 层 · 深色容器内的次级说明文字 ===== */
+.wrap .sub, .wrap .en, .wrap .meta, .main .sub, .main .en, .main .meta,
+.content .sub, .content .en, .content .meta, .sec .sub, .sec .en,
+.card .sub, .card .en, .card .meta, .group .sub, .group .en,
+.result .sub, .result .en, .board .sub, .board .en,
+.side .sub, .side .en, .footer .sub, .footer .en,
+.board-info .meta, .comp-info .meta, .stat span,
+.notice, .foot, .footnote, .hint, .form-tip, .disclaimer,
+.scope-note, .archive-note, .beian, .dateline, .d { color: var(--px-text-3) !important; text-shadow: none !important; }
+
+/* ===== 第 8 层 · 深色容器内的标题与正文回到浅色 ===== */
+.wrap h1, .wrap h2, .wrap h3, .wrap h4, .main h1, .main h2, .main h3, .main h4,
+.content h1, .content h2, .content h3, .content h4,
+.card h1, .card h2, .card h3, .card h4, .card-body h3, .card-body h4,
+.group h2, .group h3, .group h4, .board h1, .board h2,
+.board-info h1, .comp-info h1, .side h3, .side h4,
+.sec-head h2, .section-title, .article-title, .risk-detail h4,
+.comp-info b, .base b, .card-body b { color: var(--px-text) !important; text-shadow: 1px 1px 0 rgba(0,0,0,.7) !important; }
+.wrap p, .wrap li, .wrap td, .main p, .main li, .main td,
+.content p, .content li, .content td, .card-body p, .card-body li,
+.board p, .board li, .side li, .group td, .group li, .comp-info div { color: var(--px-text-2) !important; }
+
+/* ===== 第 9 层 · 零散特例 ===== */
+/* shenmai 的 h1.logo 在黑底上 → 白字 */
+h1.logo, header .logo { color: var(--px-text) !important; text-shadow: 2px 2px 0 rgba(193,130,37,.6) !important; }
+/* 金条上的 .en / .sub 用次一档深棕 */
+.top .en, .top .sub, .masthead .en, .masthead .info,
+.header .en, .header .sub, .top-in .en, .top-in .sub { color: var(--px-on-gold-2) !important; }
+/* 导航选中项：深色底 + 金边 + 浅字 */
+.menu a.on, .nav a.on, .subnav a.on, .subbar a.on, .tabs a.on,
+.tabbar a.on, .page-nav a.on, .top-nav a.on {
+  background: var(--px-surface) !important;
+  color: var(--px-link) !important;
+  text-shadow: none !important;
+}
+/* 搜索框内的输入框明确反转（避免金底金字） */
+.searchbox input, .searchbar input, .search-box input, .query-box input,
+input[type=text], input[type=search], textarea, select {
+  background-color: var(--px-ink) !important;
+  color: var(--px-text) !important;
+}
+
+/* ===== 第 10 层 · 同一 class 跨底色的冲突（QA 实测逐条修正） ===== */
+/* .sub / .sort / .info 在金条里 → 次一档深棕 */
+body .card-head .sub, body .card-head .sort, body .card-head .info, body .card-head .meta,
+body .main-head .sub, body .main-head .sort, body .main-head .info, body .main-head .meta,
+body .header .sub, body .header .sort, body .header .info, body .header .meta,
+body .top .sub, body .top .sort, body .top .info, body .top .meta,
+body .masthead .sub, body .masthead .sort, body .masthead .info,
+body .group-head .sub, body .group-head .sort, body .group-head .info,
+body .board-head .sub, body .board-head .sort, body .board-head .info,
+body .result-head .sub, body .result-head .sort, body .result-head .info, body .main-head .sub {
+  color: var(--px-on-gold-2) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2) !important;
+}
+/* 它们在深色容器里 → 浅色（覆盖上一条） */
+.card .sub, .card .sort, .card .info, .card .meta,
+.main .sub, .main .sort, .main .info, .main .meta,
+.content .sub, .content .sort, .content .info, .content .meta,
+.wrap .sub, .wrap .sort, .wrap .info, .wrap .meta,
+.group .sub, .group .info, .group .meta,
+.board .sub, .board .info, .board .meta,
+.side .sub, .side .info, .footer .sub, .footer .info {
+  color: var(--px-text-3) !important;
+  text-shadow: none !important;
+}
+/* 状态徽标 .st 内嵌件（如"存续"）→ 深色底 + 浅字 */
+.st, .status, .st-done, .st-open, .st-out, .st-in,
+.st-blue, .st-close, .st-filed, .st-gray, .st-org, .st-red, .st-wait {
+  color: var(--px-text-2) !important;
+}
+/* 关注按钮：显式反转（它有时落在金条上、有时落在深色板上） */
+.board-head .follow, .card-head .follow, .main-head .follow,
+.top .follow, .header .follow, button.follow {
+  background: var(--px-surface) !important;
+  color: var(--px-link) !important;
+  border-color: var(--px-panel-lo) !important;
+  text-shadow: none !important;
+}
+.board-head .follow:hover, button.follow:hover {
+  background: var(--px-panel-hi) !important;
+  color: #201603 !important;
+}
+
+/* ===== 第 11 层 · 最终兜底：任何仍在金底上的浅色文字强制转深棕 ===== */
+[class*="card-head"] *, [class*="main-head"] *, [class*="group-head"] *,
+.top [class*="sub"], .masthead [class*="sub"] {
+  text-shadow: none;
+}
+
+/* ============================================================================
+   像素光标 · 游戏内浏览器网页
+   ----------------------------------------------------------------------------
+   鼠标位于游戏内浏览器（含 iframe 网页内容）时，默认箭头换成与本站金棕配色
+   一致的像素光标：黄底 #ffcf2a + 深棕描边 #241605（--px-on-gold），
+   左上角带浅黄高光 #fff0a8。
+   可点击元素切换为像素手指。iframe 内的光标由本文档决定，故规则写在这里；
+   浏览器外壳（地址栏 / 边框）的光标在 game/css/style.css 中同步。
+   ========================================================================= */
+html, body, * {
+  cursor: url("cursor-arrow.svg") 0 0, default !important;
+}
+a, a *, button, button *, .btn, .cta-button, .submit, .follow, .loadmore,
+select, summary, [role="button"], input[type="submit"], input[type="button"],
+input[type="reset"], input[type="checkbox"], input[type="radio"], label[for] {
+  cursor: url("cursor-hand.svg") 5 0, pointer !important;
+}
+
+/* ===== 第 12 层 · 内嵌深色面板：显式恢复浅色（按 QA 实测补） ===== */
+/* tianyancha 的金色标题区里嵌了一块 .comp-info 深色面板，
+   第 2 层的 .main-head * 把它的白字压成了深棕 → 这里显式翻回来。 */
+.comp-info, .comp-info * { color: var(--px-text-2) !important; text-shadow: none !important; }
+.comp-info h1, .comp-info b, .comp-info strong, .comp-info .name { color: var(--px-text) !important; }
+.comp-info a { color: var(--px-link) !important; }
+/* 金条上的深色内嵌小块（按钮/徽标/标签/输入框）恢复浅色字 */
+.card-head button, .card-head .badge, .card-head .tag, .card-head .cnt,
+.main-head button, .main-head .badge, .main-head .tag, .main-head .cnt,
+.group-head button, .group-head .badge, .group-head .tag, .group-head .cnt,
+.board-head button, .board-head .badge, .board-head .tag,
+.result-head button, .result-head .badge, .result-head .tag, .result-head .cnt,
+.top button, .header button, .header .badge, .header .tag,
+.top .top-tag, .top .essence-tag,
+.card-head input, .main-head input, .header input { color: var(--px-text) !important; }
+
+/* ============================================================================
+   窄屏适配 · 手机浏览器
+   ----------------------------------------------------------------------------
+   游戏内手机 iframe 视口约 360px，命中本段；电脑 iframe 宽度 > 700px，不命中，
+   桌面版式不受影响。目标：消除固定留白与多栏布局导致的横向溢出。
+   ========================================================================= */
+@media (max-width: 700px) {
+  html, body { overflow-x: hidden !important; }
+
+  /* 1) 通用容器：去掉超宽上限，收窄内边距 */
+  .top, .top-in, .topbar-in, .nav, .nav-in, .subnav, .subnav-in,
+  .subbar, .subbar-in, .utility, .utility-in, .toolbar, .toolbar-in,
+  .masthead, .header, .header-in, .crumb, .searchbar, .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .wrap { max-width: 100% !important; padding: 0 12px !important; margin: 12px auto 24px !important; }
+  .top { padding: 12px 12px 0 !important; gap: 12px !important; }
+
+  /* 顶部导航条允许折行，避免把 logo / 菜单挤出屏幕 */
+  .top, .top-in, .topbar, .topbar-in, .nav, .nav-in, .subnav-in, .subbar-in,
+  .toolbar-in, .utility-in, .header-in, .top-nav, .menu, .search-row, .form-row,
+  .query-box, .search-bar, .search-main, .base, .risk-detail, .scope, .actions {
+    flex-wrap: wrap !important;
+  }
+  .scope { margin-left: 0 !important; }
+
+  /* 2) 搜索引擎结果页的固定左留白归零 */
+  .tabs { margin: 14px 0 0 !important; padding: 0 12px !important; gap: 12px !important; overflow-x: auto !important; }
+  .results { margin: 14px 0 24px !important; max-width: 100% !important; padding: 0 12px !important; }
+  footer { padding: 12px !important; }
+
+  /* 3) 两栏 flex（侧栏 / 报纸版面 / 穿透图）改单列
+        注意：原 .wrap 多带 align-items:flex-start，改列向后主轴变成纵轴，
+        若不定 stretch，flex:1 的子项（.board 等）会收缩到 min-content 宽度而横向溢出。 */
+  .wrap, .layout, .main-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .board, .main, .content-col { width: 100% !important; }
+  .side, .pages, .col { width: 100% !important; flex-shrink: 1 !important; }
+  .node { flex-wrap: wrap !important; }
+  .node .col { width: 100% !important; }
+
+  /* 4) 多列 grid 改单列（数据卡 .stats 保留两列） */
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; margin-top: 24px !important; }
+  .about-grid, .projects-grid, .invest-feats, .grid3, .footer-grid,
+  .sitelinks, .basic, .expand .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* 5) 首屏 hero、配图与图文卡 */
+  .hero { height: auto !important; min-height: 300px !important; }
+  .slide-txt h2 { font-size: 24px !important; line-height: 1.3 !important; }
+  .proj-fig { height: 140px !important; }
+  .news-fig, .thumb { width: 100% !important; height: 150px !important; }
+  .news-item, .article, .hit { flex-direction: column !important; gap: 10px !important; }
+
+  /* 6) 标题与正文尺寸收敛 */
+  h1 { font-size: 20px !important; }
+  h2 { font-size: 17px !important; }
+  h3 { font-size: 15px !important; }
+  .r h3, .job-title, .article h3, .news-item h3, .paper-title, .section-title {
+    font-size: 15px !important; line-height: 1.4 !important;
+  }
+
+  /* 7) 表格：取消固定列宽，允许折行，避免横向溢出 */
+  table { width: 100% !important; table-layout: auto !important; }
+  th, td { width: auto !important; padding: 7px 8px !important; font-size: 11px !important; word-break: break-word !important; }
+
+  /* 8) 媒体与表单自适应 */
+  img { max-width: 100% !important; height: auto !important; }
+  input, select, textarea { max-width: 100% !important; }
+  .searchbox, .searchbar, .search-bar, .query-box, .input-in { width: 100% !important; max-width: 100% !important; }
+  .company-card, .job-card { padding: 16px !important; }
+}
+
+/* ===== 第 12 层 · 内嵌深色面板：显式恢复浅色（按 QA 实测补） ===== */
+/* tianyancha 的金色标题区里嵌了一块 .comp-info 深色面板，
+   第 2 层的 .main-head * 把它的白字压成了深棕 → 这里显式翻回来。 */
+.comp-info, .comp-info * { color: var(--px-text-2) !important; text-shadow: none !important; }
+.comp-info h1, .comp-info b, .comp-info strong, .comp-info .name { color: var(--px-text) !important; }
+.comp-info a { color: var(--px-link) !important; }
+/* 金条上的深色内嵌小块（按钮/徽标/标签/输入框）恢复浅色字 */
+.card-head button, .card-head .badge, .card-head .tag, .card-head .cnt,
+.main-head button, .main-head .badge, .main-head .tag, .main-head .cnt,
+.group-head button, .group-head .badge, .group-head .tag, .group-head .cnt,
+.board-head button, .board-head .badge, .board-head .tag,
+.result-head button, .result-head .badge, .result-head .tag, .result-head .cnt,
+.top button, .header button, .header .badge, .header .tag,
+.top .top-tag, .top .essence-tag,
+.card-head input, .main-head input, .header input { color: var(--px-text) !important; }

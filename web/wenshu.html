@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国裁判文书网 - 文书检索</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #8b1a1a; color: #fff; padding: 18px 0}
+.top-in{max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 18px}
+.emblem{width: 52px; height: 52px; background-color: #1e1508; border-radius: 0; display: flex; align-items: center; justify-content: center; color: #e88787; font-size: 24px; font-weight: bold}
+.top h1{font-size: 24px; font-weight: normal; letter-spacing: 3px}
+.top .en{font-size: 12px; opacity: .75; margin-top: 3px; letter-spacing: 1px}
+.nav{background: #6f1414}
+.nav-in{max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; gap: 2px}
+.nav a{color: #fff; text-decoration: none; padding: 11px 22px; font-size: 12px; opacity: .9}
+.nav a.on{background-color: #1e1508; color: #e88787; opacity: 1}
+.wrap{max-width: 1100px; margin: 16px auto 40px; padding: 0 16px}
+.search-card{background-color: #1e1508; border-radius: 0; padding: 22px; margin-bottom: 14px; box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+.search-main{display: flex; gap: 10px; margin-bottom: 16px}
+.search-main input{flex: 1; border: 2px solid #8b1a1a; border-radius: 0; padding: 10px 14px; font-size: 12px; outline: 0; color: #b8b8b8}
+.search-main button{background: #8b1a1a; color: #fff; border: 0; padding: 0 34px; border-radius: 0; cursor: pointer; font-size: 12px}
+.filters{display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 12px; color: #b8b8b8}
+.filters .fl{display: flex; gap: 6px; align-items: center}
+.filters .fl span.k{color: #999}
+.filters a{color: #e88787; text-decoration: none; padding: 1px 7px; border-radius: 0}
+.filters a.on{background: #8b1a1a; color: #fff}
+.result-card{background-color: #1e1508; border-radius: 0; box-shadow: 3px 3px 0 rgba(80,60,20,.55); overflow: hidden}
+.result-head{padding: 14px 22px; border-bottom: 1px solid #eceef1; display: flex; justify-content: space-between; align-items: center; background-color: #1e1508}
+.result-head .cnt{font-size: 12px; color: #b8b8b8}
+.result-head .cnt b{color: #e88787; font-size: 12px}
+.result-head .sort{font-size: 12px; color: #999}
+.doc{padding: 18px 22px; border-bottom: 1px solid #f2f3f5}
+.doc:last-child{border-bottom: 0}
+.doc h3{font-size: 12px; margin-bottom: 8px}
+.doc h3 a{color: #8fafe0; text-decoration: none}
+.doc h3 a:hover{text-decoration: underline}
+.doc .meta{font-size: 12px; color: #999; margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 6px 16px}
+.doc .abs{font-size: 12px; color: #b8b8b8; line-height: 24px}
+.doc .abs .kw{color: #e88787; font-weight: bold}
+.tag{display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 0; margin-right: 6px; vertical-align: middle}
+.tag-labor{background-color: #1e1508; color: #ffa270}
+.tag-civil{background-color: #1e1508; color: #7eb4f1}
+.tag-contract{background-color: #1e1508; color: #cb87e8}
+.tag-open{background-color: #1e1508; color: #e78888}
+.tag-trial{background-color: #1e1508; color: #97d99a}
+.tag-mediate{background-color: #1e1508; color: #f57f17}
+.detail-box{background-color: #1e1508; border: 1px solid #eceef1; border-radius: 0; padding: 14px 16px; margin-top: 10px; font-size: 12px; line-height: 24px; color: #b8b8b8}
+.detail-box b{color: #b8b8b8; font-weight: normal; display: inline-block; width: 88px}
+.foot{text-align: center; color: #999; font-size: 12px; padding: 20px; line-height: 22px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="emblem">法</div>
+    <div>
+      <h1>中国裁判文书网</h1>
+      <div class="en">China Judgements Online</div>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="nav-in">
+    <a href="wenshu.html" class="on">文书检索</a>
+    <a href="wenshu.html">高级检索</a>
+    <a href="wenshu.html">指导案例</a>
+    <a href="wenshu.html">专题报道</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="search-card">
+    <div class="search-main">
+      <input value="晶脉文旅" readonly>
+      <button>搜索</button>
+    </div>
+    <div class="filters">
+      <div class="fl"><span class="k">案件类型：</span><a class="on" href="wenshu.html">全部(3)</a><a href="wenshu.html">民事案件(3)</a><a href="wenshu.html">刑事案件(0)</a><a href="wenshu.html">行政案件(0)</a><a href="wenshu.html">执行案件(0)</a></div>
+      <div class="fl"><span class="k">案由：</span><a class="on" href="wenshu.html">全部</a><a href="wenshu.html">劳动争议(3)</a><a href="wenshu.html">合同纠纷(0)</a></div>
+      <div class="fl"><span class="k">裁判年份：</span><a class="on" href="wenshu.html">全部</a><a href="wenshu.html">2024(1)</a><a href="wenshu.html">2023(2)</a></div>
+      <div class="fl"><span class="k">法院：</span><a class="on" href="wenshu.html">全部</a><a href="wenshu.html">漭江市人民法院(3)</a></div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-head">
+      <div class="cnt">检索到 <b>3</b> 篇文书</div>
+      <div class="sort">排序：裁判日期 <span style="color: #e88787">↓</span></div>
+    </div>
+
+    <div class="doc">
+      <h3><a href="wenshu.html">晶脉文旅有限公司与王某劳动争议一审民事裁定书</a></h3>
+      <div class="meta">
+        <span>案号：（2024）漭民初字第0123号</span>
+        <span>审理法院：漭江市人民法院</span>
+        <span>裁判日期：尚未审结</span>
+        <span>文书类型：民事</span>
+      </div>
+      <div>
+        <span class="tag tag-labor">劳动争议</span>
+        <span class="tag tag-open">审理中</span>
+      </div>
+      <div class="detail-box">
+        <div><b>当事人</b>原告：王某　被告：晶脉文旅有限公司</div>
+        <div><b>案由</b>确认劳动关系纠纷</div>
+        <div><b>诉讼请求</b>请求确认原、被告之间存在劳动关系；请求判令被告补缴2023年2月至2023年9月社会保险费</div>
+        <div><b>审理状态</b>已立案，尚未开庭</div>
+      </div>
+    </div>
+
+    <div class="doc">
+      <h3><a href="wenshu.html">晶脉文旅有限公司与李某劳动争议一审民事调解书</a></h3>
+      <div class="meta">
+        <span>案号：（2023）漭民初字第2345号</span>
+        <span>审理法院：漭江市人民法院</span>
+        <span>裁判日期：2023-07-13</span>
+        <span>文书类型：民事</span>
+      </div>
+      <div>
+        <span class="tag tag-labor">劳动争议</span>
+        <span class="tag tag-mediate">调解结案</span>
+      </div>
+      <div class="abs">
+        原告李某诉称，其于2021年11月入职被告处任景区讲解员，被告自2022年11月起拖欠工资共计<span class="kw">34,600元</span>，多次催要未果……
+      </div>
+      <div class="detail-box">
+        <div><b>案由</b>追索劳动报酬纠纷</div>
+        <div><b>调解结果</b>被告晶脉文旅有限公司于2023年8月17日前一次性支付原告李某劳动报酬30,000元；双方无其他争议</div>
+        <div><b>结案方式</b>调解</div>
+      </div>
+    </div>
+
+    <div class="doc">
+      <h3><a href="wenshu.html">晶脉文旅有限公司与张某劳动争议一审民事判决书</a></h3>
+      <div class="meta">
+        <span>案号：（2023）漭民初字第1234号</span>
+        <span>审理法院：漭江市人民法院</span>
+        <span>裁判日期：2023-04-05</span>
+        <span>文书类型：民事</span>
+      </div>
+      <div>
+        <span class="tag tag-labor">劳动争议</span>
+        <span class="tag tag-civil">判决</span>
+      </div>
+      <div class="abs">
+        本院认为，原告张某于2021年4月入职被告晶脉文旅有限公司，任景区运营部专员。2022年10月，被告以"组织架构调整"为由解除与原告的劳动合同，未提供充分证据证明解除行为符合《中华人民共和国劳动合同法》第四十条规定之情形，亦未提前三十日书面通知……
+      </div>
+      <div class="detail-box">
+        <div><b>案由</b>劳动合同纠纷</div>
+        <div><b>判决结果</b>一、被告晶脉文旅有限公司于本判决生效之日起十日内支付原告张某违法解除劳动合同赔偿金<span style="color: #e88787">50,000元</span>；二、驳回原告其他诉讼请求</div>
+        <div><b>结案方式</b>判决（被告败诉）</div>
+        <div><b>履行情况</b>已履行完毕（2023-07）</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background-color: #1e1508; border-radius: 0; padding: 16px 22px; margin-top: 14px; font-size: 12px; color: #acb7c3; line-height: 24px">
+    <b style="color: #b8b8b8">检索说明：</b>本站公开的是已生效且符合公开条件的裁判文书。依据相关规定，涉及国家秘密、未成年人犯罪、调解结案、离婚诉讼等类型的文书不予公开；部分文书存在上网时间滞后于裁判时间的情况。检索结果为0不代表不存在相关案件。
+  </div>
+</div>
+
+<div class="foot">
+  主办：最高人民法院　　本页面为游戏内虚构数据
+</div>
+<script src="game-bridge.js?v=20261025"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

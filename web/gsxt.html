@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国家企业信用信息公示系统</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #c8161d; color: #fff; padding: 14px 0}
+.top-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 16px}
+.emblem{width: 42px; height: 42px; background-color: #1e1508; border-radius: 0; display: flex; align-items: center; justify-content: center; color: #f17e83; font-size: 24px; font-weight: bold}
+.top h1{font-size: 24px; font-weight: normal}
+.top .sub{font-size: 12px; opacity: .8; margin-top: 2px}
+.subnav{background: #a5121a; padding: 0}
+.subnav-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px}
+.subnav a{color: #fff; text-decoration: none; padding: 10px 18px; font-size: 12px; opacity: .85}
+.subnav a.on{background-color: #1e1508; color: #f17e83; opacity: 1}
+.wrap{max-width: 1000px; margin: 16px auto 40px; padding: 0 16px}
+.notice{background-color: #1e1508; border: 1px solid #ffe1a8; color: #e8cf87; font-size: 12px; padding: 8px 14px; border-radius: 0; margin-bottom: 14px; line-height: 20px}
+.card{background-color: #1e1508; border-radius: 0; margin-bottom: 14px; box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+.card-head{padding: 12px 20px; border-bottom: 1px solid #eceef1; font-size: 12px; font-weight: bold; color: #f17e83; display: flex; align-items: center; justify-content: space-between}
+.card-head .badge{font-size: 12px; font-weight: normal; color: #b8b8b8; background-color: #1e1508; padding: 2px 8px; border-radius: 0}
+.card-body{padding: 16px 20px}
+table.info{width: 100%; border-collapse: collapse; font-size: 12px}
+table.info th{width: 170px; background-color: #1e1508; text-align: left; padding: 10px 14px; border: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; vertical-align: top}
+table.info td{padding: 10px 14px; border: 1px solid #eceef1; color: #b8b8b8; line-height: 20px}
+table.list{width: 100%; border-collapse: collapse; font-size: 12px}
+table.list th{background-color: #1e1508; padding: 10px; text-align: left; border: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; font-size: 12px}
+table.list td{padding: 10px; border: 1px solid #eceef1; line-height: 20px; vertical-align: top}
+.st{display: inline-block; padding: 2px 8px; border-radius: 0; font-size: 12px}
+.st-done{background-color: #1e1508; color: #97d99a}
+.st-open{background-color: #1e1508; color: #ffa270}
+.st-out{background-color: #1e1508; color: #abbcc5}
+.st-in{background-color: #1e1508; color: #e78888}
+.none{padding: 26px; text-align: center; color: #a0a4ab; font-size: 12px}
+.search-bar{background-color: #1e1508; border-radius: 0; padding: 20px; margin-bottom: 14px; box-shadow: 3px 3px 0 rgba(80,60,20,.55); display: flex; gap: 10px; align-items: center}
+.search-bar input{flex: 1; border: 1px solid #d5d8dc; border-radius: 0; padding: 9px 14px; font-size: 12px; outline: 0; color: #b8b8b8}
+.search-bar button{background: #c8161d; color: #fff; border: 0; padding: 9px 28px; border-radius: 0; cursor: pointer; font-size: 12px}
+.foot{text-align: center; color: #9aa0a6; font-size: 12px; padding: 20px; line-height: 22px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="emblem">徽</div>
+    <div>
+      <h1>国家企业信用信息公示系统</h1>
+      <div class="sub">National Enterprise Credit Information Publicity System</div>
+    </div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="gsxt.html" class="on">企业公示信息</a>
+    <a href="gsxt.html">信息公告</a>
+    <a href="gsxt.html">使用帮助</a>
+    <a href="gsxt.html">网站导航</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="search-bar">
+    <input value="晶脉文旅有限公司" readonly>
+    <button>查询</button>
+  </div>
+
+  <div class="notice">
+    本系统公示的企业信息来源于政府部门依法履职过程中产生的信息和企业公示的信息。任何单位和个人不得将公示信息用于非法用途。
+  </div>
+
+  <div class="card">
+    <div class="card-head">登记信息 <span class="badge">数据来源：漭江市市场监督管理局</span></div>
+    <div class="card-body">
+      <table class="info">
+        <tr><th>统一社会信用代码</th><td>91330100MA2XXXXX7K</td></tr>
+        <tr><th>企业名称</th><td>晶脉文旅有限公司</td></tr>
+        <tr><th>类型</th><td>有限责任公司（自然人独资）</td></tr>
+        <tr><th>法定代表人</th><td>谢某</td></tr>
+        <tr><th>注册资本</th><td>500万元人民币</td></tr>
+        <tr><th>实缴资本</th><td>500万元人民币</td></tr>
+        <tr><th>成立日期</th><td>2020年11月30日</td></tr>
+        <tr><th>营业期限</th><td>2020年11月30日 至 长期</td></tr>
+        <tr><th>登记机关</th><td>漭江市市场监督管理局</td></tr>
+        <tr><th>登记状态</th><td><span class="st st-done">存续（在营、开业、在册）</span></td></tr>
+        <tr><th>注册地址</th><td>漭江市佟家岭镇矿区路1号</td></tr>
+        <tr><th>经营范围</th><td>旅游景区开发、运营、管理；文化旅游项目投资；酒店管理；餐饮服务；工艺美术品零售；会议及展览服务。</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">股东及出资信息</div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>股东名称</th><th>证件类型</th><th>认缴出资额</th><th>认缴出资日期</th><th>持股比例</th></tr>
+        <tr><td>谢某</td><td>中华人民共和国居民身份证</td><td>500万元</td><td>2020-11-30</td><td>100%</td></tr>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: #9aa0a6">历史股东变更：无记录</div>
+      <div style="margin-top: 12px; padding: 10px 14px; background-color: #1e1508; border: 1px solid #ffe1a8; font-size: 12px; color: #e8cf87; line-height: 22px">
+        该股东所持 100% 股权已全部出质给天吴集团有限公司。可进一步查询：
+        <a href="equity.html" style="color: #f17e83; text-decoration: none">股权穿透图谱</a>
+        <span style="color: #8a7a3a">（穿透至天吴集团、衡大地产）</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">股权出质登记信息 <span class="badge">共 1 条</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>登记编号</th><th>出质人</th><th>质权人</th><th>出质股权数额</th><th>股权出质设立日期</th><th>状态</th></tr>
+        <tr>
+          <td>（漭）股质登记设字〔2021〕第0087号</td>
+          <td>谢某</td>
+          <td>天吴集团有限公司</td>
+          <td>500万元（占注册资本100%）</td>
+          <td>2020年12月28日</td>
+          <td><span class="st st-in">有效</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">行政处罚信息 <span class="badge">共 1 条</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>决定书文号</th><th>违法行为类型</th><th>行政处罚内容</th><th>决定机关</th><th>公示日期</th></tr>
+        <tr>
+          <td>漭市监处字〔2023〕第217号</td>
+          <td>未依照《企业信息公示暂行条例》第八条规定期限公示年度报告</td>
+          <td>罚款人民币10,000元</td>
+          <td>漭江市市场监督管理局</td>
+          <td>2023-05-01</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">经营异常名录信息 <span class="badge">共 1 条</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>列入日期</th><th>列入原因</th><th>作出决定机关</th><th>移出日期</th><th>移出原因</th></tr>
+        <tr>
+          <td>2022-07-21</td>
+          <td>未按规定期限公示2021年度年度报告</td>
+          <td>漭江市市场监督管理局</td>
+          <td>2022-11-08</td>
+          <td>已补报未报年份的年度报告并公示，申请移出</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">严重违法失信名单</div>
+    <div class="card-body"><div class="none">暂无相关信息</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">对外投资信息</div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>被投资企业名称</th><th>统一社会信用代码</th><th>投资比例</th><th>登记状态</th></tr>
+        <tr><td>佟家岭景区管理有限公司</td><td>91330100MA2YYYYY3B</td><td>100%</td><td><span class="st st-done">存续</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">企业年报公示信息 <span class="badge">共 3 份</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>报告年度</th><th>企业名称</th><th>公示日期</th><th>操作</th></tr>
+        <tr><td>2023年度报告</td><td>晶脉文旅有限公司</td><td>2024-01-14</td><td><a href="gsxt.html" style="color: #f17e83; text-decoration: none">查看</a></td></tr>
+        <tr><td>2022年度报告</td><td>晶脉文旅有限公司</td><td>2022-11-06</td><td><a href="gsxt.html" style="color: #f17e83; text-decoration: none">查看</a></td></tr>
+        <tr><td>2021年度报告</td><td>晶脉文旅有限公司</td><td>2022-03-17</td><td><a href="gsxt.html" style="color: #f17e83; text-decoration: none">查看</a></td></tr>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: #9aa0a6; line-height: 22px">
+        注：企业年报中的资产状况信息（营业总收入、净利润、负债总额等）由企业自主决定是否向社会公示。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  主办：国家市场监督管理总局　　技术支持：国家企业信用信息公示系统<br>
+  建议使用IE9以上版本浏览器访问　　本页面为游戏内虚构数据
+</div>
+<script src="game-bridge.js?v=20261025"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

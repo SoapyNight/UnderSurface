@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神脉教会 - 寻找真正的自我</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box}
+        body {font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; background-image: none; color: #e0e0e0; min-height: 100vh; overflow-x: hidden}
+        
+        /* 背景动画 */
+        .bg-animation {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3}
+        
+        .circle {position: absolute; border: 2px solid #e94560; border-radius: 0; animation: none}
+        
+        @keyframes float {
+            0%, 100% {transform: translateY(0) rotate(0deg); opacity: 0}
+            10% {opacity: 1}
+            90% {opacity: 1}
+            100% {transform: translateY(-100vh) rotate(360deg); opacity: 0}
+        }
+        
+        /* 头部 */
+        header {text-align: center; padding: 4rem 2rem; background-color: #1e1508; background-image: url("assets/shenmai-crypt.png") center/cover no-repeat; backdrop-filter: none}
+        
+        /* 石室影像 */
+        .crypt-figure {margin: 0 0 2rem; border-radius: 0; overflow: hidden; border: 1px solid rgba(233, 69, 96, 0.35); position: relative; height: 320px; background: url("assets/shenmai-crypt.png") center/cover no-repeat}
+        
+        .crypt-figure figcaption {position: absolute; left: 0; right: 0; bottom: 0; padding: 2rem 1.25rem 0.75rem; font-size: 12px; color: #b9b9c6; letter-spacing: 1px; background-color: #1e1508; background-image: none}
+        
+        .logo {font-size: 48px; color: #e94560; text-shadow: 2px 2px 0 rgba(48,28,4,.75); margin-bottom: 1rem; animation: none}
+        
+        @keyframes glow {
+            from {text-shadow: 2px 2px 0 rgba(48,28,4,.75)}
+            to {text-shadow: 2px 2px 0 rgba(48,28,4,.75)}
+        }
+        
+        .subtitle {font-size: 24px; color: #a0a0a0; font-style: italic}
+        
+        /* 主内容 */
+        .container {max-width: 900px; margin: 0 auto; padding: 3rem 2rem}
+        
+        .section {background-color: #1e1508; backdrop-filter: none; border: 1px solid rgba(233, 69, 96, 0.3); border-radius: 0; padding: 2rem; margin-bottom: 2rem; transition: background-color .06s steps(2,end), color .06s steps(2,end), border-color .06s steps(2,end)}
+        
+        .section:hover {transform: translateY(-5px); border-color: rgba(233, 69, 96, 0.6)}
+        
+        .section h2 {color: #e94560; font-size: 36px; margin-bottom: 1rem; text-align: center}
+        
+        .section p {line-height: 24px; text-align: justify; margin-bottom: 1rem}
+        
+        /* 符号装饰 */
+        .symbol {text-align: center; font-size: 48px; color: #e94560; margin: 2rem 0; opacity: 0.7}
+        
+        /* 教义列表 */
+        .tenets {list-style: none; padding: 0}
+        
+        .tenets li {padding: 1rem; margin-bottom: 1rem; background: rgba(233, 69, 96, 0.1); border-left: 3px solid #e94560; border-radius: 0}
+        
+        /* 按钮 */
+        .cta-button {display: block; width: 100%; max-width: 300px; margin: 2rem auto; padding: 1rem 2rem; background-color: #1e1508; background-image: none; color: white; text-align: center; text-decoration: none; border-radius: 0; font-size: 24px; font-weight: bold; transition: background-color .06s steps(2,end), color .06s steps(2,end), border-color .06s steps(2,end); box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+        
+        .cta-button:hover {transform: scale(1.05); box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+        
+        /* 底部 */
+        footer {text-align: center; padding: 2rem; background: rgba(0, 0, 0, 0.5); color: #b8b8b8; font-size: 12px}
+        
+        /* 神秘符号 */
+        .mystic-symbols {text-align: center; font-size: 36px; color: #e94560; letter-spacing: 16px; margin: 2rem 0; opacity: 0.5}
+    </style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <!-- 头部 -->
+    <header>
+        <h1 class="logo">🜁 神脉教会 🜂</h1>
+        <p class="subtitle">"在混沌中寻找秩序，在虚无中发现真实"</p>
+    </header>
+    
+    <!-- 主内容 -->
+    <div class="container">
+        <figure class="crypt-figure">
+            <figcaption>教会修行石室 · 内部影像（仅限受召者查看）</figcaption>
+        </figure>
+        <!-- 欢迎词 -->
+        <div class="section">
+            <h2>欢迎，迷途的旅人</h2>
+            <p>你是否感到生活的空虚？是否在物质的世界中迷失了自我？是否渴望找到生命的真正意义？</p>
+            <p>神脉教会，为你指引方向。</p>
+            <div class="symbol">🜃 🜄 🜅 🜆</div>
+            <p>我们相信，每个人的内心都有一条"神脉"，连接着宇宙的终极真理。通过修行与觉悟，我们可以唤醒这条脉络，获得真正的自由与平静。</p>
+        </div>
+        
+        <!-- 核心教义 -->
+        <div class="section">
+            <h2>核心教义</h2>
+            <ul class="tenets">
+                <li><strong>🜁 脉之觉醒：</strong>每个人的灵魂深处都有一条神脉，它是连接物质世界与精神世界的桥梁</li>
+                <li><strong>🜂 舍弃虚妄：</strong>世俗的财富、名誉、情感都是束缚灵魂的枷锁，唯有舍弃才能获得真正的自由</li>
+                <li><strong>🜃 归于一统：</strong>万物归一，一归万物。当我们放下个体的执念，就能与宇宙的意识融为一体</li>
+                <li><strong>🜄 永恒轮回：</strong>生命不是线性的，而是循环的。通过修行，我们可以超越轮回，达到永恒的境界</li>
+            </ul>
+        </div>
+        
+        <!-- 修行方式 -->
+        <div class="section">
+            <h2>修行方式</h2>
+            <p>神脉教会的修行分为三个阶段：</p>
+            <p><strong>第一阶段：净化</strong> - 通过冥想、禁食、隔离，清除内心的杂念与欲望</p>
+            <p><strong>第二阶段：觉醒</strong> - 在导师的引导下，唤醒沉睡的神脉，感受宇宙的能量</p>
+            <p><strong>第三阶段：合一</strong> - 放下自我，与教会融为一体，成为更高意识的一部分</p>
+            <div class="mystic-symbols">🜇 🜈 🜉 🜊</div>
+        </div>
+        
+        <!-- 加入我们 -->
+        <div class="section">
+            <h2>加入我们</h2>
+            <p>如果你已经准备好踏上这条觉醒之路，欢迎加入神脉教会。</p>
+            <p>我们将为你提供：</p>
+            <p>• 专业的修行指导<br>
+            • 志同道合的伙伴<br>
+            • 远离世俗的修行场所<br>
+            • 通往真理的道路</p>
+            <p style="text-align: center; margin-top: 2rem; color: #e94560; font-size: 24px">
+                "当你准备好时，门就会打开"
+            </p>
+            <a href="shenmai.html" class="cta-button">立即加入</a>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="section">
+            <h2>联系我们</h2>
+            <p style="text-align: center">
+                邮箱：contact@shenmai.org<br>
+                地址：漭江市佟家岭景区内部区域<br>
+                （请通过官方渠道预约访问）
+            </p>
+        </div>
+    </div>
+    
+    <!-- 底部 -->
+    <footer>
+        <p>© 2024 神脉教会 | 寻找真正的自我</p>
+        <p class="mystic-symbols">🜋 🜌 🜍 🜎</p>
+    </footer>
+    
+    <script>
+        // 创建背景动画圆圈
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 20; i++) {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.width = Math.random() * 100 + 50 + 'px';
+            circle.style.height = circle.style.width;
+            circle.style.left = Math.random() * 100 + '%';
+            circle.style.animationDelay = Math.random() * 20 + 's';
+            circle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            bgAnimation.appendChild(circle);
+        }
+        
+        // 控制台警告
+        console.log('%c⚠️ 警告 ⚠️', 'color: red; font-size: 30px;');
+        console.log('%c你正在查看神脉教会的网页源代码', 'color: #e94560; font-size: 16px;');
+        console.log('%c这...可能不是一个明智的选择', 'color: gray; font-size: 14px;');
+    </script>
+<script src="game-bridge.js?v=20261025"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

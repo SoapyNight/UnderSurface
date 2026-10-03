@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漭江点评 - 吃喝玩乐在漭江</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #1e1508; color: #fff; padding: 12px 0}
+.top-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap}
+.logo{font-size: 22px; font-weight: bold; letter-spacing: 3px}
+.logo .en{display: block; font-size: 12px; font-weight: normal; opacity: .85; letter-spacing: 1px; margin-top: 2px}
+.searchbox{flex: 1; min-width: 200px; max-width: 400px; display: flex; border: 1px solid #444; overflow: hidden}
+.searchbox input{flex: 1; border: 0; outline: 0; padding: 7px 12px; font-size: 12px; color: #b8b8b8; background: transparent}
+.searchbox button{background: #1e1508; color: #fff; border: 0; padding: 0 18px; cursor: pointer; font-size: 12px}
+.top-right{margin-left: auto; font-size: 12px; line-height: 20px; text-align: right; opacity: .9}
+.nav{background: #1e1508}
+.nav-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; flex-wrap: wrap}
+.nav a{color: #fff; text-decoration: none; padding: 10px 18px; font-size: 12px; opacity: .9}
+.nav a.on{background-color: #1e1508; color: #ffd27a}
+.wrap{max-width: 1000px; margin: 16px auto 40px; padding: 0 16px; display: flex; gap: 16px; align-items: flex-start}
+.main{flex: 1; min-width: 0}
+.side{width: 260px; flex-shrink: 0}
+.crumb{color: #999; font-size: 12px; margin-bottom: 12px}
+.card{background-color: #1e1508; padding: 16px; margin-bottom: 14px}
+.card h3{font-size: 13px; color: #b8b8b8; margin-bottom: 10px}
+.shop{background-color: #1e1508; padding: 16px; margin-bottom: 14px; border: 1px solid #3a2810}
+.shop-head{display: flex; gap: 12px; align-items: flex-start}
+.shop-av{width: 64px; height: 64px; flex-shrink: 0; background-color: #2b1e0c; border: 1px solid #7e5410; display: flex; align-items: center; justify-content: center; color: #e2cfa4; font-size: 12px}
+.shop-info{flex: 1; min-width: 0}
+.shop-info .nm{font-size: 14px; color: #fff; margin-bottom: 6px}
+.shop-info .nm .badge{display: inline-block; border: 1px solid #7e5410; color: #e2cfa4; font-size: 12px; padding: 0 6px; margin-left: 6px; vertical-align: middle}
+.stars{color: #ffd27a; letter-spacing: 2px}
+.score{color: #ffd27a; font-size: 16px; margin-left: 6px}
+.shop-meta{color: #a8895a; line-height: 22px; margin-top: 4px}
+.shop-meta span{margin-right: 14px}
+.cmt{margin-top: 12px; border-top: 1px dashed #3a2810; padding-top: 10px}
+.cmt .c{padding: 8px 0; border-bottom: 1px dashed #2b1e0c}
+.cmt .c:last-child{border-bottom: 0}
+.cmt .cu{color: #ffd27a}
+.cmt .ct{color: #e2cfa4; line-height: 22px; margin-top: 2px}
+.cmt .cs{color: #a8895a; font-size: 12px}
+.side-card{background-color: #1e1508; padding: 16px; margin-bottom: 14px}
+.side-card h3{font-size: 13px; color: #b8b8b8; margin-bottom: 10px}
+.side-card ul{list-style: none}
+.side-card li{padding: 6px 0; font-size: 12px; border-bottom: 1px dashed #3a2810}
+.side-card li:last-child{border-bottom: 0}
+.rank li{display: flex; justify-content: space-between}
+.rank .no{color: #ffd27a}
+.foot{text-align: center; color: #999; font-size: 12px; padding: 20px; line-height: 22px}
+a{color: #ffd27a; text-decoration: none}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="logo">漭江点评<span class="en">MANGJIANG DIANPING · 吃喝玩乐在漭江</span></div>
+    <div class="searchbox">
+      <input value="葛师傅烧烤" readonly>
+      <button>搜索</button>
+    </div>
+    <div class="top-right">漭江人自己的点评<br>收录商户 8,912 家</div>
+  </div>
+</div>
+<div class="nav">
+  <div class="nav-in">
+    <a href="dianping.html" class="on">美食</a>
+    <a href="#barbecue">烧烤</a>
+    <a href="#noodle">面馆</a>
+    <a href="#store">便利店</a>
+    <a href="waimai.html">外卖</a>
+    <a href="life.html">同城</a>
+    <a href="city.html">漭江吧</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="main">
+    <div class="crumb">首页 &gt; 美食 &gt; 漭江本地口碑榜</div>
+
+    <div class="shop" id="barbecue">
+      <div class="shop-head">
+        <div class="shop-av">烧烤</div>
+        <div class="shop-info">
+          <div class="nm">葛师傅烧烤<span class="badge">老城区开了十几年</span></div>
+          <div><span class="stars">★★★★☆</span><span class="score">4.6</span> <span style="color:#a8895a">· 1,842 条评价</span></div>
+          <div class="shop-meta">
+            <span>人均 ￥45</span>
+            <span>老城区 · 夜市街尽头</span>
+            <span>晚 6:00 - 凌晨 3:00</span>
+          </div>
+          <div class="shop-meta">推荐：烤羊肉串、烤面筋、冰镇汽水、烤馒头片</div>
+        </div>
+      </div>
+      <div class="cmt">
+        <div class="c">
+          <div class="cu">漭江在逃打工人 <span class="cs">2024-02-24</span></div>
+          <div class="ct">老葛人实在，串给得足。就是晚上人多，得等位。半夜两点还能吃到热的，这点没得说。</div>
+        </div>
+        <div class="c">
+          <div class="cu">匿名用户 <span class="cs">2024-02-18</span></div>
+          <div class="ct">老板话不多，油迹背心穿一年了。烤串是真香，就是别问太多有的没的。</div>
+        </div>
+        <div class="c">
+          <div class="cu">夜班小张 <span class="cs">2024-02-12</span></div>
+          <div class="ct">下夜班路过必来五串，配一瓶汽水。这个点还开着的就剩这儿和那家便利店了。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop" id="noodle">
+      <div class="shop-head">
+        <div class="shop-av">面馆</div>
+        <div class="shop-info">
+          <div class="nm">老城区无名面馆<span class="badge">早市</span></div>
+          <div><span class="stars">★★★★★</span><span class="score">4.8</span> <span style="color:#a8895a">· 623 条评价</span></div>
+          <div class="shop-meta">
+            <span>人均 ￥12</span>
+            <span>老城区 · 巷口第二家</span>
+            <span>早 6:00 - 下午 2:00</span>
+          </div>
+          <div class="shop-meta">推荐：牛肉面、素臊子面、卤蛋、免费面汤</div>
+        </div>
+      </div>
+      <div class="cmt">
+        <div class="c">
+          <div class="cu">早起的人 <span class="cs">2024-02-26</span></div>
+          <div class="ct">没有招牌，跟着排队的人走就对了。六点就开，面汤管够，吃完一身汗，干活有劲。</div>
+        </div>
+        <div class="c">
+          <div class="cu">老街坊 <span class="cs">2024-02-04</span></div>
+          <div class="ct">开了二十多年了，价钱一直没怎么涨。老板娘记性好，谁不吃香菜都记得。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop" id="store">
+      <div class="shop-head">
+        <div class="shop-av">便利</div>
+        <div class="shop-info">
+          <div class="nm">巷口24小时便利店<span class="badge">24小时</span></div>
+          <div><span class="stars">★★★★☆</span><span class="score">4.3</span> <span style="color:#a8895a">· 411 条评价</span></div>
+          <div class="shop-meta">
+            <span>人均 ￥15</span>
+            <span>老城区 · 连栋居民楼对面</span>
+            <span>全天营业</span>
+          </div>
+          <div class="shop-meta">推荐：盒饭、汽水、火腿肠、关东煮</div>
+        </div>
+      </div>
+      <div class="cmt">
+        <div class="c">
+          <div class="cu">加班狗 <span class="cs">2024-02-21</span></div>
+          <div class="ct">半夜只剩这里能买口热的。泡面加个蛋，凑合一顿。店员人都挺好的。</div>
+        </div>
+        <div class="c">
+          <div class="cu">猫奴一号 <span class="cs">2024-02-15</span></div>
+          <div class="ct">门口常有只黑猫蹲着，眼睛一红一白，别喂太多，它挑食。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop" id="farm">
+      <div class="shop-head">
+        <div class="shop-av">农家</div>
+        <div class="shop-info">
+          <div class="nm">佟家岭半山农家菜<span class="badge">景区旁</span></div>
+          <div><span class="stars">★★★★☆</span><span class="score">4.4</span> <span style="color:#a8895a">· 1,207 条评价</span></div>
+          <div class="shop-meta">
+            <span>人均 ￥68</span>
+            <span>佟家岭景区停车场往里 300 米</span>
+            <span>午 11:00 - 晚 8:30</span>
+          </div>
+          <div class="shop-meta">推荐：柴火炖鸡、山野菜、石磨豆腐、自酿米酒</div>
+        </div>
+      </div>
+      <div class="cmt">
+        <div class="c">
+          <div class="cu">周末去哪儿玩 <span class="cs">2024-02-10</span></div>
+          <div class="ct">爬完山下来吃一顿正好，炖鸡是现杀的。老板说后山林子深处别乱钻，跟着修好的路上走。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop">
+      <div class="shop-head">
+        <div class="shop-av">推</div>
+        <div class="shop-info">
+          <div class="nm">天机神算<span class="badge">本地服务</span></div>
+          <div><span class="stars">★★★★★</span><span class="score">5.0</span> <span style="color:#a8895a">· 37 条评价</span></div>
+          <div class="shop-meta">
+            <span>老城区 · 支巷深处（无招牌）</span>
+            <span>24 小时待命</span>
+          </div>
+          <div class="shop-meta">条目：算命 · 看相 · 白事 · 驱邪</div>
+        </div>
+      </div>
+      <div class="cmt">
+        <div class="c">
+          <div class="cu">匿名用户 <span class="cs">2024-01-27</span></div>
+          <div class="ct">不是吃饭的地儿，但给五星。老爷子一句话顶别人十句，就是有些事他不肯说。详情看<a href="tianji.html">天机神算小店主页</a>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="side-card">
+      <h3>本地口碑榜</h3>
+      <ul class="rank">
+        <li><span class="no">1</span><span>老城区无名面馆</span></li>
+        <li><span class="no">2</span><span>葛师傅烧烤</span></li>
+        <li><span class="no">3</span><span>佟家岭半山农家菜</span></li>
+        <li><span class="no">4</span><span>巷口24小时便利店</span></li>
+        <li><span class="no">5</span><span>矿区路大排档</span></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>相关推荐</h3>
+      <ul>
+        <li><a href="waimai.html">漭江外卖 · 深夜配送</a></li>
+        <li><a href="life.html">漭江同城 · 找吃的</a></li>
+        <li><a href="city.html">漭江吧 · 老城区哪家好吃</a></li>
+        <li><a href="tianji.html">天机神算</a></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>点评须知</h3>
+      <ul>
+        <li>评价需真实消费</li>
+        <li>禁止刷分与恶意差评</li>
+        <li>涉及人身攻击将被删除</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  漭江点评 · 吃喝玩乐在漭江<br>
+  本页面为游戏内虚构页面，商户与评价均为虚构
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

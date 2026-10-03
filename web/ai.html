@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSleep AI - 智能问答助手</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background: #1e1e2e; color: #e0e0e0; font-size: 12px; min-height: 100vh; display: flex; flex-direction: column}
+.top{background: #2a2a3d; border-bottom: 1px solid #3a3a4d; padding: 12px 0}
+.top-in{max-width: 900px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between}
+.logo{font-size: 24px; font-weight: bold; color: #a78bfa}
+.logo span{color: #b8b8b8; font-size: 12px; font-weight: normal; margin-left: 8px}
+.user{font-size: 12px; color: #888}
+.chat{flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 24px 16px; overflow-y: auto}
+.msg{display: flex; gap: 12px; margin-bottom: 24px}
+.avatar{width: 34px; height: 34px; border-radius: 0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold}
+.avatar.ai{background-color: #1e1508; background-image: none; color: #fff}
+.avatar.user{background: #3a3a4d; color: #aaa}
+.bubble{flex: 1; background: #2a2a3d; border-radius: 0; padding: 16px 18px; line-height: 22px; color: #d0d0d0}
+.msg.user-msg .bubble{background: #33334a}
+.bubble p{margin-bottom: 10px}
+.bubble p:last-child{margin-bottom: 0}
+.bubble h4{font-size: 12px; color: #a78bfa; margin: 14px 0 8px}
+.bubble ul{margin: 6px 0 12px 20px}
+.bubble li{margin-bottom: 5px; line-height: 22px}
+.bubble strong{color: #fff}
+.thinking{font-size: 12px; color: #b8b8b8; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #3a3a4d}
+.thinking .step{display: inline-block; margin-right: 14px}
+.disclaimer{background: #2d2a3d; border-left: 3px solid #a78bfa; padding: 12px 16px; margin-top: 14px; font-size: 12px; color: #999; line-height: 22px; border-radius: 0}
+.input-bar{background: #2a2a3d; border-top: 1px solid #3a3a4d; padding: 16px 0}
+.input-in{max-width: 900px; margin: 0 auto; padding: 0 16px; display: flex; gap: 10px; align-items: flex-end}
+.input-in textarea{flex: 1; background: #1e1e2e; border: 1px solid #3a3a4d; border-radius: 0; padding: 12px 16px; color: #e0e0e0; font-size: 12px; font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; resize: none; outline: 0; min-height: 48px}
+.input-in button{background: #7c3aed; color: #fff; border: 0; border-radius: 0; padding: 12px 24px; cursor: pointer; font-size: 12px; height: 48px}
+.input-in button:hover{background: #6d28d9}
+.hint{max-width: 900px; margin: 8px auto 0; padding: 0 16px; font-size: 12px; color: #b8b8b8; text-align: center}
+.suggest{display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px}
+.suggest span{background: #33334a; border: 1px solid #3a3a4d; color: #aaa; font-size: 12px; padding: 6px 12px; border-radius: 0; cursor: pointer}
+.nodata{background: #252536; border: 1px dashed #3a3a4d; border-radius: 0; padding: 14px 16px; margin: 10px 0; font-size: 12px; color: #777; line-height: 22px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="logo">DeepSleep AI <span>智能问答助手 v3.2</span></div>
+    <div class="user">已连接 · 免费用户</div>
+  </div>
+</div>
+
+<div class="chat">
+  <div class="msg user-msg">
+    <div class="avatar user">我</div>
+    <div class="bubble">晶脉文旅有限公司靠谱吗？值得投资吗？</div>
+  </div>
+
+  <div class="msg">
+    <div class="avatar ai">AI</div>
+    <div class="bubble">
+      <div class="thinking">
+        <span class="step">✓ 检索企业公开信息</span>
+        <span class="step">✓ 匹配行业数据</span>
+        <span class="step">✓ 生成回答</span>
+      </div>
+
+      <p>以下是我能检索到的关于这家公司的公开信息：</p>
+
+      <h4>基本情况</h4>
+      <p>晶脉文旅有限公司成立于2020年11月，注册地在漭江市佟家岭镇，是一家从事文化旅游项目投资与景区运营管理的企业，法定代表人谢某。目前主要经营佟家岭景区，该项目是在原佟家岭废弃矿区基础上改造建成的工业文化旅游目的地。</p>
+
+      <h4>可查到的经营信息</h4>
+      <ul>
+        <li>佟家岭景区于2023年1月正式对外开放，公开报道称年接待游客约30万人次</li>
+        <li>2023年8月获评漭江市"年度优秀企业"称号</li>
+        <li>纳税信用等级为A级，无欠税记录</li>
+        <li>公开报道显示公司获得过天吴集团的投资</li>
+        <li>景区所在的佟家岭片区在道路、供水等基础设施方面有实质改善</li>
+        <li>景区吸纳本地就业约200人，其中包含部分原矿区职工</li>
+      </ul>
+
+      <div class="nodata">
+        <b>未检索到的信息：</b><br>
+        · 该公司为有限责任公司（非上市），不属于强制信息披露主体，未查询到经审计的财务报表<br>
+        · 未查询到公开的股权结构变更记录及融资条款<br>
+        · 未查询到独立的行业研究报告或第三方评级结果
+      </div>
+
+      <h4>关于"是否值得投资"</h4>
+      <p>这个问题我无法直接回答，原因有两个：一是投资决策需要结合你自身的资金状况、风险承受能力和投资期限来判断，这些我并不了解；二是从公开渠道能够获取的信息，只反映一家企业的表面经营状态，而投资决策所依赖的核心材料——经审计的财务报表、投资协议条款、资金监管安排——通常不会公开披露。</p>
+
+      <p>从现有公开信息来看，这家公司有实际运营的项目，有可见的经营活动，在地方层面获得过表彰，这些都是客观存在的事实。</p>
+
+      <p>需要提醒的是，任何投资都存在风险，这与企业本身是否"靠谱"并不完全是一回事。如果你打算参与投资，建议直接向对方索取书面材料，包括投资协议、收益约定方式、本金退出安排，并仔细阅读其中的条款。</p>
+
+      <div class="disclaimer">
+        <strong>免责声明：</strong>以上内容基于公开可检索资料整理，未经独立核实，不构成投资建议或任何形式的担保。我的知识存在时间截止点，可能无法反映企业的最新状况。<br>
+        涉及大额资金的投资决定，建议咨询具备资质的财务顾问或执业律师。
+      </div>
+
+      <div class="suggest">
+        <span>文旅行业的一般投资回报周期是多久？</span>
+        <span>非上市公司的股权如何估值？</span>
+        <span>投资协议里有哪些条款需要特别注意？</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-bar">
+  <div class="input-in">
+    <textarea placeholder="输入你的问题..."></textarea>
+    <button>发送</button>
+  </div>
+  <div class="hint">DeepSleep AI 可能会犯错，请核查重要信息。本页面为游戏内虚构内容</div>
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

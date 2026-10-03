@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漭江市地理信息公共服务平台 - 天地图 · 漭江</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #1f6ea8; color: #fff; padding: 0}
+.top-in{max-width: 1080px; margin: 0 auto; padding: 0 16px}
+.top-bar{display: flex; align-items: center; justify-content: space-between; padding: 8px 0; font-size: 12px; opacity: .9; border-bottom: 1px solid rgba(255,255,255,.22)}
+.top-main{padding: 18px 0 16px; display: flex; align-items: center; gap: 18px}
+.emblem{width: 46px; height: 46px; background-color: #1e1508; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; color: #a9e0f5}
+.top-main h1{font-size: 22px; font-weight: normal; letter-spacing: 1px; line-height: 30px}
+.top-main .en{font-size: 12px; opacity: .72; margin-top: 4px}
+.subnav{background: #175a8c; padding: 0}
+.subnav-in{max-width: 1080px; margin: 0 auto; padding: 0 16px; display: flex; gap: 0}
+.subnav a{color: #fff; text-decoration: none; padding: 11px 20px; font-size: 12px; opacity: .88}
+.subnav a.on{background-color: #1e1508; opacity: 1; color: #a9e0f5}
+.crumb{max-width: 1080px; margin: 14px auto 0; padding: 0 16px; font-size: 12px; color: #999}
+.crumb a{color: #7eb0f2; text-decoration: none}
+.wrap{max-width: 1080px; margin: 12px auto 40px; padding: 0 16px}
+.layout{display: flex; gap: 18px; align-items: flex-start}
+.side{width: 210px; flex-shrink: 0; background-color: #1e1508; border-radius: 0; overflow: hidden}
+.side h3{background-color: #1e1508; padding: 12px 16px; font-size: 12px; color: #ffd27a; border-bottom: 1px solid #eceef1}
+.side a{display: block; padding: 10px 16px; font-size: 12px; color: #b8b8b8; text-decoration: none; border-bottom: 1px solid #f0f1f5}
+.side a.on{background-color: #241a0a; color: #ffd27a}
+.main{flex: 1; min-width: 0}
+.card{background-color: #1e1508; border-radius: 0; margin-bottom: 14px; overflow: hidden}
+.card-head{padding: 13px 20px; border-bottom: 1px solid #f0f1f5; font-size: 12px; font-weight: bold; color: #a9e0f5; display: flex; align-items: center; justify-content: space-between}
+.card-head .cnt{font-size: 12px; font-weight: normal; color: #b8b8b8}
+.card-body{padding: 18px 20px}
+table{width: 100%; border-collapse: collapse; font-size: 12px}
+th{background-color: #1e1508; padding: 10px; text-align: left; border: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; font-size: 12px; vertical-align: top}
+td{padding: 10px; border: 1px solid #eceef1; line-height: 22px; vertical-align: top}
+.badge{display: inline-block; padding: 2px 8px; border-radius: 0; font-size: 12px}
+.b-ok{background-color: #1e1508; color: #97d99a}
+.b-warn{background-color: #1e1508; color: #ffa270}
+.b-gray{background-color: #1e1508; color: #abbcc5}
+.tip{padding: 12px 20px; background-color: #1e1508; border-top: 1px solid #fff3cd; color: #8a7a3a; font-size: 12px; line-height: 20px}
+.alert{background-color: #1e1508; border: 1px solid #ffe1a8; color: #e8cf87; font-size: 12px; padding: 10px 14px; margin-bottom: 14px; line-height: 20px}
+.foot{text-align: center; color: #9aa0a6; font-size: 12px; padding: 22px; line-height: 22px; border-top: 1px solid #f0f1f5; margin-top: 20px}
+
+/* ---- 像素示意地图 ---- */
+.mapwrap{display: flex; gap: 14px; align-items: stretch}
+.mapview{position: relative; flex: 1; min-width: 0; height: 430px; overflow: hidden; border: 1px solid #eceef1;
+  background-color: #10240f;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 28px 28px;}
+.mt{position: absolute; border: 2px solid #2f5a2a; background-color: #1b3a17}
+.mt.t1{left: 6%; top: 12%; width: 26%; height: 30%}
+.mt.t2{left: 13%; top: 46%; width: 22%; height: 30%}
+.mt.forest{left: 40%; top: 8%; width: 20%; height: 24%; background-color: #16301a; border-color: #2c5a34}
+.river{position: absolute; left: 0; right: 0; top: 66%; height: 10%; background-color: #14364f; border-top: 2px solid #1f5f8c; border-bottom: 2px solid #1f5f8c}
+.river span{position: absolute; left: 12px; top: 6px; color: #7fc4ea; font-size: 12px}
+.block{position: absolute; background-color: #3a3226; border: 1px solid #6b5c3f}
+.block span{position: absolute; left: 4px; top: 3px; color: #d8cba6; font-size: 12px; white-space: nowrap}
+.road{position: absolute; background-color: #6b5c3f}
+.road.h{height: 4px}
+.road.v{width: 4px}
+.goldroad{position: absolute; height: 5px; background-color: #c18225}
+.goldroad span{position: absolute; left: 6px; top: -18px; color: #ffd27a; font-size: 12px; white-space: nowrap}
+.pin{position: absolute; transform: translate(-50%,-100%); text-align: center; font-size: 12px; color: #fff; white-space: nowrap}
+.pin b{display: block; width: 14px; height: 14px; margin: 0 auto 2px; border: 2px solid #1e1508; background-color: #e04b4b}
+.pin.blue b{background-color: #4b8fe0}
+.pin.green b{background-color: #55b06a}
+.pin.gold b{background-color: #d9a52b}
+.pin em{font-style: normal; background-color: rgba(0,0,0,.55); padding: 1px 5px; color: #f0e6cc}
+.maplabel{position: absolute; right: 10px; bottom: 8px; font-size: 12px; color: #9fbf8f; background-color: rgba(0,0,0,.5); padding: 3px 8px}
+.scalebar{position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: #e8dfc6}
+.scalebar i{display: block; width: 90px; height: 8px; border: 2px solid #e8dfc6; border-top: 0; margin-bottom: 3px}
+.legend{width: 200px; flex-shrink: 0; border: 1px solid #eceef1; padding: 12px 14px; font-size: 12px; line-height: 24px}
+.legend h4{font-size: 12px; color: #a9e0f5; font-weight: normal; margin-bottom: 8px; border-bottom: 1px solid #f0f1f5; padding-bottom: 6px}
+.legend .li{display: flex; align-items: center; gap: 8px}
+.legend .sw{width: 14px; height: 14px; border: 1px solid #6b5c3f; flex-shrink: 0}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="top-bar">
+      <div>漭江市地理信息公共服务平台　|　map.mangjiang.gov.cn</div>
+      <div>天地图·漭江　|　测绘资质：甲测资字 00000000</div>
+    </div>
+    <div class="top-main">
+      <div class="emblem">地图</div>
+      <div>
+        <h1>漭江市地理信息公共服务平台</h1>
+        <div class="en">Mangjiang Geographic Information Public Service Platform</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="map.html">平台首页</a>
+    <a href="map.html" class="on">地图服务</a>
+    <a href="map.html">专题图层</a>
+    <a href="map.html">兴趣点查询</a>
+    <a href="map.html">标准地图下载</a>
+    <a href="map.html">服务接口</a>
+  </div>
+</div>
+
+<div class="crumb">
+  <a href="map.html">首页</a>　&gt;　<a href="map.html">地图服务</a>　&gt;　<b>佟家岭镇周边 · 专题地图</b>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <div class="side">
+      <h3>图层目录</h3>
+      <a href="map.html">行政区划</a>
+      <a href="map.html">交通路网</a>
+      <a href="map.html" class="on">重点景区</a>
+      <a href="map.html">自然保护地</a>
+      <a href="map.html">重点项目</a>
+      <a href="map.html">影像底图</a>
+      <a href="map.html">地形晕渲</a>
+      <a href="map.html">兴趣点（POI）</a>
+    </div>
+
+    <div class="main">
+
+      <div class="alert">
+        本平台地图为示意性专题图，用于展示项目空间位置关系，不作为测绘成果使用，不得用于权属确认、工程设计与规划审批。
+      </div>
+
+      <div class="card">
+        <div class="card-head">佟家岭镇周边专题地图 <span class="cnt">比例尺 1:50000</span></div>
+        <div class="card-body">
+          <div class="mapwrap">
+            <div class="mapview">
+              <div class="mt t1"></div>
+              <div class="mt t2"></div>
+              <div class="mt forest"></div>
+
+              <div class="road h" style="left: 0; top: 44%; width: 100%"></div>
+              <div class="goldroad" style="left: 12%; top: 52%; width: 62%"><span>佟家岭旅游公路（Y302）全长 8.6 km</span></div>
+              <div class="road v" style="left: 30%; top: 30%; height: 62%"></div>
+              <div class="road v" style="left: 68%; top: 14%; height: 78%"></div>
+
+              <div class="block" style="left: 33%; top: 40%; width: 14%; height: 9%"><span>佟家岭镇</span></div>
+              <div class="block" style="left: 74%; top: 30%; width: 20%; height: 12%"><span>漭江市区</span></div>
+              <div class="block" style="left: 52%; top: 56%; width: 13%; height: 8%"><span>景区入口</span></div>
+
+              <div class="river"><span>漭江</span></div>
+
+              <div class="pin gold" style="left: 44%; top: 30%"><b></b><em>蛮牢山</em></div>
+              <div class="pin green" style="left: 50%; top: 10%"><b></b><em>后山林区</em></div>
+              <div class="pin blue" style="left: 58%; top: 50%"><b></b><em>佟家岭景区</em></div>
+              <div class="pin" style="left: 36%; top: 63%"><b></b><em>矿区路1号</em></div>
+              <div class="pin" style="left: 82%; top: 58%"><b></b><em>停车场</em></div>
+
+              <div class="scalebar"><i></i>0　　1　　2 km</div>
+              <div class="maplabel">示意图 · 非测绘成果</div>
+            </div>
+
+            <div class="legend">
+              <h4>图例</h4>
+              <div class="li"><span class="sw" style="background-color: #1b3a17; border-color: #2f5a2a"></span>山地 / 丘陵</div>
+              <div class="li"><span class="sw" style="background-color: #16301a; border-color: #2c5a34"></span>林区</div>
+              <div class="li"><span class="sw" style="background-color: #14364f; border-color: #1f5f8c"></span>河流 / 水体</div>
+              <div class="li"><span class="sw" style="background-color: #6b5c3f; border-color: #6b5c3f"></span>城市道路</div>
+              <div class="li"><span class="sw" style="background-color: #c18225; border-color: #c18225"></span>旅游公路</div>
+              <div class="li"><span class="sw" style="background-color: #e04b4b; border-color: #1e1508"></span>矿区 / 道路节点</div>
+              <div class="li"><span class="sw" style="background-color: #55b06a; border-color: #1e1508"></span>林区节点</div>
+              <div class="li"><span class="sw" style="background-color: #d9a52b; border-color: #1e1508"></span>重点项目</div>
+            </div>
+          </div>
+        </div>
+        <div class="tip">
+          注：图中“蛮牢山”为本平台标注的山体名称。蛮牢山生态修复与旅游开发项目位于佟家岭景区西侧，紧邻现有矿区遗址保护范围。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">兴趣点（POI）信息</div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 180px">名称</th><th style="width: 120px">类别</th><th style="width: 200px">位置描述</th><th style="width: 130px">坐标（示意）</th><th>备注</th></tr>
+            <tr><td>佟家岭镇</td><td>行政驻地</td><td>漭江市西北部</td><td>N30°14′ E119°02′</td><td>镇政府驻地</td></tr>
+            <tr><td>矿区路 1 号</td><td>门址</td><td>佟家岭镇矿区路</td><td>N30°13′ E119°01′</td><td>晶脉文旅有限公司注册地址</td></tr>
+            <tr><td>佟家岭景区</td><td>风景名胜</td><td>佟家岭镇西侧</td><td>N30°12′ E118°59′</td><td>工业遗产主题景区，占地约 500 亩</td></tr>
+            <tr><td>蛮牢山</td><td>山体</td><td>佟家岭景区西侧</td><td>N30°13′ E118°57′</td><td>历史遗留矿区，重点项目所在地</td></tr>
+            <tr><td>后山林区</td><td>林地</td><td>蛮牢山北侧</td><td>N30°15′ E118°58′</td><td>集体林地，面积约 900 亩</td></tr>
+            <tr><td>佟家岭旅游公路</td><td>公路</td><td>市区—佟家岭镇</td><td>—</td><td>Y302 线，全长 8.6 公里</td></tr>
+            <tr><td>漭江市区</td><td>城区</td><td>漭江市东南部</td><td>N30°11′ E119°08′</td><td>市政府驻地</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">相关查询入口</div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 250px">查询事项</th><th style="width: 240px">查询渠道</th><th>备注</th></tr>
+            <tr><td>重点项目建设进展</td><td><a href="zhengce.html" style="color: #7eb0f2; text-decoration: none">漭江市政务公开 · 重点项目公示</a></td><td>含审批与许可办理进展</td></tr>
+            <tr><td>环评审批公示</td><td><a href="env.html" style="color: #7eb0f2; text-decoration: none">漭江市生态环境局</a></td><td>含蛮牢山项目拟审批公示</td></tr>
+            <tr><td>招标与中标信息</td><td><a href="bidding.html" style="color: #7eb0f2; text-decoration: none">漭江市公共资源交易中心</a></td><td>含场地平整工程中标公告</td></tr>
+            <tr><td>政务门户</td><td><a href="gov.html" style="color: #7eb0f2; text-decoration: none">漭江市人民政府门户网站</a></td><td>政策文件与经济运行</td></tr>
+            <tr><td>公交出行</td><td><a href="bus.html" style="color: #7eb0f2; text-decoration: none">漭江公交 · 线路查询</a></td><td>含佟家岭旅游专线</td></tr>
+            <tr><td>天气与空气质量</td><td><a href="weather.html" style="color: #7eb0f2; text-decoration: none">漭江天气</a></td><td>含山区雾情与矿区扬尘</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  主办：漭江市自然资源和规划局　　承办：漭江市地理信息中心<br>
+  本页面为游戏内虚构政务网站，所有地名、坐标、地图内容均为虚构　　审图号：漭 S（2024）000 号
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>
