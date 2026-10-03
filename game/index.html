@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UnderSurface</title>
+<link rel="stylesheet" href="css/style.css?v=20261025">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 场景层 -->
+    <div id="scene-bg"></div>
+    <div id="hotspot-layer"></div>
+    <div id="prop-layer"></div>
+    <div id="npc-layer"></div>
+    <div id="hero"><div id="hero-sprite"></div></div>
+
+    <!-- 角色靠近可交互点时浮现的「调查」像素字提示 -->
+    <div id="prompt" class="hidden"></div>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div class="hud-box">
+        <div class="hud-clock"><span id="hud-date"></span><span id="hud-time"></span></div>
+        <div class="hud-stats">
+          <span id="hud-day"></span>
+          <span id="hud-stamina"></span>
+        </div>
+      </div>
+      <button id="hud-menu" type="button" title="游戏菜单（Esc）">≡ 菜单</button>
+      <button id="map-back" type="button" class="hidden" title="回到景区门口">← 回到景区门口</button>
+    </div>
+
+    <!-- 底栏 -->
+    <div id="bottombar">
+      <button id="bar-toggle" type="button" title="收缩 / 展开（F）">▼</button>
+      <div id="bar-items">
+        <button type="button" data-act="phone">查看手机</button>
+        <button type="button" data-act="nextday" id="bar-nextday">下一天</button>
+        <button type="button" id="bar-home" class="hidden" data-act="home">一键回家</button>
+        <button type="button" id="bar-think" class="hidden" data-act="think">深度思考</button>
+      </div>
+    </div>
+
+    <!-- 对话立绘：仅当说话人有全身立绘时出现；贴在舞台左下，下半身被对话框压住 -->
+    <div id="dlg-portrait" class="hidden"><img id="dlg-portrait-img" alt=""></div>
+
+    <!-- 对话框 -->
+    <div id="dialogue" class="hidden">
+      <div class="dlg-face"><img id="dlg-avatar" alt=""></div>
+      <div class="dlg-body">
+        <div class="dlg-name" id="dlg-name"></div>
+        <div class="dlg-text" id="dlg-text"></div>
+        <div class="dlg-foot">
+          <button id="dlg-skip" type="button" class="hidden" title="跳过已经看过的对话">跳过已读 ▸▸</button>
+          <span class="dlg-hint">▼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 通用面板（菜单 / 笔记 / 成就 / 设置 / 存档 / 主题） -->
+    <div id="panel" class="hidden">
+      <div id="panel-box">
+        <div class="panel-head"><span id="panel-title"></span><button id="panel-close" type="button">✕</button></div>
+        <div id="panel-body"></div>
+      </div>
+    </div>
+
+    <!-- 全屏档案页（成就 / 游戏设置） -->
+    <div id="page" class="hidden">
+      <div id="page-box">
+        <div class="page-head">
+          <span id="page-title"></span>
+          <button id="page-close" type="button">✕</button>
+        </div>
+        <div id="page-body"></div>
+      </div>
+    </div>
+
+    <!-- 电脑 / 浏览器 -->
+    <div id="computer" class="hidden">
+      <div id="computer-box">
+        <div id="computer-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <button id="computer-back" type="button" title="返回上一页" disabled>←</button>
+          <span id="computer-url">about:blank</span>
+          <button id="computer-close" type="button">✕</button>
+        </div>
+        <div id="computer-net" class="hidden"></div>
+        <iframe id="computer-view" src="about:blank" title="浏览器"></iframe>
+      </div>
+    </div>
+
+    <!-- 手机 -->
+    <div id="phone" class="hidden">
+      <div id="phone-box">
+        <div class="phone-screen">
+          <!-- 主屏：热区与主屏图上自带的图标一一对应（坐标按 360×640 原图的百分比） -->
+          <div id="phone-home" class="phone-page">
+            <div class="home-inner">
+              <img src="../art/手机界面.png" alt="手机">
+              <span id="phone-status-time">9:41</span>
+              <button class="phone-app-btn" type="button" data-app="settings" style="left:6.8%;top:17.2%"  title="设置"></button>
+              <button class="phone-app-btn" type="button" data-app="wechat"   style="left:28.9%;top:17.2%" title="微信"></button>
+              <button class="phone-app-btn" type="button" data-app="qq"       style="left:50.8%;top:17.2%" title="QQ空间"></button>
+              <button class="phone-app-btn" type="button" data-app="browser"  style="left:72.6%;top:17.2%" title="浏览器"></button>
+              <button class="phone-app-btn" type="button" data-app="gallery"  style="left:6.8%;top:31.4%"  title="相册"></button>
+              <button class="phone-app-btn" type="button" data-app="recorder" style="left:28.9%;top:31.4%" title="录音机"></button>
+              <button class="phone-app-btn" type="button" data-app="music"    style="left:50.8%;top:31.4%" title="音乐"></button>
+              <button class="phone-app-btn" type="button" data-app="clock"    style="left:72.6%;top:31.4%" title="时钟"></button>
+              <button class="phone-app-btn" type="button" data-app="phone"    style="left:6.8%;top:75.4%"  title="电话"></button>
+              <button class="phone-app-btn" type="button" data-app="sms"      style="left:28.9%;top:75.4%" title="短信"></button>
+              <button class="phone-app-btn" type="button" data-app="wechat"   style="left:50.8%;top:75.4%" title="微信"></button>
+              <button class="phone-app-btn" type="button" data-app="camera"   style="left:72.6%;top:75.4%" title="相机"></button>
+            </div>
+          </div>
+          <!-- 通用应用页（时钟 / 相册 / 音乐 / 设置 … 由引擎按 app 渲染） -->
+          <div id="phone-app" class="phone-page hidden">
+            <div id="phone-app-bar">
+              <button id="phone-app-back" type="button" title="返回主屏">←</button>
+              <span id="phone-app-title"></span>
+            </div>
+            <div id="phone-app-body"></div>
+          </div>
+          <!-- 手机浏览器 -->
+          <div id="phone-browser" class="phone-page hidden">
+            <div id="phone-bar">
+              <button id="phone-back" type="button" title="返回主屏">←</button>
+              <button id="phone-back-page" type="button" title="返回上一页" disabled>↶</button>
+              <span id="phone-url">about:blank</span>
+            </div>
+            <iframe id="phone-view" src="about:blank" title="手机浏览器"></iframe>
+          </div>
+        </div>
+        <div class="phone-btns">
+          <button id="phone-close" type="button">收起手机</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 成就 / 提示条 -->
+    <div id="toast" class="hidden"></div>
+
+    <!-- 噩梦成真 · 彩蛋演出层：倒吊人自天花板垂落（压在对话框之下，独白可读） -->
+    <div id="fx" class="hidden"><div id="fx-hang"><i></i></div></div>
+    <!-- 突脸 scareJump：全屏糊脸 + 红光（盖住所有 UI，仅低于转场幕布） -->
+    <div id="fx-scare" class="hidden"><div id="fx-face"></div><div id="fx-flash"></div></div>
+
+    <!-- 转场幕布 -->
+    <div id="curtain"></div>
+
+    <!-- 标题页 -->
+    <div id="title" class="hidden">
+      <img id="title-mark" src="../art/logo2.png" alt="">
+      <img id="title-logo" src="../art/logo字符.png" alt="UNDERSURFACE">
+      <div id="title-menu">
+        <button type="button" data-act="new">新游戏</button>
+        <button type="button" data-act="continue">继续游戏</button>
+        <button type="button" data-act="load">读取存档</button>
+        <button type="button" data-act="notes">线索笔记</button>
+      </div>
+      <div id="title-corner">
+        <button type="button" data-act="achv" title="成就"><img src="../art/成就.png" alt="成就"></button>
+        <button type="button" data-act="settings" title="游戏设置"><img src="../art/设置.png" alt="游戏设置"></button>
+      </div>
+    </div>
+
+    <!-- 开场团队 LOGO -->
+    <div id="splash" class="hidden">
+      <div class="splash-logo">
+        <img src="../art/团队logo.png" alt="WHAT'S OUR NAME STUDIO">
+        <span class="splash-blink"></span>
+      </div>
+      <div class="splash-text">WHAT'S OUR NAME STUDIO</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 背景音乐：室内 / 室外各一条循环音轨（进入场景时自动切换） -->
+<audio id="bgm-indoor" src="../Muisc/深夜公寓_场景配乐.mp3" loop preload="auto"></audio>
+<audio id="bgm-outdoor" src="../Muisc/sunset-drift.wav" loop preload="auto"></audio>
+<!-- 开场 LOGO 与标题页的主题曲：仅在标题页循环，进入游戏后停止 -->
+<audio id="bgm-title" src="../Muisc/title-bird.m4a" loop preload="auto"></audio>
+<!-- 手机「音乐」App 的独立音轨：与场景配乐互斥播放 -->
+<audio id="phone-music" preload="none"></audio>
+
+<script src="js/data.js?v=20261025"></script>
+<script src="js/engine.js?v=20261025"></script>
+<script src="js/main.js?v=20261025"></script>
+</body>
+</html>
