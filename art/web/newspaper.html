@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漭江日报数字报 - 漭江日报电子版</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.masthead{background: #8b1a1a; color: #fff; text-align: center; padding: 20px 16px 14px}
+.masthead h1{font-size: 36px; letter-spacing: 12px; font-weight: normal}
+.masthead .info{font-size: 12px; opacity: .85; margin-top: 8px; letter-spacing: 1px}
+.dateline{background: #6f1414; color: #fff; text-align: center; padding: 8px; font-size: 12px; letter-spacing: 2px}
+.toolbar{background-color: #1e1508; border-bottom: 1px solid #ddd; padding: 10px 16px}
+.toolbar-in{max-width: 1000px; margin: 0 auto; display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap}
+.toolbar select,.toolbar input{border: 1px solid #ccc; padding: 6px 10px; font-size: 12px; font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; outline: 0}
+.toolbar input{width: 180px}
+.toolbar button{background: #8b1a1a; color: #fff; border: 0; padding: 7px 20px; cursor: pointer; font-size: 12px}
+.wrap{max-width: 1000px; margin: 16px auto 40px; padding: 0 16px}
+.layout{display: flex; gap: 16px; align-items: flex-start}
+.pages{width: 150px; flex-shrink: 0; background-color: #1e1508; border: 1px solid #ddd; padding: 10px}
+.pages h4{font-size: 12px; color: #e88787; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #eee}
+.pages a{display: block; padding: 7px 6px; color: #b8b8b8; text-decoration: none; font-size: 12px; border-bottom: 1px dashed #eee}
+.pages a:hover{color: #e88787; background-color: #1e1508}
+.pages a.on{color: #e88787; font-weight: bold}
+.main{flex: 1; background-color: #1e1508; border: 1px solid #ddd; padding: 22px; box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+.paper-title{font-size: 24px; color: #e88787; text-align: center; margin-bottom: 4px; font-weight: bold}
+.paper-sub{text-align: center; color: #999; font-size: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #8b1a1a}
+.result-box{background-color: #1e1508; border: 1px solid #e5e0d5; padding: 24px; text-align: center}
+.result-box .big{font-size: 12px; color: #b8b8b8; margin-bottom: 14px}
+.result-box .small{font-size: 12px; color: #999; line-height: 26px}
+.hit{border-bottom: 1px dashed #ddd; padding: 16px 0; text-align: left; display: flex; gap: 16px; align-items: flex-start}
+.hit:last-child{border-bottom: 0}
+.hit-fig{width: 132px; height: 92px; flex-shrink: 0; background-color: #1e1508; border: 1px solid #ded8cb; position: relative; filter: none}
+.hit-fig::after{content: attr(data-cap); position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 6px; font-size: 12px; color: #eee; letter-spacing: 1px; background-color: #1e1508; background-image: none}
+.hit-fig.f1{background-image: url("assets/news-train-crowd.png")}
+.hit-fig.f2{background-image: url("assets/old-mine-before.png")}
+.hit-fig.f3{background-image: url("assets/news-award-ceremony.png")}
+.hit-fig.f4{background-image: url("assets/news-tour-road.png")}
+.hit-body{flex: 1; min-width: 0}
+.hit h3{font-size: 12px; margin-bottom: 6px}
+.hit h3 a{color: #b8b8b8; text-decoration: none}
+.hit h3 a:hover{color: #e88787}
+.hit .m{font-size: 12px; color: #999; margin-bottom: 8px}
+.hit .a{font-size: 12px; color: #b8b8b8; line-height: 24px}
+.hit .a .hl{background-color: #1e1508; padding: 0 2px}
+.archive-note{background-color: #1e1508; border: 1px solid #e5e0d5; padding: 14px 18px; margin-top: 16px; font-size: 12px; color: #777; line-height: 24px}
+.archive-note h4{font-size: 12px; color: #e88787; margin-bottom: 6px}
+.foot{text-align: center; color: #999; font-size: 12px; padding: 20px; line-height: 22px}
+.front-fig{height: 176px; margin-bottom: 16px; border: 1px solid #ded8cb; background-color: #1e1508; background-image: url("assets/newspaper-page.png") center/cover no-repeat; position: relative}
+.front-fig::after{content: "A01版 · 要闻"; position: absolute; left: 0; bottom: 0; padding: 3px 9px; font-size: 12px; color: #fff; background: rgba(139,26,26,.82); letter-spacing: 1px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="masthead">
+  <h1>漭 江 日 报</h1>
+  <div class="info">中共漭江市委机关报 · 数字报平台 · 国内统一刊号 CN33-0000</div>
+</div>
+<div class="dateline">2024年1月24日　星期三　农历癸卯年腊月十四</div>
+
+<div class="toolbar">
+  <div class="toolbar-in">
+    <select>
+      <option>漭江日报</option>
+      <option>漭江晚报</option>
+      <option>漭江商报</option>
+    </select>
+    <select>
+      <option>2024年</option>
+      <option>2023年</option>
+    </select>
+    <input value="晶脉文旅" readonly>
+    <button>检索</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <div class="pages">
+      <h4>近期版面</h4>
+      <a href="newspaper.html" class="on">2024-01-24 A01版</a>
+      <a href="newspaper.html">2024-01-23 A02版</a>
+      <a href="newspaper.html">2024-01-22 B01版</a>
+      <a href="newspaper.html">2023-12-02 A03版</a>
+      <a href="newspaper.html">2023-09-07 A02版</a>
+      <a href="newspaper.html">2023-07-27 B02版</a>
+      <h4 style="margin-top: 14px">检索历史</h4>
+      <a href="newspaper.html">按日期浏览</a>
+      <a href="newspaper.html">按栏目浏览</a>
+      <a href="newspaper.html">高级检索</a>
+    </div>
+
+    <div class="main">
+      <div class="front-fig" role="img" aria-label="漭江日报 2024年1月24日 A01版版面"></div>
+      <div class="paper-title">漭江日报数字报</div>
+      <div class="paper-sub">全文检索 · 关键词："晶脉文旅" · 时间范围：全部</div>
+
+      <div class="result-box" style="text-align: left; padding: 20px">
+        <div style="font-size: 12px; color: #888; margin-bottom: 14px">共检索到 4 篇相关报道，均为消息类稿件</div>
+
+        <div class="hit">
+          <div class="hit-fig f1" role="img" aria-label="2023年五一假期佟家岭景区游客如织"></div>
+          <div class="hit-body">
+          <h3><a href="newspaper.html">我市2023年五一假期旅游市场持续升温 重点景区接待量创新高</a></h3>
+          <div class="m">漭江日报 2024-01-24 A01版　本报记者 陈立</div>
+          <div class="a">2023年五一假期，我市旅游市场迎来旺季。据统计，5月1日至5日，全市共接待游客46.8万人次，实现旅游综合收入2.1亿元。其中<span class="hl">晶脉文旅</span>旗下的佟家岭景区接待游客10.3万人次，占全市接待总量的22%……</div>
+          </div>
+        </div>
+
+        <div class="hit">
+          <div class="hit-fig f2" role="img" aria-label="改造前的佟家岭老矿区"></div>
+          <div class="hit-body">
+          <h3><a href="newspaper.html">老矿区变身新景区 我市工业遗产保护利用迈出坚实步伐</a></h3>
+          <div class="m">漭江日报 2023-12-02 A03版　本报记者 王敏</div>
+          <div class="a">本报讯 昨日，记者走进佟家岭景区，只见曾经的废弃矿井架已化作工业景观，矿车轨道变身观光步道。景区运营方<span class="hl">晶脉文旅</span>负责人介绍，景区自2023年1月开放以来，累计接待游客已超过30万人次……</div>
+          </div>
+        </div>
+
+        <div class="hit">
+          <div class="hit-fig f3" role="img" aria-label="全市经济工作会议优秀企业表彰现场"></div>
+          <div class="hit-body">
+          <h3><a href="newspaper.html">全市经济工作会议召开 表彰年度优秀企业</a></h3>
+          <div class="m">漭江日报 2023-09-07 A02版　本报记者 王敏</div>
+          <div class="a">9月5日，全市经济工作会议召开。会议总结了2023年全市经济工作，部署2024年重点任务，并对一批优秀企业进行表彰。<span class="hl">晶脉文旅</span>有限公司等12家企业获评"漭江市年度优秀企业"称号……</div>
+          </div>
+        </div>
+
+        <div class="hit">
+          <div class="hit-fig f4" role="img" aria-label="佟家岭旅游公路建成通车"></div>
+          <div class="hit-body">
+          <h3><a href="newspaper.html">佟家岭旅游公路建成通车 打通景区"最后一公里"</a></h3>
+          <div class="m">漭江日报 2023-07-27 B02版　本报记者 陈立</div>
+          <div class="a">7月25日上午，佟家岭旅游公路通车仪式举行。该公路全长8.6公里，双向四车道。据市交通运输局介绍，项目建设资金由企业方<span class="hl">晶脉文旅</span>与市级财政共同筹措，其中企业方承担了主体工程投资……</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="archive-note">
+        <h4>检索结果说明</h4>
+        本报数字报平台收录自1998年以来的全部版面内容。本次检索未找到调查报道、深度报道、评论文章或读者来信类稿件。<br>
+        检索范围包括《漭江日报》《漭江晚报》《漭江商报》三报全部内容。<br>
+        如需查阅纸质版或办理剪报服务，请联系本报资料室。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  漭江日报社 主办　　数字报平台　　本页面为游戏内虚构内容
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

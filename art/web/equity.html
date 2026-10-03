@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国家企业信用信息公示系统 - 股权穿透图谱</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #c8161d; color: #fff; padding: 14px 0}
+.top-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 16px}
+.emblem{width: 42px; height: 42px; background-color: #1e1508; border-radius: 0; display: flex; align-items: center; justify-content: center; color: #f17e83; font-size: 24px; font-weight: bold; flex-shrink: 0}
+.brand h1{font-size: 24px; font-weight: normal}
+.brand .sub{font-size: 12px; opacity: .8; margin-top: 2px}
+.searchbox{flex: 1; max-width: 340px; margin-left: auto; display: flex; border: 2px solid #a5121a; border-radius: 0; overflow: hidden}
+.searchbox input{flex: 1; border: 0; outline: 0; padding: 8px 12px; font-size: 12px}
+.searchbox button{background: #a5121a; color: #fff; border: 0; padding: 0 24px; cursor: pointer; font-size: 12px}
+.subnav{background: #a5121a; padding: 0}
+.subnav-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px}
+.subnav a{color: #fff; text-decoration: none; padding: 10px 18px; font-size: 12px; opacity: .85}
+.subnav a.on{background-color: #1e1508; color: #f17e83; opacity: 1}
+.wrap{max-width: 1000px; margin: 16px auto 40px; padding: 0 16px}
+.tabbar{display: flex; gap: 2px; background-color: #1e1508; border-radius: 0; padding: 0 12px; margin-bottom: 14px}
+.tabbar a{padding: 12px 18px; text-decoration: none; color: #b8b8b8; font-size: 12px; border-bottom: 2px solid transparent}
+.tabbar a.on{color: #f17e83; border-bottom-color: #c8161d}
+.head{background-color: #1e1508; border-radius: 0; padding: 20px 22px; margin-bottom: 14px; display: flex; align-items: center; gap: 18px}
+.head .mark{width: 52px; height: 52px; background-color: #1e1508; border: 1px solid #ffe1a8; flex-shrink: 0}
+.head h1{font-size: 24px; margin-bottom: 6px}
+.head .meta{font-size: 12px; color: #b8b8b8; line-height: 22px}
+.head .meta b{font-weight: normal; color: #b8b8b8}
+.card{background-color: #1e1508; border-radius: 0; margin-bottom: 14px; overflow: hidden}
+.card-head{padding: 13px 22px; border-bottom: 1px solid #f0f1f5; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: space-between}
+.card-head .cnt{font-size: 12px; font-weight: normal; color: #f17e83; background-color: #1e1508; padding: 2px 10px; border-radius: 0}
+.card-body{padding: 18px 22px}
+
+/* 穿透图：纯直角连接线，像素风 */
+.tree{display: flex; flex-direction: column; gap: 0}
+.tier{position: relative; padding-left: 0}
+.node{background-color: #1e1508; border: 1px solid #4a3a1c; border-radius: 0; padding: 12px 16px; display: flex; align-items: flex-start; gap: 14px}
+.node.root{border-color: #c18225}
+.node.cur{border-color: #c18225; background-color: #241a0a}
+.node .nm{font-size: 12px; color: #b8b8b8; font-weight: bold}
+.node .nm.strong{color: #ffd27a}
+.node .dt{font-size: 12px; color: #999; line-height: 20px; margin-top: 4px}
+.node .st{margin-left: auto; font-size: 12px; color: #e78888; white-space: nowrap}
+.node .st.ok{color: #97d99a}
+.node .st.gray{color: #abbcc5}
+.col{width: 150px; flex-shrink: 0; font-size: 12px; color: #999}
+.col b{display: block; font-weight: normal; color: #b8b8b8; font-size: 12px; margin-top: 2px}
+
+/* 连接线：竖线 + 横线，无圆角 */
+.link{width: 2px; height: 22px; background-color: #7e5410; margin-left: 26px}
+.link.fork{width: 2px; height: 14px; background-color: #7e5410; margin-left: 26px}
+
+table{width: 100%; border-collapse: collapse; font-size: 12px}
+th{background-color: #1e1508; padding: 10px; text-align: left; border-bottom: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; font-size: 12px}
+td{padding: 10px; border-bottom: 1px solid #f5f6f8; line-height: 20px; vertical-align: top}
+tr:last-child td{border-bottom: 0}
+.badge{display: inline-block; padding: 2px 8px; border-radius: 0; font-size: 12px}
+.b-pay{background-color: #1e1508; color: #97d99a}
+.b-zero{background-color: #1e1508; color: #e78888}
+.b-warn{background-color: #1e1508; color: #ffa270}
+.b-gray{background-color: #1e1508; color: #abbcc5}
+.none{padding: 26px; text-align: center; color: #a0a4ab; font-size: 12px; line-height: 24px}
+.tip{padding: 12px 22px; background-color: #1e1508; border-top: 1px solid #fff3cd; color: #8a7a3a; font-size: 12px; line-height: 20px}
+.foot{text-align: center; color: #9aa0a6; font-size: 12px; padding: 20px; line-height: 22px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="emblem">徽</div>
+    <div class="brand">
+      <h1>国家企业信用信息公示系统</h1>
+      <div class="sub">National Enterprise Credit Information Publicity System</div>
+    </div>
+    <div class="searchbox"><input value="天吴集团有限公司" readonly><button>查询</button></div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="gsxt.html" class="on">企业公示信息</a>
+    <a href="gsxt.html">信息公告</a>
+    <a href="gsxt.html">使用帮助</a>
+    <a href="gsxt.html">网站导航</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabbar">
+    <a href="gsxt.html">工商概览</a>
+    <a href="gsxt.html">经营规模</a>
+    <a href="gsxt.html">资质荣誉</a>
+    <a href="tianyancha.html">风险信息</a>
+    <a href="gsxt.html" class="on">关联图谱</a>
+  </div>
+
+  <div class="head">
+    <div class="mark" role="img" aria-label="晶脉文旅有限公司企业标识"></div>
+    <div>
+      <h1>晶脉文旅有限公司 · 股权穿透图谱</h1>
+      <div class="meta">
+        统一社会信用代码：<b>91330100MA2XXXXX7K</b>　|　法定代表人：<b>谢某</b>　|　注册资本：<b>500万元</b><br>
+        穿透层级：<b>3 层</b>　|　数据来源：<b>国家企业信用信息公示系统 + 企业年报公示信息</b>　|　更新日期：<b>2024-01-17</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">股权穿透路径 <span class="cnt">自上而下 3 层</span></div>
+    <div class="card-body">
+      <div class="tree">
+
+        <div class="tier">
+          <div class="node root">
+            <div class="col">第 1 层<b>标的公司</b></div>
+            <div>
+              <div class="nm strong">晶脉文旅有限公司</div>
+              <div class="dt">有限责任公司（自然人独资）　|　认缴注册资本 500万元　|　实缴 500万元　|　成立 2020-11-30</div>
+            </div>
+            <div class="st ok">存续</div>
+          </div>
+        </div>
+
+        <div class="link"></div>
+
+        <div class="tier">
+          <div class="node">
+            <div class="col">直接股东<b>持股 100%</b></div>
+            <div>
+              <div class="nm">谢某（自然人）</div>
+              <div class="dt">认缴出资 500万元　|　认缴日期 2020-11-30　|　实缴 500万元　|　证件类型：中华人民共和国居民身份证</div>
+              <div class="dt" style="color: #ffa270">该股东所持 100% 股权已于 2020-12-28 全部出质，质权人为天吴集团有限公司（登记编号：〔漭〕股质登记设字〔2021〕第0087号）</div>
+            </div>
+            <div class="st">股权已全数出质</div>
+          </div>
+        </div>
+
+        <div class="link"></div>
+
+        <div class="tier">
+          <div class="node">
+            <div class="col">质权人 / 第 2 层<b>天吴集团有限公司</b></div>
+            <div>
+              <div class="nm strong">天吴集团有限公司</div>
+              <div class="dt">成立 2013-03-15　|　法定代表人：梁某　|　注册资本 80,000万元　|　实缴 80,000万元　|　登记状态：存续</div>
+              <div class="dt">注册地址：漭江市高新区天吴大厦 A 座　　经营范围：投资管理、房地产开发、企业管理咨询、货物进出口</div>
+              <div class="dt" style="color: #ffd27a">作为质权人持有晶脉文旅 100% 股权的质权；同时为公司创始股东谢某的参股企业，构成关联方。</div>
+            </div>
+            <div class="st ok">存续</div>
+          </div>
+        </div>
+
+        <div class="link fork"></div>
+
+        <div class="tier" style="padding-left: 26px">
+          <div class="node" style="border-color: #7e5410">
+            <div class="col">天吴集团股东<b>持股 51%</b></div>
+            <div>
+              <div class="nm">衡大地产（集团）有限公司</div>
+              <div class="dt">认缴出资 40,800万元　|　认缴日期 2013-03-15</div>
+            </div>
+            <div class="st gray">存续</div>
+          </div>
+        </div>
+
+        <div class="link fork" style="margin-left: 52px"></div>
+
+        <div class="tier" style="padding-left: 26px">
+          <div class="node" style="border-color: #7e5410">
+            <div class="col">天吴集团股东<b>持股 29%</b></div>
+            <div>
+              <div class="nm">漭江市天吴企业管理合伙企业（有限合伙）</div>
+              <div class="dt">认缴出资 23,200万元　|　执行事务合伙人：梁某</div>
+            </div>
+            <div class="st gray">存续</div>
+          </div>
+        </div>
+
+        <div class="link fork" style="margin-left: 52px"></div>
+
+        <div class="tier" style="padding-left: 26px">
+          <div class="node" style="border-color: #c18225">
+            <div class="col">天吴集团股东<b>持股 20%</b></div>
+            <div>
+              <div class="nm strong">谢某（自然人）</div>
+              <div class="dt">认缴出资 16,000万元　|　认缴日期 2015-05-29</div>
+              <div class="dt" style="color: #ffa270">即：晶脉文旅 100% 股东谢某，同时持有其股权质权人天吴集团 20% 股份。双向关联。</div>
+            </div>
+            <div class="st">双向关联</div>
+          </div>
+        </div>
+
+        <div class="link"></div>
+
+        <div class="tier">
+          <div class="node">
+            <div class="col">第 3 层<b>衡大地产（集团）有限公司</b></div>
+            <div>
+              <div class="nm strong">衡大地产（集团）有限公司</div>
+              <div class="dt">成立 2009-07-20　|　法定代表人：梁某　|　注册资本 200,000万元　|　实缴 0 万元　|　登记状态：存续</div>
+              <div class="dt">注册地址：漭江市高新区创新大厦 B 座 18 层（商务秘书企业集中登记地）</div>
+              <div class="dt">参保人数：<b>0 人</b>　|　不动产登记：<b>无</b>　|　对外投资：<b>7 家</b></div>
+            </div>
+            <div class="st">注册资本 20 亿元 / 实缴 0</div>
+          </div>
+        </div>
+
+        <div class="link fork"></div>
+
+        <div class="tier" style="padding-left: 26px">
+          <div class="node" style="border-color: #7e5410">
+            <div class="col">衡大地产股东<b>持股 60%</b></div>
+            <div>
+              <div class="nm">梁某（自然人）</div>
+              <div class="dt">认缴出资 120,000万元　|　实缴 0 万元　|　认缴日期 2009-07-20</div>
+            </div>
+            <div class="st gray">存续</div>
+          </div>
+        </div>
+
+        <div class="link fork" style="margin-left: 52px"></div>
+
+        <div class="tier" style="padding-left: 26px">
+          <div class="node" style="border-color: #d24a3a">
+            <div class="col">衡大地产股东<b>持股 40%</b></div>
+            <div>
+              <div class="nm" style="color: #e78888">天吴集团有限公司</div>
+              <div class="dt">认缴出资 80,000万元　|　实缴 0 万元　|　认缴日期 2013-12-02</div>
+              <div class="dt" style="color: #e78888">天吴集团持有衡大地产 40%，衡大地产持有天吴集团 51% —— 双方互为股东，构成交叉（循环）持股。</div>
+            </div>
+            <div class="st">循环持股</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tip">
+      说明：股权穿透结果依据各级企业自行公示的年报股东信息逐层推算，公示信息存在滞后与不完整的情况，标注“—”表示未查询到公示记录。交叉持股会形成穿透闭环，本图谱已在闭环处终止，不再继续向上追溯。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">关键节点对照 <span class="cnt">3 个层级 / 6 个主体</span></div>
+    <div class="card-body">
+      <table>
+        <tr><th>层级</th><th>企业 / 股东名称</th><th>持股比例</th><th>注册资本</th><th>实缴资本</th><th>参保人数</th></tr>
+        <tr><td>第1层</td><td>晶脉文旅有限公司</td><td>—</td><td>500万元</td><td><span class="badge b-pay">500万元</span></td><td>未公示</td></tr>
+        <tr><td>直接股东</td><td>谢某</td><td>100%</td><td>—</td><td>500万元</td><td>—</td></tr>
+        <tr><td>第2层</td><td>天吴集团有限公司</td><td>质权人</td><td>80,000万元</td><td><span class="badge b-pay">80,000万元</span></td><td>46 人</td></tr>
+        <tr><td>第2层股东</td><td>衡大地产（集团）有限公司</td><td>51%</td><td>200,000万元</td><td><span class="badge b-zero">0元</span></td><td><span class="badge b-zero">0 人</span></td></tr>
+        <tr><td>第2层股东</td><td>漭江市天吴企业管理合伙企业</td><td>29%</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>第2层股东</td><td>谢某</td><td>20%</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>第3层股东</td><td>梁某</td><td>60%</td><td>—</td><td><span class="badge b-zero">0元</span></td><td>—</td></tr>
+        <tr><td>第3层股东</td><td>天吴集团有限公司</td><td>40%</td><td>—</td><td><span class="badge b-zero">0元</span></td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">穿透链上的疑点提示</div>
+    <div class="card-body">
+      <table>
+        <tr><th>疑点</th><th>公示数据</th></tr>
+        <tr>
+          <td><span class="badge b-warn">双向关联</span></td>
+          <td>谢某持有晶脉文旅 100%，同时又持有天吴集团 20%。天吴集团既是晶脉文旅 100% 股权的质权人，也是其融资方与合作方。三方关系在多个公开页面上被分别表述为“战略投资人”“天使轮投资方”“质权人”。</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-warn">循环持股</span></td>
+          <td>天吴集团与衡大地产互相持股（51% / 40%），对外均以“集团”名义出现，无法通过股权关系追溯到最终实际控制人。两家公司的法定代表人为同一人。</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-zero">出资缺口</span></td>
+          <td>衡大地产（集团）有限公司注册资本 200,000 万元，实缴 0 元，参保人数 0 人，注册地为商务秘书企业集中登记地，名下无不动产登记记录。该主体以“注册资本 20 亿元”的身份，出现在多个项目的合作方与担保方名单中。</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-zero">无实际经营痕迹</span></td>
+          <td>衡大地产在公示系统中对外投资 7 家企业，未见任何建设项目立项、土地使用、施工许可或环评公示记录。</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tip">
+      注：以上为公示数据的客观陈列，不构成任何结论。企业注册资本为认缴制，认缴金额与实缴金额之间可以存在差异，该差异本身不违反法律规定。是否构成实质性风险，需结合具体交易背景判断。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">该企业的对外投资（穿透向下）</div>
+    <div class="card-body">
+      <table>
+        <tr><th>被投资企业</th><th>统一社会信用代码</th><th>投资比例</th><th>认缴出资</th><th>登记状态</th></tr>
+        <tr><td>佟家岭景区管理有限公司</td><td>91330100MA2YYYYY3B</td><td>100%</td><td>1,000万元</td><td><span class="badge b-pay">存续</span></td></tr>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: #9aa0a6; line-height: 22px">
+        未查询到该企业的其他对外投资记录。媒体曾报道公司将建设度假酒店及文创街区，截至查询日期，未检索到对应的新设项目公司。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  国家企业信用信息公示系统 · 企业股权穿透图谱<br>
+  本页面为游戏内虚构数据，与任何真实企业无关
+</div>
+<script src="game-bridge.js?v=20261025"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工业和信息化部政务服务平台 - ICP/IP地址/域名信息备案管理系统</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #1257a6; color: #fff; padding: 0}
+.top-in{max-width: 1080px; margin: 0 auto; padding: 0 16px}
+.top-bar{display: flex; align-items: center; justify-content: space-between; padding: 8px 0; font-size: 12px; opacity: .9; border-bottom: 1px solid rgba(255,255,255,.22)}
+.top-main{padding: 18px 0 16px; display: flex; align-items: center; gap: 18px}
+.emblem{width: 46px; height: 46px; background-color: #1e1508; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; color: #a9cdf5}
+.top-main h1{font-size: 22px; font-weight: normal; letter-spacing: 1px; line-height: 30px}
+.top-main .en{font-size: 12px; opacity: .72; margin-top: 4px}
+.subnav{background: #0f4a8c; padding: 0}
+.subnav-in{max-width: 1080px; margin: 0 auto; padding: 0 16px; display: flex; gap: 0}
+.subnav a{color: #fff; text-decoration: none; padding: 11px 20px; font-size: 12px; opacity: .88}
+.subnav a.on{background-color: #1e1508; opacity: 1; color: #a9cdf5}
+.crumb{max-width: 1080px; margin: 14px auto 0; padding: 0 16px; font-size: 12px; color: #999}
+.crumb a{color: #7eb0f2; text-decoration: none}
+.wrap{max-width: 1080px; margin: 12px auto 40px; padding: 0 16px}
+.layout{display: flex; gap: 18px; align-items: flex-start}
+.side{width: 210px; flex-shrink: 0; background-color: #1e1508; border-radius: 0; overflow: hidden}
+.side h3{background-color: #1e1508; padding: 12px 16px; font-size: 12px; color: #ffd27a; border-bottom: 1px solid #eceef1}
+.side a{display: block; padding: 10px 16px; font-size: 12px; color: #b8b8b8; text-decoration: none; border-bottom: 1px solid #f0f1f5}
+.side a.on{background-color: #241a0a; color: #ffd27a}
+.main{flex: 1; min-width: 0}
+.card{background-color: #1e1508; border-radius: 0; margin-bottom: 14px; overflow: hidden}
+.card-head{padding: 13px 20px; border-bottom: 1px solid #f0f1f5; font-size: 12px; font-weight: bold; color: #a9cdf5; display: flex; align-items: center; justify-content: space-between}
+.card-head .cnt{font-size: 12px; font-weight: normal; color: #b8b8b8}
+.card-body{padding: 18px 20px}
+.doc h2{font-size: 20px; color: #b8b8b8; text-align: center; padding: 20px 0 12px; font-weight: normal; line-height: 30px}
+.doc .dh{text-align: center; font-size: 12px; color: #999; padding-bottom: 14px; border-bottom: 1px solid #f0f1f5; margin-bottom: 16px}
+table{width: 100%; border-collapse: collapse; font-size: 12px}
+th{background-color: #1e1508; padding: 10px; text-align: left; border: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; font-size: 12px; vertical-align: top}
+td{padding: 10px; border: 1px solid #eceef1; line-height: 22px; vertical-align: top}
+table.query th{width: 150px}
+.badge{display: inline-block; padding: 2px 8px; border-radius: 0; font-size: 12px}
+.b-ok{background-color: #1e1508; color: #97d99a}
+.b-warn{background-color: #1e1508; color: #ffa270}
+.b-gray{background-color: #1e1508; color: #abbcc5}
+.none{padding: 26px; text-align: center; color: #a0a4ab; font-size: 12px; line-height: 24px}
+.tip{padding: 12px 20px; background-color: #1e1508; border-top: 1px solid #fff3cd; color: #8a7a3a; font-size: 12px; line-height: 20px}
+.alert{background-color: #1e1508; border: 1px solid #ffe1a8; color: #e8cf87; font-size: 12px; padding: 10px 14px; margin-bottom: 14px; line-height: 20px}
+.search-bar{background-color: #1e1508; border: 1px solid #eceef1; padding: 18px 20px; margin-bottom: 14px}
+.search-bar .row{display: flex; gap: 10px; align-items: center; margin-bottom: 10px}
+.search-bar label{width: 90px; flex-shrink: 0; color: #999}
+.search-bar input,.search-bar select{flex: 1; border: 1px solid #d5d8dc; border-radius: 0; padding: 9px 12px; font-size: 12px; outline: 0; color: #b8b8b8; background-color: #1e1508; font-family: inherit}
+.search-bar button{background: #1257a6; color: #fff; border: 0; padding: 10px 30px; border-radius: 0; cursor: pointer; font-size: 12px; font-family: inherit}
+.captcha{display: flex; align-items: center; gap: 10px}
+.captcha .box{width: 110px; height: 34px; background-color: #241a0a; border: 1px solid #d5d8dc; display: flex; align-items: center; justify-content: center; letter-spacing: 4px; color: #ffd27a; font-size: 16px; user-select: none}
+.foot{text-align: center; color: #9aa0a6; font-size: 12px; padding: 22px; line-height: 22px; border-top: 1px solid #f0f1f5; margin-top: 20px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="top-bar">
+      <div>工业和信息化部政务服务平台　|　beian.miit.gov.cn</div>
+      <div>简体中文　|　English　|　无障碍</div>
+    </div>
+    <div class="top-main">
+      <div class="emblem">工信</div>
+      <div>
+        <h1>ICP/IP地址/域名信息备案管理系统</h1>
+        <div class="en">ICP / IP Address / Domain Name Filing Management System</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="beian.html">备案系统首页</a>
+    <a href="beian.html">备案信息查询</a>
+    <a href="beian.html">备案流程</a>
+    <a href="beian.html" class="on">公共查询</a>
+    <a href="beian.html">政策法规</a>
+    <a href="beian.html">帮助中心</a>
+  </div>
+</div>
+
+<div class="crumb">
+  <a href="beian.html">首页</a>　&gt;　<a href="beian.html">公共查询</a>　&gt;　<b>网站备案信息查询</b>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <div class="side">
+      <h3>备案服务</h3>
+      <a href="beian.html">网站备案信息查询</a>
+      <a href="beian.html" class="on">主体备案信息查询</a>
+      <a href="beian.html">APP 备案信息查询</a>
+      <a href="beian.html">小程序备案信息查询</a>
+      <a href="beian.html">备案信息公示</a>
+      <a href="beian.html">违法违规网站曝光</a>
+      <a href="beian.html">备案常见问题</a>
+    </div>
+
+    <div class="main">
+
+      <div class="alert">
+        根据《互联网信息服务管理办法》，在中华人民共和国境内从事互联网信息服务，应当依法履行备案手续。本系统仅提供备案信息查询，不具备备案办理功能。
+      </div>
+
+      <div class="card">
+        <div class="card-head">网站备案信息查询</div>
+        <div class="card-body">
+          <div class="search-bar">
+            <div class="row">
+              <label>查询方式</label>
+              <select>
+                <option>按域名查询</option>
+                <option>按主办单位名称查询</option>
+                <option>按备案号查询</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>查询内容</label>
+              <input value="jingmai.com.cn" readonly>
+            </div>
+            <div class="row">
+              <label>验证码</label>
+              <div class="captcha">
+                <input style="flex: 1" value="4K7B" readonly>
+                <div class="box">4K7B</div>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 0">
+              <label></label>
+              <button type="button">查 询</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">备案信息 <span class="cnt">查询结果 1 条</span></div>
+        <div class="card-body" style="padding: 0">
+          <table class="query">
+            <tr><th>主办单位名称</th><td><b>晶脉文旅有限公司</b></td></tr>
+            <tr><th>主办单位性质</th><td>企业</td></tr>
+            <tr><th>备案号</th><td><b>浙ICP备2024000001号-1</b></td></tr>
+            <tr><th>网站域名</th><td>jingmai.com.cn</td></tr>
+            <tr><th>网站名称</th><td>晶脉文旅有限公司官方网站</td></tr>
+            <tr><th>网站首页网址</th><td>www.jingmai.com.cn</td></tr>
+            <tr><th>审核通过日期</th><td>2023-10-05</td></tr>
+            <tr><th>备案地</th><td>浙江省</td></tr>
+            <tr><th>备案状态</th><td><span class="badge b-ok">已备案</span></td></tr>
+          </table>
+          <div class="tip">
+            提示：本查询结果仅反映备案主体与域名的基础信息，不包含网站运营资质、经营许可等信息。如需查询企业登记与经营信息，请前往
+            <a href="gsxt.html" style="color: #7eb0f2; text-decoration: none">国家企业信用信息公示系统</a>。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">同一主办单位名下其他备案</div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 200px">备案号</th><th style="width: 180px">网站 / APP 名称</th><th style="width: 160px">域名 / 平台</th><th style="width: 100px">审核日期</th><th>状态</th></tr>
+            <tr>
+              <td>浙ICP备2024000001号-1</td>
+              <td>晶脉文旅有限公司官方网站</td>
+              <td>jingmai.com.cn</td>
+              <td>2023-10-05</td>
+              <td><span class="badge b-ok">已备案</span></td>
+            </tr>
+            <tr>
+              <td>浙ICP备2024000001号-2</td>
+              <td>佟家岭景区票务服务平台</td>
+              <td>ticket.jingmai.com.cn</td>
+              <td>2023-10-24</td>
+              <td><span class="badge b-ok">已备案</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">备案公示说明</div>
+        <div class="card-body">
+          <table>
+            <tr><th style="width: 180px">公示范围</th><td>已完成备案手续的网站、APP、小程序主体信息与域名信息。</td></tr>
+            <tr><th>数据来源</th><td>各省通信管理局备案审核系统。</td></tr>
+            <tr><th>更新频率</th><td>审核通过后 24 小时内更新。</td></tr>
+            <tr><th>异议处理</th><td>对备案信息有异议的，可向备案地通信管理局反映。</td></tr>
+          </table>
+          <div class="tip">
+            本页面为游戏内虚构政务网站，所公示的备案号、审核日期、域名等信息均为虚构，仅用于剧情演示。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">相关查询入口</div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 250px">查询事项</th><th style="width: 240px">查询渠道</th><th>备注</th></tr>
+            <tr><td>企业登记信息</td><td><a href="gsxt.html" style="color: #7eb0f2; text-decoration: none">国家企业信用信息公示系统</a></td><td>可查注册资本、股东、行政处罚</td></tr>
+            <tr><td>企业信用档案</td><td><a href="credit.html" style="color: #7eb0f2; text-decoration: none">信用中国（漭江）</a></td><td>可查行政许可、行政处罚、红黑名单</td></tr>
+            <tr><td>公司官网</td><td><a href="index.html" style="color: #7eb0f2; text-decoration: none">晶脉文旅有限公司官方网站</a></td><td>含公司简介、景区项目、新闻</td></tr>
+            <tr><td>政务公开</td><td><a href="gov.html" style="color: #7eb0f2; text-decoration: none">漭江市人民政府门户网站</a></td><td>政策文件、项目公示、经济运行</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  主办：中华人民共和国工业和信息化部　　技术支持：中国信息通信研究院<br>
+  本页面为游戏内虚构政务网站，所有备案信息均为虚构　　京ICP备 00000000 号
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

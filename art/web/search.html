@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晶脉文旅有限公司_搜索</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{padding: 20px 20px 0; display: flex; align-items: center; gap: 30px}
+.logo{font-size: 24px; font-weight: bold; color: #4285f4}
+.logo span:nth-child(2){color: #f2877e}.logo span:nth-child(3){color: #fbbc05}
+.logo span:nth-child(4){color: #4285f4}.logo span:nth-child(5){color: #34a853}.logo span:nth-child(6){color: #f2877e}
+.searchbox{flex: 1; max-width: 640px; display: flex; align-items: center; border: 1px solid #dfe1e5; border-radius: 0; padding: 8px 16px; box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+.searchbox input{flex: 1; border: 0; outline: 0; font-size: 12px; padding: 4px 8px}
+.searchbox .btn{background-color: #1e1508; border: 1px solid #f8f9fa; color: #4285f4; border-radius: 0; padding: 6px 14px; cursor: pointer; font-size: 12px; margin-left: 6px}
+.tabs{margin: 20px 0 0 152px; border-bottom: 1px solid #dadce0; display: flex; gap: 20px}
+.tabs a{padding: 10px 4px; color: #b4b7bb; text-decoration: none; border-bottom: 3px solid transparent; font-size: 12px}
+.tabs a.on{color: #7db0f2; border-bottom-color: #1a73e8}
+.results{margin: 20px 0 40px 152px; max-width: 692px}
+.stat{color: #b5b8bb; font-size: 12px; margin-bottom: 18px}
+.r{margin-bottom: 26px}
+.r .cite{font-size: 12px; color: #b3b6bc; margin-bottom: 2px}
+.r .cite b{font-weight: normal; color: #b3b6bc; font-size: 12px; display: block; line-height: 18px}
+.r .cite em{font-style: normal; color: #b4b7bb; font-size: 12px}
+.r h3{font-size: 24px; font-weight: normal; margin: 2px 0 4px}
+.r h3 a{color: #847af5; text-decoration: none}
+.r h3 a:hover{text-decoration: underline}
+.r h3 a:visited{color: #bc85ea}
+.r p{color: #b4b7bc; line-height: 22px; font-size: 12px}
+.r .tag{display: inline-block; color: #87e8a5; font-size: 12px; margin-right: 8px}
+.sitelinks{display: grid; grid-template-columns: 1fr 1fr; gap: 6px 30px; margin-top: 10px}
+.sitelinks a{color: #847af5; text-decoration: none; font-size: 12px}
+.sitelinks a:hover{text-decoration: underline}
+.ad{border: 1px solid #dadce0; border-radius: 0; padding: 14px 18px; margin-bottom: 26px; background-color: #1e1508}
+.ad .adtag{color: #b3b6bc; font-size: 12px; border: 1px solid #dadce0; border-radius: 0; padding: 0 4px; margin-right: 6px}
+.ad .cite{font-size: 12px; color: #b3b6bc; margin-bottom: 2px}
+.ad .cite b{font-weight: normal; color: #b3b6bc; font-size: 12px}
+.ad .cite em{font-style: normal; color: #b4b7bb; font-size: 12px}
+.ad h3{font-size: 24px; font-weight: normal; margin: 2px 0 4px}
+.ad h3 a{color: #847af5; text-decoration: none}
+.ad h3 a:hover{text-decoration: underline}
+.ad p{color: #b4b7bc; line-height: 22px; font-size: 12px}
+.searchbox input{caret-color: #f2877e}
+.searchbox input::placeholder{color: #a8895a}
+.searchbox.err{border-color: #d24a3a !important; box-shadow: 0 0 0 2px rgba(210,74,58,.55), 3px 3px 0 rgba(80,60,20,.55) !important}
+.mono{position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.74); z-index: 99}
+.mono.show{display: flex}
+.mono .mono-card{max-width: 520px; width: 100%; background: #0a0703; border: 3px solid #c18225; box-shadow: inset 2px 2px 0 rgba(0,0,0,.65), inset -2px -2px 0 rgba(193,130,37,.35), 0 3px 0 #000; padding: 18px 20px}
+.mono .mono-who{color: #d24a3a; font-size: 12px; margin-bottom: 10px}
+.mono .mono-txt{color: #e2cfa4; font-size: 13px; line-height: 24px}
+.mono .mono-achv{color: #ffd27a; font-size: 13px; line-height: 24px; margin-top: 10px}
+.mono .mono-hint{color: #a8895a; font-size: 12px; margin-top: 14px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="logo"><span>搜</span><span>索</span><span>引</span><span>擎</span></div>
+  <div class="searchbox">
+    <input id="q" value="晶脉文旅有限公司" autocomplete="off" spellcheck="false" placeholder="输入关键词后回车">
+    <button class="btn" id="go">搜索一下</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <a class="on" href="search.html">网页</a>
+  <a href="search.html">资讯</a>
+  <a href="search.html">图片</a>
+  <a href="search.html">视频</a>
+  <a href="search.html">地图</a>
+  <a href="search.html">更多</a>
+</div>
+
+<div class="results">
+  <div class="stat">搜索引擎为您找到相关结果约 12,400 个（用时 0.28 秒）</div>
+  <!-- 广告位：官网（作为「晶脉 / 文旅」类关键词的置顶结果保留） -->
+  <div class="ad">
+    <div class="cite">
+      <span class="adtag">广告</span>
+      <b>晶脉文旅有限公司 - 官方网站</b>
+    </div>
+    <div class="cite"><em>www.jingmai.com.cn</em></div>
+    <h3><a href="index.html">晶脉文旅有限公司官方网站 - 佟家岭景区</a></h3>
+    <p>晶脉文旅致力于打造国内一流的工业文化遗产旅游目的地。旗舰项目佟家岭景区年接待游客超30万人次，涵盖矿工体验、观光小火车、矿工记忆馆等。欢迎各界人士投资合作。</p>
+    <div class="sitelinks">
+      <a href="index.html#about">关于我们</a>
+      <a href="business.html">产业规模</a>
+      <a href="index.html#news">新闻动态</a>
+      <a href="index.html#invest">投资者关系</a>
+    </div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>BOSS直聘 - 晶脉文旅有限公司招聘</b><em>www.zhipin.com/gongsi/jingmai-wenlu.html</em></div>
+    <h3><a href="zhipin.html">晶脉文旅有限公司招聘 - 在招职位6个 - BOSS直聘</a></h3>
+    <p>晶脉文旅有限公司，文化旅游行业，100-499人，漭江市。在招职位：景区运营经理、导游、市场营销专员、财务主管、财务会计、出纳。福利：五险一金、带薪年假、员工宿舍。最近更新：2024-03-01。</p>
+    <div class="tag">公司简介</div><div class="tag">在招职位</div><div class="tag">公司福利</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江新闻网</b><em>news.mangjiang.com</em></div>
+    <h3><a href="news.html">晶脉文旅助力佟家岭转型，老矿区焕发新生机_漭江新闻网</a></h3>
+    <p>2023-12-01 —— 曾经尘土飞扬的佟家岭矿区，如今已成为漭江市最受欢迎的旅游目的地之一。记者实地走访发现，景区保留了大量珍贵的采矿设备，并新增了矿工体验、观光小火车等互动项目，带动周边村民增收……</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>创业时代网</b><em>www.chuangyeshi.com</em></div>
+    <h3><a href="chuangyeshi.html">从矿区到景区：晶脉文旅的创业传奇 - 创业时代网</a></h3>
+    <p>2023-12-06 —— 谢某，晶脉文旅的创始人，土生土长的漭江人。2021年回乡创业，获得天吴集团天使轮融资，启动佟家岭景区项目。经过三年发展，已成为漭江市文旅产业的标杆企业。本文专访还原了这段创业历程……</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>DeepSleep AI</b><em>chat.deepsleep.com</em></div>
+    <h3><a href="ai.html">DeepSleep AI - 智能问答助手</a></h3>
+    <p>向AI提问关于晶脉文旅有限公司的信息，获取客观中立的分析报告。支持股权穿透、风险提示、舆情摘要等问答。投资有风险，决策需谨慎。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>国家企业信用信息公示系统</b><em>www.gsxt.gov.cn</em></div>
+    <h3><a href="gsxt.html">晶脉文旅有限公司 - 企业公示信息</a></h3>
+    <p>登记机关：漭江市市场监督管理局。成立日期：2020年11月30日。注册资本：500万元。法定代表人：谢某。可查询企业行政处罚、经营异常名录、股权出质登记、股东出资及变更记录等信息。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>国家企业信用信息公示系统</b><em>www.gsxt.gov.cn</em></div>
+    <h3><a href="equity.html">晶脉文旅有限公司 - 股东信息与股权穿透图谱 - 国家企业信用信息公示系统</a></h3>
+    <p>穿透 3 层股权关系：谢某 100% 持股 → 质权人天吴集团有限公司 → 衡大地产（集团）有限公司。查看注册资本与实缴资本差异、关联企业与循环持股情况。</p>
+    <div class="tag">股权穿透</div><div class="tag">关联图谱</div><div class="tag">股东信息</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江市人民政府</b><em>www.mangjiang.gov.cn/zhengce</em></div>
+    <h3><a href="zhengce.html">漭江市文旅产业扶持政策与重点项目公示 - 漭江市人民政府</a></h3>
+    <p>《漭江市文旅产业扶持与激励办法》全文，市重点文旅产业项目库 2023 年度名单，含佟家岭工业遗产景区提升改造项目、蛮牢山生态修复与旅游开发项目立项及环评公示。</p>
+    <div class="tag">政策文件</div><div class="tag">重点项目</div><div class="tag">环评公示</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>天眼查</b><em>www.tianyancha.com</em></div>
+    <h3><a href="tianyancha.html">晶脉文旅有限公司 - 企业信息查询 - 天眼查</a></h3>
+    <p>晶脉文旅有限公司成立于2020-11-30，法定代表人为谢某，注册资本500万人民币。查看企业风险、司法案件、行政处罚、经营异常、股权质押、关联企业信息。共提示 3 条风险信息。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>中国裁判文书网</b><em>wenshu.court.gov.cn</em></div>
+    <h3><a href="wenshu.html">中国裁判文书网 - 文书检索</a></h3>
+    <p>全国法院裁判文书公开平台。可按当事人、案由、法院、裁判日期等条件检索已公开的裁判文书。目前累计公开文书逾 1.4 亿篇，支持全文检索与关键词高亮。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>中国执行信息公开网</b><em>zxgk.court.gov.cn</em></div>
+    <h3><a href="zhixing.html">中国执行信息公开网 - 被执行人查询</a></h3>
+    <p>最高人民法院主办的执行信息公开平台。可查询被执行人、失信被执行人、限制消费令、终本案件等信息。数据实时同步至全国各级人民法院执行系统。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>巨潮资讯网</b><em>www.cninfo.com.cn</em></div>
+    <h3><a href="cninfo.html">巨潮资讯网 - 中国证监会指定信息披露网站</a></h3>
+    <p>提供上市公司公告、定期报告、临时公告等信息披露服务。查询范围仅限沪深京交易所上市公司及新三板挂牌企业。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江日报电子版</b><em>paper.mangjiangdaily.com.cn</em></div>
+    <h3><a href="newspaper.html">漭江日报数字报 - 漭江日报电子版</a></h3>
+    <p>漭江市委机关报。可检索历史版面，查看本地时政、经济、社会、文化等新闻报道。支持按日期翻页与版面导航。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>中国旅游协会</b><em>www.china-tourism-rank.org.cn</em></div>
+    <h3><a href="ranking.html">2023年度中国文旅企业百强榜单发布</a></h3>
+    <p>2023-10-05 —— 中国旅游协会联合行业研究机构发布《2023年度中国文旅企业百强榜单》，上榜企业营业收入合计占行业总规模的42.7%。榜单依据企业规模、成长性、品牌影响力等多项指标综合评定……</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江贴吧</b><em>tieba.mangjiang.com/f?kw=晶脉文旅</em></div>
+    <h3><a href="tieba.html">晶脉文旅吧_漭江贴吧</a></h3>
+    <p>关注 3,281 | 贴子 1,842。吧友讨论晶脉文旅、佟家岭景区的一切。置顶：如何评价晶脉？——吧内还有关于景区夜班、围墙、后山异响的讨论，部分帖子已被删除。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江生活论坛</b><em>bbs.mangjianglife.com/forum.php?mod=forumdisplay&amp;fid=2</em></div>
+    <h3><a href="forum.html">老城区民生版 - 漭江生活论坛（业主 · 邻里 · 二手）</a></h3>
+    <p>漭江本地综合社区论坛。民生版今日新帖 236，涵盖停水停电通知、物业管理、老旧小区加装电梯、邻里互助、二手闲置交易。业主可在此发布求助、投诉与小区议事。</p>
+    <div class="tag">业主论坛</div><div class="tag">民生版</div><div class="tag">同城社区</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>佟家岭驴友论坛</b><em>www.mjoutdoor.cn/bbs</em></div>
+    <h3><a href="forum_outdoor.html">佟家岭驴友论坛 - 徒步 · 露营 · 探线（漭江户外）</a></h3>
+    <p>本地户外兴趣论坛。版块含线路攻略、装备评测、结伴出行、野外摄影。近期热门：「佟家岭后山到底能不能进？」「那个塌陷区边上为什么拉了封锁线」。请务必结伴同行并报备。</p>
+    <div class="tag">户外论坛</div><div class="tag">徒步露营</div><div class="tag">线路攻略</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江树洞</b><em>shudong.mangjiang.net/anon</em></div>
+    <h3><a href="forum_anon.html">漭江树洞 · 匿名版 - 说点不敢当面说的话</a></h3>
+    <p>匿名发帖，无需注册。涵盖情感倾诉、职场吐槽与……一些深夜才有人回的怪谈帖。版规只有一条：别追问发帖人是谁。今日在线 412 人，其中 137 人处于「深夜模式」。</p>
+    <div class="tag">匿名论坛</div><div class="tag">树洞</div><div class="tag">怪谈</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>国家税务总局</b><em>www.chinatax.gov.cn</em></div>
+    <h3><a href="tax.html">国家税务总局 - A级纳税人名单查询</a></h3>
+    <p>纳税信用级别分为A、B、M、C、D五级。A级为年度评价指标得分90分以上的纳税人。可查询企业纳税信用等级、欠税公告、重大税收违法案件当事人名单。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>企财数据 · 企业财务数据查询平台</b><em>www.qicai-data.com/company/jingmai-wenlu</em></div>
+    <h3><a href="finance.html">晶脉文旅有限公司 · 企业财务数据与财务指标 - 企财数据</a></h3>
+    <p>汇总企业自主公示的年报资产状况，测算偿债能力、盈利能力、营运能力、成长能力与现金流质量指标。2023 年资产负债率 92.6%，连续两年亏损，经营现金流净额为负。</p>
+    <div class="tag">财务比率</div><div class="tag">资产负债</div><div class="tag">现金流</div><div class="tag">税务信用</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>中国审判流程信息公开网</b><em>splcgk.court.gov.cn</em></div>
+    <h3><a href="shenpan.html">中国审判流程信息公开网</a></h3>
+    <p>最高人民法院主办。向案件当事人及法定代理人、诉讼代理人公开审判流程信息，包括立案信息、庭审安排、合议庭组成、审限变更等。</p>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江市人民政府</b><em>www.mangjiang.gov.cn</em></div>
+    <h3><a href="gov.html">漭江市人民政府门户网站 - 政务公开 · 政务服务</a></h3>
+    <p>漭江市人民政府门户网站，提供政策文件、市重点文旅产业项目库、通知公告、经济运行情况及各职能部门服务平台入口。</p>
+    <div class="tag">政务公开</div><div class="tag">重点项目</div><div class="tag">通知公告</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>信用中国（漭江）</b><em>www.creditchina.gov.cn</em></div>
+    <h3><a href="credit.html">晶脉文旅有限公司 - 企业信用档案 - 信用中国（漭江）</a></h3>
+    <p>统一社会信用代码 91330100MA2XXXXX7K，信用等级 B 级。可查询行政许可、行政处罚、经营异常名录、红黑名单、信用承诺等信用信息。</p>
+    <div class="tag">信用档案</div><div class="tag">行政许可</div><div class="tag">信用等级</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江市生态环境局</b><em>sthjj.mangjiang.gov.cn</em></div>
+    <h3><a href="env.html">建设项目环境影响评价文件拟审批公示 - 漭江市生态环境局</a></h3>
+    <p>漭江市生态环境局公示环评受理、拟审批、审批决定、竣工验收、排污许可及行政处罚信息。含蛮牢山生态修复与旅游开发项目拟审批公示。</p>
+    <div class="tag">环评审批</div><div class="tag">环境质量</div><div class="tag">行政处罚</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江市公共资源交易中心</b><em>ggzy.mangjiang.gov.cn</em></div>
+    <h3><a href="bidding.html">工程建设中标结果公告 - 漭江市公共资源交易中心</a></h3>
+    <p>漭江市公共资源交易平台，公示政府采购、工程建设、土地使用权、国有产权交易信息，含招标公告、中标结果、合同订立与履约验收信息。</p>
+    <div class="tag">中标结果</div><div class="tag">招标公告</div><div class="tag">公共资源交易</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>工业和信息化部政务服务平台</b><em>beian.miit.gov.cn</em></div>
+    <h3><a href="beian.html">ICP/IP地址/域名信息备案管理系统 - 备案信息查询</a></h3>
+    <p>工业和信息化部 ICP/IP 地址/域名信息备案管理系统，提供网站、APP、小程序备案信息公共查询服务。</p>
+    <div class="tag">ICP备案</div><div class="tag">网站备案</div><div class="tag">公共查询</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>漭江市地理信息公共服务平台</b><em>map.mangjiang.gov.cn</em></div>
+    <h3><a href="map.html">佟家岭镇周边专题地图 - 天地图 · 漭江</a></h3>
+    <p>漭江市地理信息公共服务平台，提供行政区划、交通路网、重点景区、重点项目、兴趣点（POI）等专题图层与地图服务。</p>
+    <div class="tag">地图服务</div><div class="tag">专题图层</div><div class="tag">兴趣点</div>
+  </div>
+
+  <div class="r">
+    <div class="cite"><b>抖播</b><em>www.doubo.com/u/jingmai_tongjialing</em></div>
+    <h3><a href="video.html">佟家岭景区 - 抖播 · 记录美好生活</a></h3>
+    <p>佟家岭景区官方抖播账号（抖播号：jingmai_tongjialing），发布景区风光、工业遗产、生态修复等短视频内容，粉丝 12.4 万。</p>
+    <div class="tag">短视频</div><div class="tag">企业认证</div><div class="tag">佟家岭</div>
+  </div>
+</div>
+
+<div class="mono" id="mono">
+  <div class="mono-card">
+    <div class="mono-who">内心独白特殊提示</div>
+    <div class="mono-txt" id="monoTxt">有些东西，可能还是不要查得太清楚比较好……</div>
+    <div class="mono-achv" id="monoAchv" style="display: none"></div>
+    <div class="mono-hint">（点击任意处继续）</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* =========================================================================
+     搜索逻辑说明（本页为游戏内虚构搜索引擎，模仿真实搜索体验）
+     ① 直接输入「网址」或「IP 地址」→ 正常跳转到对应站点；
+     ② 输入其他关键词 → 不跳转，留在本页原地渲染结果：
+        最符合的排在第一条 → 中间插入商业广告 → 下方接无关内容；
+     ③ 若关键词命中线索站点，点击置顶结果进入详情页后，
+        由 game-bridge.js 上报 web:page，游戏引擎据此判定线索 / 成就。
+     ========================================================================= */
+
+  /* 关键词 → 站点：命中即作为「最符合的结果」置顶（不再跳转） */
+  /* 注意：index(含 jingmai) 必须排在 ai 之前，否则 jingmai 会误命中 "ai" */
+  var ROUTES = [
+    { k: ['招聘', 'boss', '直聘', '求职', '职位', '找工作'], p: 'zhipin.html' },
+    { k: ['新闻', '报道'], p: 'news.html' },
+    { k: ['创业', '专题', '创始人'], p: 'chuangyeshi.html' },
+    { k: ['报纸', '日报', '数字报', '纸媒', 'epaper'], p: 'newspaper.html' },
+    { k: ['排名', '榜单', '百强', '排行'], p: 'ranking.html' },
+    { k: ['贴吧', '评价', '网友'], p: 'tieba.html' },
+    { k: ['纳税', '税务', '税收', '欠税'], p: 'tax.html' },
+    { k: ['财务', '财报', '资产负债', '偿债', '盈利', '利润', '净利', '现金流', '周转率', '税负'], p: 'finance.html' },
+    { k: ['股东', '股权', '穿透', '出质', '质押'], p: 'equity.html' },
+    { k: ['工商', '注册资本', '公示系统', '信用公示', '信用信息', 'gsxt'], p: 'gsxt.html' },
+    { k: ['产业规模', '产业', '业务', '营收'], p: 'business.html' },
+    { k: ['市政府', '人民政府', '政务公开', '政府门户', '门户网站'], p: 'gov.html' },
+    { k: ['政府', '政策', '扶持', '补贴', '立项', '环评', '蛮牢山'], p: 'zhengce.html' },
+    { k: ['生态环境', '环保局', '排污', '环境质量', '生态修复'], p: 'env.html' },
+    { k: ['天眼查', '爱企查', '企查查'], p: 'tianyancha.html' },
+    { k: ['裁判文书', '文书', '判决', '诉讼'], p: 'wenshu.html' },
+    { k: ['审判流程', '开庭', '审理', '立案'], p: 'shenpan.html' },
+    { k: ['被执行人', '执行', '失信', '限高'], p: 'zhixing.html' },
+    { k: ['巨潮', '公告', '披露', '证监会', '上市'], p: 'cninfo.html' },
+    { k: ['信用中国', '信用档案', '红名单', '黑名单', '信用修复', '跨部门'], p: 'credit.html' },
+    { k: ['招投标', '中标', '公共资源', '招标', '成交公告', '交易中心'], p: 'bidding.html' },
+    { k: ['备案', 'icp', '工信部'], p: 'beian.html' },
+    { k: ['地图', '地理信息', '天地图', '路网', '兴趣点'], p: 'map.html' },
+    { k: ['短视频', '抖播', '抖音', '视频', 'doubo'], p: 'video.html' },
+    { k: ['官网', '官方网站', '公司官网', 'jingmai'], p: 'index.html' },
+    { k: ['ai', '人工智能', '问答'], p: 'ai.html' },
+    /* --- 更多种类的论坛 --- */
+    { k: ['业主', '物业', '小区', '业委会', '加装电梯', '民生'], p: 'forum.html' },
+    { k: ['驴友', '户外', '徒步', '登山', '露营', '探线', '探险'], p: 'forum_outdoor.html' },
+    { k: ['树洞', '匿名', '怪谈', '灵异', '都市传说', '深夜', '半夜'], p: 'forum_anon.html' },
+    /* --- 漭江市民生活网：搜索结果可跳转的日常站点 --- */
+    { k: ['租房', '二手房', '房源', '房租', '合租', '买房', '找房'], p: 'house.html' },
+    { k: ['同城', '分类信息', '二手', '闲置', '家政', '开锁', '搬家', '便民'], p: 'life.html' },
+    { k: ['点评', '美食', '探店', '烧烤', '面馆', '好吃', '餐厅', '小吃', '夜市'], p: 'dianping.html' },
+    { k: ['漭江吧', '城市吧', '拆迁', '杂谈'], p: 'city.html' },
+    { k: ['公交', '乘车', '线路', '公交卡', '专线'], p: 'bus.html' },
+    { k: ['天气', '气温', '空气', '降水', '雾霾', '预报'], p: 'weather.html' },
+    { k: ['医院', '挂号', '预约', '门诊', '看病', '市二院'], p: 'hospital.html' },
+    { k: ['外卖', '点餐', '配送', '团购'], p: 'waimai.html' },
+    { k: ['算命', '看相', '驱邪', '白事', '天机神算', '风水', '风水先生'], p: 'tianji.html' },
+    { k: ['晶脉', '文旅'], show: true }
+  ];
+
+  /* 直接输入网址 → 站点（主机名，去掉 www. 与协议后精确匹配） */
+  var HOST = {
+    'gsxt.gov.cn': 'gsxt.html',
+    'tianyancha.com': 'tianyancha.html',
+    'cninfo.com.cn': 'cninfo.html',
+    'wenshu.court.gov.cn': 'wenshu.html',
+    'zxgk.court.gov.cn': 'zhixing.html',
+    'splcgk.court.gov.cn': 'shenpan.html',
+    'chinatax.gov.cn': 'tax.html',
+    'qicai-data.com': 'finance.html',
+    'creditchina.gov.cn': 'credit.html',
+    'beian.miit.gov.cn': 'beian.html',
+    'jingmai.com.cn': 'index.html',
+    'news.mangjiang.com': 'news.html',
+    'mangjiang.gov.cn': 'gov.html',
+    'tieba.mangjiang.com': 'tieba.html',
+    'mangjiangtongcheng.com': 'life.html',
+    'mangjiangdianping.com': 'dianping.html',
+    'weather.mangjiang.com': 'weather.html',
+    'mangjiangbus.com': 'bus.html',
+    'anjumangjiang.com': 'house.html',
+    'mangjiang2h.com': 'hospital.html',
+    'mangjiangwaimai.com': 'waimai.html',
+    'tianjishensuan.net': 'tianji.html',
+    'doubo.com': 'video.html',
+    'map.mangjiang.gov.cn': 'map.html',
+    'sthjj.mangjiang.gov.cn': 'env.html',
+    'ggzy.mangjiang.gov.cn': 'bidding.html',
+    'deepsleep.com': 'ai.html',
+    'zhipin.com': 'zhipin.html',
+    'mangjiangdaily.com.cn': 'newspaper.html',
+    'chuangyeshi.com': 'chuangyeshi.html',
+    'china-tourism-rank.org.cn': 'ranking.html',
+    'mangjiang-search.com': 'search.html',
+    'mangjianglife.com': 'forum.html',
+    'mjoutdoor.cn': 'forum_outdoor.html',
+    'mangjiang.net': 'forum_anon.html'
+  };
+
+  /* 直接输入 IP 地址 → 站点 */
+  var IPS = { '134.200.15.42': 'shenmai.html' };
+
+  /* 商业广告池：复用「漭江市民生活网」等与搜索主题无关的旧站点 */
+  var ADS = [
+    { name: '安居漭江 · 房产', cite: 'www.anjumangjiang.com', title: '老城区精装两居 直租免中介 拎包入住', desc: '近地铁、近菜场，采光好、无遮挡。房东直租，押一付一，随时可看房。安居漭江——漭江人自己的找房平台。', page: 'house.html' },
+    { name: '漭江同城 · 便民服务', cite: 'www.mangjiangtongcheng.com', title: '开锁 / 换锁 / 搬家 / 家电清洗 同城师傅 30 分钟上门', desc: '本地师傅实名认证，明码标价，先报价后上门。同城信息，一网打尽。', page: 'life.html' },
+    { name: '漭江点评 · 美食', cite: 'www.mangjiangdianping.com', title: '老城区十大面馆口碑榜出炉 跟着本地人吃', desc: '真实食客评分，人均 12 元起。更有夜市烧烤、小吃甜品、探店攻略，今晚吃什么不再纠结。', page: 'dianping.html' },
+    { name: '漭江吧 · 城市论坛', cite: 'tieba.mangjiang.com/f?kw=漭江吧', title: '漭江吧 86 万本地人在聊 拆迁 / 租房 / 闲置', desc: '本地人自己的论坛。看贴、发贴、找同城，热门话题实时更新。', page: 'city.html' },
+    { name: '漭江公交 · 出行', cite: 'www.mangjiangbus.com', title: '佟家岭旅游专线 扫码乘车 周末加密班次', desc: '实时到站查询、线路换乘、公交卡充值一站搞定。出门前先查一查，别在站台干等。', page: 'bus.html' },
+    { name: '漭江天气 · 气象', cite: 'weather.mangjiang.com', title: '未来七天天气 · 空气质量实时查询', desc: '逐小时预报、降水概率、空气质量指数、穿衣指数。出行、遛弯、爬山前，看一眼心里有数。', page: 'weather.html' },
+    { name: '漭江市第二人民医院', cite: 'www.mangjiang2h.com/gh', title: '在线预约挂号 · 免排队 · 专家号源实时放号', desc: '支持当日挂号、预约挂号、报告查询、在线缴费。市二院官方挂号平台，请通过正规渠道就诊。', page: 'hospital.html' },
+    { name: '漭江外卖', cite: 'www.mangjiangwaimai.com', title: '新用户首单立减 15 元 满 30 减 15', desc: '附近商家 30 分钟送达，夜宵、奶茶、生鲜、药品全都有。深夜也能点。', page: 'waimai.html' },
+    { name: '天机神算 · 命理', cite: 'www.tianjishensuan.net', title: '祖传看相算命 化解疑难 姻缘事业财运', desc: '三十年老字号，专解疑难杂症、久病不愈、夜不能寐、诸事不顺。线上排盘，随缘结缘。', page: 'tianji.html' }
+  ];
+
+  var q = document.getElementById('q');
+  var go = document.getElementById('go');
+  var box = document.querySelector('.searchbox');
+  var mono = document.getElementById('mono');
+  var monoAchv = document.getElementById('monoAchv');
+  var results = document.querySelector('.results');
+  var miss = 0;      // 无关信息搜索次数
+  var pended = false;
+
+  /* 页面初始内容（默认「晶脉文旅有限公司」的结果）—— 供 show 关键词复位 */
+  var DEFAULT_HTML = results.innerHTML;
+
+  /* 结果池快照：把静态结果拆成可复用的条目，供原地重排 */
+  var HREF_MAP = {};   // href → 结果 HTML（含官网广告位，便于 index.html 置顶）
+  var pool = [];       // 普通结果列表（不含广告位）
+  (function snapshot() {
+    var blocks = results.children;
+    for (var i = 0; i < blocks.length; i++) {
+      var node = blocks[i];
+      if (node.className !== 'r' && node.className !== 'ad') continue;
+      var a = node.querySelector('h3 a');
+      var href = a ? (a.getAttribute('href') || '') : '';
+      var html = node.outerHTML;
+      if (href && !HREF_MAP[href]) HREF_MAP[href] = html;
+      if (node.className === 'r') pool.push({ href: href, html: html });
+    }
+  })();
+
+  function esc(x) {
+    return String(x).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function hash(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+    return Math.abs(h);
+  }
+  function isIp(s) { return /^\d{1,3}(\.\d{1,3}){3}$/.test(s); }
+
+  /* 判断输入是否为网址 / IP，并解析出应跳转的页面（否则返回 null） */
+  function directTarget(s) {
+    var t = s.trim().toLowerCase();
+    if (!t) return null;
+    if (isIp(t)) return IPS[t] || null;
+    var host = t.replace(/^[a-z]+:\/\//, '').replace(/^\/\//, '').split('/')[0].split('?')[0].split('#')[0];
+    if (host.indexOf('.') < 0) return null;      // 没有点的，按关键词处理
+    host = host.replace(/^www\./, '');
+    return HOST[host] || null;
+  }
+
+  /* 依关键词稳定地挑选若干条广告（同一关键词每次结果一致） */
+  function pickAds(key, n) {
+    var out = [], start = hash(key) % ADS.length;
+    for (var i = 0; i < n && i < ADS.length; i++) out.push(ADS[(start + i) % ADS.length]);
+    return out;
+  }
+
+  function adBlock(a) {
+    return '<div class="ad">' +
+      '<div class="cite"><span class="adtag">广告</span><b>' + esc(a.name) + '</b></div>' +
+      '<div class="cite"><em>' + esc(a.cite) + '</em></div>' +
+      '<h3><a href="' + a.page + '">' + esc(a.title) + '</a></h3>' +
+      '<p>' + esc(a.desc) + '</p>' +
+      '</div>';
+  }
+
+  function statLine(key, matched) {
+    var n = matched ? (2000 + hash(key) % 90000) : (120 + hash(key) % 9000);
+    var sec = 10 + hash(key) % 80;
+    return '<div class="stat">搜索引擎为您找到相关结果约 ' + n.toLocaleString('en-US') +
+      ' 个（用时 0.' + sec + ' 秒）</div>';
+  }
+
+  /* 原地渲染搜索结果：最符合的 → 商业广告 → 无关内容 */
+  function render(key, route) {
+    var html = statLine(key, !!route);
+
+    if (route && HREF_MAP[route.p]) {
+      html += HREF_MAP[route.p];                       // 最符合的结果置顶
+    } else {
+      html += '<div class="r"><p style="color:#a8895a">未找到与「' + esc(key) +
+        '」完全匹配的网页。以下为一些可能相关的内容。</p></div>';
+    }
+
+    var ads = pickAds(key, 2);
+    for (var i = 0; i < ads.length; i++) html += adBlock(ads[i]);
+
+    var others = [];
+    for (var j = 0; j < pool.length; j++) {
+      if (route && pool[j].href === route.p) continue;  // 已在顶部展示，避免重复
+      others.push(pool[j].html);
+    }
+    if (others.length) {
+      var start = hash(key) % others.length;
+      var limit = Math.min(others.length, 9);
+      for (var k = 0; k < limit; k++) html += others[(start + k) % others.length];
+    }
+
+    results.innerHTML = html;
+    window.scrollTo(0, 0);
+  }
+
+  function showMono(achv) {
+    if (achv) {
+      monoAchv.textContent = '解锁成就 · 这还是国内吗？';
+      monoAchv.style.display = 'block';
+    } else {
+      monoAchv.style.display = 'none';
+    }
+    mono.classList.add('show');
+    box.classList.add('err');
+  }
+
+  function hideMono() {
+    mono.classList.remove('show');
+    box.classList.remove('err');
+  }
+
+  function submit() {
+    var raw = (q.value || '').trim();
+    if (!raw) { q.focus(); return; }
+    var s = raw.toLowerCase();
+
+    /* ① 直接输入网址 / IP → 跳转 */
+    var direct = directTarget(s);
+    if (direct) {
+      hideMono();
+      location.href = direct;
+      return;
+    }
+
+    /* ② 关键词 → 原地渲染结果 */
+    var route = null;
+    for (var i = 0; i < ROUTES.length; i++) {
+      var r = ROUTES[i], hit = false;
+      for (var j = 0; j < r.k.length; j++) {
+        if (s.indexOf(r.k[j]) >= 0) { hit = true; break; }
+      }
+      if (hit) { route = r; break; }
+    }
+
+    if (route && route.show) {                 // 搜本公司 → 复位到默认结果
+      hideMono();
+      results.innerHTML = DEFAULT_HTML;
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    render(raw, route);
+
+    /* ③ 搜不到有效信息 → 内心独白；反复 10 次 → 隐藏成就 */
+    if (!route) {
+      miss += 1;
+      if (miss >= 10 && !pended) {
+        pended = true;
+        try { window.parent.postMessage({ type: 'search:irrelevant10' }, '*'); } catch (e) {}
+        showMono(true);
+      } else {
+        showMono(false);
+      }
+    } else {
+      hideMono();
+    }
+  }
+
+  go.addEventListener('click', function (ev) { ev.preventDefault(); submit(); });
+  q.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') { ev.preventDefault(); submit(); }
+  });
+  mono.addEventListener('click', function () { hideMono(); q.focus(); });
+})();
+</script>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

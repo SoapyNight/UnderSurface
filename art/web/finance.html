@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晶脉文旅有限公司 · 企业财务数据与财务指标 - 企财数据</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #101a2b; color: #b8c2d2; font-size: 12px}
+.top{background: #1f6feb; color: #fff; padding: 14px 0}
+.top-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 16px}
+.emblem{width: 42px; height: 42px; background-color: #101a2b; display: flex; align-items: center; justify-content: center; color: #7ab8ff; font-size: 24px; font-weight: bold}
+.top h1{font-size: 24px; font-weight: normal}
+.top .sub{font-size: 12px; opacity: .8; margin-top: 2px}
+.subnav{background: #1a5ec4; padding: 0}
+.subnav-in{max-width: 1000px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px}
+.subnav a{color: #fff; text-decoration: none; padding: 10px 18px; font-size: 12px; opacity: .85}
+.subnav a.on{background-color: #101a2b; color: #7ab8ff; opacity: 1}
+.wrap{max-width: 1000px; margin: 16px auto 40px; padding: 0 16px}
+.notice{background-color: #101a2b; border: 1px solid #ffe1a8; color: #e8cf87; font-size: 12px; padding: 8px 14px; margin-bottom: 14px; line-height: 20px}
+.card{background-color: #101a2b; margin-bottom: 14px; box-shadow: 3px 3px 0 rgba(80,60,20,.55)}
+.card-head{padding: 12px 20px; border-bottom: 1px solid #2a3b55; font-size: 12px; font-weight: bold; color: #7ab8ff; display: flex; align-items: center; justify-content: space-between}
+.card-head .badge{font-size: 12px; font-weight: normal; color: #b8c2d2; background-color: #16233a; padding: 2px 8px}
+.card-body{padding: 16px 20px}
+table.info{width: 100%; border-collapse: collapse; font-size: 12px}
+table.info th{width: 170px; background-color: #16233a; text-align: left; padding: 10px 14px; border: 1px solid #2a3b55; color: #9fb0c8; font-weight: normal; vertical-align: top}
+table.info td{padding: 10px 14px; border: 1px solid #2a3b55; color: #b8c2d2; line-height: 20px}
+table.list{width: 100%; border-collapse: collapse; font-size: 12px}
+table.list th{background-color: #16233a; padding: 10px; text-align: left; border: 1px solid #2a3b55; color: #9fb0c8; font-weight: normal; font-size: 12px}
+table.list td{padding: 10px; border: 1px solid #2a3b55; line-height: 20px; vertical-align: top}
+table.list td.num{text-align: right; font-variant-numeric: tabular-nums}
+table.list tr.hi td{background-color: #1d2f4d}
+.st{display: inline-block; padding: 2px 8px; font-size: 12px}
+.st-done{background-color: #16233a; color: #97d99a}
+.st-open{background-color: #16233a; color: #ffa270}
+.st-out{background-color: #16233a; color: #abbcc5}
+.st-in{background-color: #16233a; color: #e78888}
+.none{padding: 26px; text-align: center; color: #8d9cb2; font-size: 12px}
+.search-bar{background-color: #101a2b; padding: 20px; margin-bottom: 14px; box-shadow: 3px 3px 0 rgba(80,60,20,.55); display: flex; gap: 10px; align-items: center}
+.search-bar input{flex: 1; border: 1px solid #2a3b55; padding: 9px 14px; font-size: 12px; outline: 0; color: #b8c2d2}
+.search-bar button{background: #1f6feb; color: #fff; border: 0; padding: 9px 28px; cursor: pointer; font-size: 12px}
+.foot{text-align: center; color: #8d9cb2; font-size: 12px; padding: 20px; line-height: 22px}
+</style>
+<!-- pixel-theme: 像素风主题，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="emblem">财</div>
+    <div>
+      <h1>企财数据 · 企业财务数据查询平台</h1>
+      <div class="sub">QiCai Data — Enterprise Financial Data &amp; Ratio Analytics</div>
+    </div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="finance.html" class="on">财务档案</a>
+    <a href="finance.html">财务指标</a>
+    <a href="finance.html">数据说明</a>
+    <a href="finance.html">常见问题</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="search-bar">
+    <input value="晶脉文旅有限公司" readonly>
+    <button>查询</button>
+  </div>
+
+  <div class="notice">
+    本平台数据来自企业自主公示的年报、政府部门公开信息及第三方监测，经模型汇总测算后呈现，<b>未经会计师事务所审计</b>，仅供研究参考，不构成任何投资、借贷或交易建议。
+  </div>
+
+  <div class="card">
+    <div class="card-head">企业财务档案 <span class="badge">数据完整度：32%</span></div>
+    <div class="card-body">
+      <table class="info">
+        <tr><th>企业名称</th><td>晶脉文旅有限公司</td></tr>
+        <tr><th>统一社会信用代码</th><td>91330100MA2XXXXX7K</td></tr>
+        <tr><th>企业类型</th><td>有限责任公司（自然人独资）· 非上市 · 非公众公司</td></tr>
+        <tr><th>数据年份</th><td>2021 / 2022 / 2023 年度</td></tr>
+        <tr><th>财务报告审计情况</th><td><span class="st st-out">未获取到经审计的财务报表</span>（非上市企业无强制披露义务）</td></tr>
+        <tr><th>数据来源</th><td>企业年报自主公示、国家企业信用信息公示系统、税务机关公开信息、涉诉司法文书摘录</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">数据来源与完整性说明 <span class="badge">口径透明化披露</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>数据类别</th><th>公开情况</th><th>可获取渠道 / 说明</th></tr>
+        <tr><td>经审计财务报表</td><td><span class="st st-out">不可获取</span></td><td>非上市企业无需向社会公开经审计报表。</td></tr>
+        <tr><td>企业年报 · 资产状况</td><td><span class="st st-open">企业自主公示</span></td><td>营业总收入、净利润、负债总额等由企业自行选择是否公示，准确性由企业负责。</td></tr>
+        <tr><td>财务比率与指标</td><td><span class="st st-open">第三方测算</span></td><td>依据年报公示数据推算，样本口径有限，仅供参考。</td></tr>
+        <tr><td>银行流水 / 对账单 / 现金日记账</td><td><span class="st st-out">不公开</span></td><td>属企业内部与银行信息，仅可经司法或监管程序调取。</td></tr>
+        <tr><td>应收应付账龄 / 存货明细</td><td><span class="st st-out">不公开</span></td><td>可从司法文书、供应商访谈间接推断。</td></tr>
+        <tr><td>债务期限结构</td><td><span class="st st-out">不公开</span></td><td>可从借款合同编号、保全裁定等片段还原。</td></tr>
+        <tr><td>银行授信 / 融资合同</td><td><span class="st st-out">不公开</span></td><td>司法文书披露的合同编号可作间接印证。</td></tr>
+        <tr><td>对外担保 / 抵押质押</td><td><span class="st st-open">部分可查</span></td><td>登记信息、司法文书可查得部分记录。</td></tr>
+        <tr><td>订单 / 产能利用率 / 回款周期</td><td><span class="st st-out">不公开</span></td><td>由媒体报道与景区经营数据推算。</td></tr>
+        <tr><td>纳税申报表 / 发票明细</td><td><span class="st st-out">不公开</span></td><td>税务部门内部数据，非公开查询范围。</td></tr>
+        <tr><td>税负率 / 税务评级</td><td><span class="st st-done">评级可查</span></td><td>纳税信用等级由税务机关公开；税负率为据纳税额与收入估算。</td></tr>
+        <tr><td>企业征信 / 贷款卡 / 逾期记录</td><td><span class="st st-out">不公开</span></td><td>征信报告属银行内部信息；逾期可查执行公开网。</td></tr>
+        <tr><td>工商 / 股权 / 质押 / 涉诉</td><td><span class="st st-done">公开可查</span></td><td>公示系统、裁判文书网、执行信息公开网。</td></tr>
+        <tr><td>社保 / 公积金缴纳</td><td><span class="st st-open">部分可查</span></td><td>参保人数、缴纳状态可由相关部门公示查询。</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">财务比率与指标 <span class="badge">依据年报公示数据测算 · 2021–2023</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>指标</th><th>2021 年度</th><th>2022 年度</th><th>2023 年度</th></tr>
+        <tr><td colspan="4" style="background-color:#16233a;color:#9fb0c8">偿债能力</td></tr>
+        <tr><td>流动比率</td><td class="num">1.12</td><td class="num">0.94</td><td class="num">0.71</td></tr>
+        <tr><td>速动比率</td><td class="num">0.83</td><td class="num">0.62</td><td class="num">0.44</td></tr>
+        <tr class="hi"><td>资产负债率</td><td class="num">78.4%</td><td class="num">86.2%</td><td class="num">92.6%</td></tr>
+        <tr><td>利息保障倍数</td><td class="num">1.6</td><td class="num">0.4</td><td class="num">-1.8</td></tr>
+        <tr><td colspan="4" style="background-color:#16233a;color:#9fb0c8">盈利能力</td></tr>
+        <tr><td>毛利率</td><td class="num">41.2%</td><td class="num">33.7%</td><td class="num">27.5%</td></tr>
+        <tr><td>净利率</td><td class="num">2.1%</td><td class="num">-12.4%</td><td class="num">-32.1%</td></tr>
+        <tr><td>净资产收益率（ROE）</td><td class="num">7.6%</td><td class="num">-58.9%</td><td class="num">-240.4%</td></tr>
+        <tr><td>总资产收益率（ROA）</td><td class="num">1.6%</td><td class="num">-8.1%</td><td class="num">-17.8%</td></tr>
+        <tr><td colspan="4" style="background-color:#16233a;color:#9fb0c8">营运能力</td></tr>
+        <tr><td>应收账款周转率</td><td class="num">6.8 次</td><td class="num">4.1 次</td><td class="num">2.3 次</td></tr>
+        <tr><td>存货周转率</td><td class="num">9.4 次</td><td class="num">5.7 次</td><td class="num">3.2 次</td></tr>
+        <tr><td>总资产周转率</td><td class="num">0.77 次</td><td class="num">0.66 次</td><td class="num">0.55 次</td></tr>
+        <tr><td colspan="4" style="background-color:#16233a;color:#9fb0c8">成长能力</td></tr>
+        <tr><td>营业收入增长率</td><td class="num">—</td><td class="num">31.9%</td><td class="num">20.8%</td></tr>
+        <tr><td>净利润增长率</td><td class="num">—</td><td class="num">由盈转亏</td><td class="num">亏损扩大</td></tr>
+        <tr><td colspan="4" style="background-color:#16233a;color:#9fb0c8">现金流质量</td></tr>
+        <tr><td>经营活动现金流净额</td><td class="num">+82 万</td><td class="num">-340 万</td><td class="num">-1,180 万</td></tr>
+        <tr><td>自由现金流</td><td class="num">+31 万</td><td class="num">-512 万</td><td class="num">-1,540 万</td></tr>
+        <tr><td>经营现金流 / 净利润</td><td class="num">1.61</td><td class="num">不适用</td><td class="num">不适用</td></tr>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: #8d9cb2; line-height: 22px">
+        测算说明：连续三年资产负债率攀升至 90% 以上，2022 年起净利与经营现金流双双转负，利息保障倍数跌破 1。指标由公开年报数据推算，若企业填报口径与实际账目存在差异，本表不承担责任。
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">企业年报公示的资产状况（企业自主填报） <span class="badge">来源：国家企业信用信息公示系统</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>项目</th><th>2021 年度</th><th>2022 年度</th><th>2023 年度</th></tr>
+        <tr><td>资产总额</td><td class="num">3,120 万元</td><td class="num">4,850 万元</td><td class="num">6,930 万元</td></tr>
+        <tr><td>负债总额</td><td class="num">2,446 万元</td><td class="num">4,181 万元</td><td class="num">6,417 万元</td></tr>
+        <tr><td>所有者权益合计</td><td class="num">674 万元</td><td class="num">669 万元</td><td class="num">513 万元</td></tr>
+        <tr><td>营业总收入</td><td class="num">2,410 万元</td><td class="num">3,180 万元</td><td class="num">3,840 万元</td></tr>
+        <tr><td>净利润</td><td class="num">51 万元</td><td class="num">-394 万元</td><td class="num">-1,233 万元</td></tr>
+        <tr><td>纳税总额</td><td class="num">108 万元</td><td class="num">64 万元</td><td class="num">46 万元</td></tr>
+        <tr class="hi"><td>从业人数</td><td class="num">86 人</td><td class="num">156 人</td><td class="num">200 人</td></tr>
+      </table>
+      <div style="margin-top: 12px; padding: 10px 14px; background-color: #16233a; border: 1px solid #ffe1a8; font-size: 12px; color: #e8cf87; line-height: 22px">
+        注：以上数据为企业年报"资产状况信息"栏目的自主填报内容，未经审计。填报口径与实际经营情况是否一致，建议结合
+        <a href="gsxt.html" style="color: #7ab8ff; text-decoration: none">工商公示信息</a>、
+        <a href="tax.html" style="color: #7ab8ff; text-decoration: none">纳税信用信息</a> 交叉核对。
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">经营与资金数据（可获取部分） <span class="badge">含司法文书摘录</span></div>
+    <div class="card-body">
+      <table class="info">
+        <tr><th>银行授信</th><td>2 家银行合计授信额度 <b>3,000 万元</b>，已用信约 2,760 万元（据涉诉文书披露的借款合同编号还原）。</td></tr>
+        <tr><th>关联方借款</th><td>向天吴集团有限公司借款 <b>2,000 万元</b>，年利率 <b>12%</b>，高于同期贷款市场报价利率，已于 2023 年展期一次。</td></tr>
+        <tr><th>抵质押情况</th><td>景区门票收费权质押、在建工程抵押、部分土地及房产抵押；另 100% 股权已出质给天吴集团（详见 <a href="equity.html" style="color: #7ab8ff; text-decoration: none">股权穿透图谱</a>）。</td></tr>
+        <tr><th>租赁负债</th><td>观光小火车及部分办公场所采用融资租赁方式取得，年租金合计约 <b>180 万元</b>，剩余租期 4 年。</td></tr>
+        <tr><th>应收 / 应付</th><td>2023 年末应收账款约 1,660 万元（周转天数约 158 天）；应付账款约 2,140 万元，主要工程款与货款账期已由 60 天延长至 <b>180 天以上</b>。</td></tr>
+        <tr><th>回款周期</th><td>门票以现金及线上即时结算回款为主；工程垫资、合作方分账款回款缓慢，存在明显资金缺口。</td></tr>
+        <tr><th>经营类指标</th><td>2023 年度接待游客约 30 万人次、门票均价 128 元，按此推算门票口径收入约 3,840 万元（与年报营业总收入基本吻合；来源：<a href="business.html" style="color: #7ab8ff; text-decoration: none">公司官网 · 产业规模</a>）。</td></tr>
+        <tr><th>在建项目</th><td>蛮牢山文旅项目立项金额 5.6 亿元，尚处前期投入阶段，环评与林地手续未办结（详见 <a href="zhengce.html" style="color: #7ab8ff; text-decoration: none">政府项目公示</a>）。</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">税务与信用信息 <span class="badge">2023 年度</span></div>
+    <div class="card-body">
+      <table class="list">
+        <tr><th>项目</th><th>状态 / 数值</th><th>说明</th></tr>
+        <tr><td>纳税信用等级</td><td><span class="st st-done">A 级</span></td><td>2023 年度评价得分 90 分以上，详见 <a href="tax.html" style="color: #7ab8ff; text-decoration: none">国家税务总局查询页</a>。</td></tr>
+        <tr><td>税负率（估算）</td><td>4.5% → 2.0% → 1.2%</td><td>营业总收入逐年上升，税负率却逐年下降，与收入增长趋势背离。</td></tr>
+        <tr><td>纳税总额</td><td>108 万 → 64 万 → 46 万</td><td>三年累计纳税额下降约 57%。</td></tr>
+        <tr><td>欠税记录</td><td><span class="st st-done">无</span></td><td>未列入欠税公告名单。</td></tr>
+        <tr class="hi"><td>社保参保人数</td><td><span class="st st-in">0 人</span></td><td>与年报填报"从业人数 200 人"存在明显矛盾。</td></tr>
+        <tr><td>住房公积金缴纳</td><td><span class="st st-in">无缴纳记录</span></td><td>未见单位公积金缴存登记信息。</td></tr>
+        <tr><td>司法涉诉</td><td><span class="st st-open">2 起新立合同纠纷</span></td><td>2024 年新立：286 万元工程款、47 万元货款，均已申请财产保全（详见 <a href="shenpan.html" style="color: #7ab8ff; text-decoration: none">审判流程公开网</a>）。</td></tr>
+        <tr><td>被执行 / 失信</td><td><span class="st st-out">暂无公开记录</span></td><td>尚未列入被执行人或失信名单，但已出现财产保全。</td></tr>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: #8d9cb2; line-height: 22px">
+        提示：纳税信用等级仅反映纳税申报与缴纳的合规情况，<b>不反映企业的经营状况、盈利能力、资产负债水平或偿债能力</b>。A 级不等于财务健康。
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    本页数据为企业自主公示信息的汇总呈现，其中财务比率与税负率均为第三方推算值，可能与企业实际账目存在差异。企业为有限责任公司，股东以其认缴出资额为限承担责任。请谨慎对待任何以本页数据为依据的投资或借贷决策。
+  </div>
+</div>
+
+<div class="foot">
+  企财数据 · 企业财务数据查询平台　　技术支持：企财数据研发部<br>
+  数据来源：国家企业信用信息公示系统 / 国家税务总局 / 中国裁判文书网　　本页面为游戏内虚构数据
+</div>
+<script src="game-bridge.js?v=20261025"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>
