@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漭江市人民政府门户网站 - 政务公开 · 政务服务</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background-color: #1e1508; color: #b8b8b8; font-size: 12px}
+.top{background: #a4231f; color: #fff; padding: 0}
+.top-in{max-width: 1080px; margin: 0 auto; padding: 0 16px}
+.top-bar{display: flex; align-items: center; justify-content: space-between; padding: 8px 0; font-size: 12px; opacity: .9; border-bottom: 1px solid rgba(255,255,255,.22)}
+.top-main{padding: 18px 0 16px; display: flex; align-items: center; gap: 18px}
+.emblem{width: 46px; height: 46px; background-color: #1e1508; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #f5c9c7}
+.top-main h1{font-size: 24px; font-weight: normal; letter-spacing: 1px}
+.top-main .en{font-size: 12px; opacity: .72; margin-top: 4px}
+.subnav{background: #8f1c19; padding: 0}
+.subnav-in{max-width: 1080px; margin: 0 auto; padding: 0 16px; display: flex; gap: 0}
+.subnav a{color: #fff; text-decoration: none; padding: 11px 20px; font-size: 12px; opacity: .88}
+.subnav a.on{background-color: #1e1508; opacity: 1; color: #f5c9c7}
+.crumb{max-width: 1080px; margin: 14px auto 0; padding: 0 16px; font-size: 12px; color: #999}
+.crumb a{color: #7eb0f2; text-decoration: none}
+.wrap{max-width: 1080px; margin: 12px auto 40px; padding: 0 16px}
+.layout{display: flex; gap: 18px; align-items: flex-start}
+.side{width: 210px; flex-shrink: 0; background-color: #1e1508; border-radius: 0; overflow: hidden}
+.side h3{background-color: #1e1508; padding: 12px 16px; font-size: 12px; color: #ffd27a; border-bottom: 1px solid #eceef1}
+.side a{display: block; padding: 10px 16px; font-size: 12px; color: #b8b8b8; text-decoration: none; border-bottom: 1px solid #f0f1f5}
+.side a.on{background-color: #241a0a; color: #ffd27a}
+.main{flex: 1; min-width: 0}
+.card{background-color: #1e1508; border-radius: 0; margin-bottom: 14px; overflow: hidden}
+.card-head{padding: 13px 20px; border-bottom: 1px solid #f0f1f5; font-size: 12px; font-weight: bold; color: #f5c9c7; display: flex; align-items: center; justify-content: space-between}
+.card-head .cnt{font-size: 12px; font-weight: normal; color: #b8b8b8}
+.card-body{padding: 18px 20px}
+.doc{padding: 0 20px 18px}
+.doc h2{font-size: 24px; color: #b8b8b8; text-align: center; padding: 20px 0 12px; font-weight: normal; line-height: 34px}
+.doc .dh{text-align: center; font-size: 12px; color: #999; padding-bottom: 14px; border-bottom: 1px solid #f0f1f5; margin-bottom: 16px}
+.doc p{font-size: 12px; line-height: 26px; color: #b8b8b8; text-indent: 2em; margin-bottom: 10px}
+.doc p.ni{text-indent: 0}
+table{width: 100%; border-collapse: collapse; font-size: 12px}
+th{background-color: #1e1508; padding: 10px; text-align: left; border: 1px solid #eceef1; color: #b8b8b8; font-weight: normal; font-size: 12px; vertical-align: top}
+td{padding: 10px; border: 1px solid #eceef1; line-height: 22px; vertical-align: top}
+.badge{display: inline-block; padding: 2px 8px; border-radius: 0; font-size: 12px}
+.b-ok{background-color: #1e1508; color: #97d99a}
+.b-warn{background-color: #1e1508; color: #ffa270}
+.b-red{background-color: #1e1508; color: #e78888}
+.b-gray{background-color: #1e1508; color: #abbcc5}
+.basic{display: grid; grid-template-columns: repeat(2,1fr); gap: 0}
+.basic .r{display: flex; border-bottom: 1px solid #f0f1f5; font-size: 12px}
+.basic .r .k{width: 130px; flex-shrink: 0; padding: 9px 12px; color: #999; background-color: #1e1508}
+.basic .r .v{padding: 9px 12px; color: #b8b8b8; flex: 1; line-height: 22px}
+.none{padding: 26px; text-align: center; color: #a0a4ab; font-size: 12px; line-height: 24px}
+.tip{padding: 12px 20px; background-color: #1e1508; border-top: 1px solid #fff3cd; color: #8a7a3a; font-size: 12px; line-height: 20px}
+.newslist{list-style: none; padding: 4px 0}
+.newslist li{display: flex; justify-content: space-between; gap: 12px; padding: 10px 20px; border-bottom: 1px solid #f0f1f5; font-size: 12px}
+.newslist li:last-child{border-bottom: 0}
+.newslist a{color: #b8b8b8; text-decoration: none}
+.newslist a:hover{color: #ffd27a}
+.newslist .dt{color: #999; flex-shrink: 0}
+.stats{display: grid; grid-template-columns: repeat(4,1fr); gap: 14px}
+.stat{background-color: #1e1508; border: 1px solid #eceef1; padding: 20px 10px; text-align: center}
+.stat b{display: block; font-size: 24px; color: #f5c9c7; font-weight: normal; line-height: 30px}
+.stat span{display: block; font-size: 12px; color: #999; margin-top: 6px}
+.foot{text-align: center; color: #9aa0a6; font-size: 12px; padding: 22px; line-height: 22px; border-top: 1px solid #f0f1f5; margin-top: 20px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="top-bar">
+      <div>漭江市人民政府门户网站　|　www.mangjiang.gov.cn</div>
+      <div>无障碍浏览　|　长者版　|　简体 / 繁体</div>
+    </div>
+    <div class="top-main">
+      <div class="emblem">徽</div>
+      <div>
+        <h1>漭江市人民政府</h1>
+        <div class="en">Mangjiang Municipal People's Government</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="subnav">
+  <div class="subnav-in">
+    <a href="gov.html" class="on">首页</a>
+    <a href="gov.html">市情概况</a>
+    <a href="gov.html">政务公开</a>
+    <a href="gov.html">政务服务</a>
+    <a href="gov.html">政民互动</a>
+    <a href="gov.html">数据开放</a>
+  </div>
+</div>
+
+<div class="crumb">
+  <a href="gov.html">首页</a>　&gt;　<b>政务公开</b>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <div class="side">
+      <h3>网站导航</h3>
+      <a href="gov.html" class="on">政务公开</a>
+      <a href="zhengce.html">政策文件</a>
+      <a href="gov.html">重点项目建设</a>
+      <a href="gov.html">通知公告</a>
+      <a href="env.html">环境保护</a>
+      <a href="bidding.html">公共资源交易</a>
+      <a href="gov.html">土地征收</a>
+      <a href="gov.html">规划公示</a>
+    </div>
+
+    <div class="main">
+
+      <div class="card">
+        <div class="card-head">政策文件 <span class="cnt">更多 &gt;</span></div>
+        <ul class="newslist">
+          <li><a href="zhengce.html">漭江市人民政府办公室关于印发《漭江市文旅产业扶持与激励办法》的通知（漭政办发〔2022〕37号）</a><span class="dt">2022-05-30</span></li>
+          <li><a href="zhengce.html">关于印发《漭江市重点项目管理办法》的通知（漭政发〔2021〕19号）</a><span class="dt">2021-07-26</span></li>
+          <li><a href="zhengce.html">漭江市人民政府关于加快推进全域旅游发展的实施意见（漭政发〔2022〕6号）</a><span class="dt">2021-12-07</span></li>
+          <li><a href="gov.html">漭江市促进民营经济高质量发展若干措施（漭政办发〔2023〕41号）</a><span class="dt">2023-07-17</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">市重点文旅产业项目库（2023 年度）<span class="cnt">共 6 个</span></div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 210px">项目名称</th><th style="width: 150px">建设单位</th><th style="width: 110px">总投资</th><th style="width: 90px">入库时间</th><th>建设进展</th></tr>
+            <tr>
+              <td><b>佟家岭工业遗产旅游景区提升改造项目</b></td>
+              <td>晶脉文旅有限公司</td>
+              <td>2.8 亿元</td>
+              <td>2022-07</td>
+              <td><span class="badge b-ok">已开园运营</span></td>
+            </tr>
+            <tr>
+              <td><b>蛮牢山生态修复与旅游开发项目</b></td>
+              <td>晶脉文旅有限公司</td>
+              <td>5.6 亿元</td>
+              <td>2023-05</td>
+              <td><span class="badge b-warn">环评公示中</span></td>
+            </tr>
+            <tr>
+              <td>漭江老城区历史文化街区修缮工程</td>
+              <td>漭江市城建投资集团</td>
+              <td>1.2 亿元</td>
+              <td>2022-07</td>
+              <td><span class="badge b-ok">在建</span></td>
+            </tr>
+            <tr>
+              <td>漭江红枫谷生态旅游度假区</td>
+              <td>漭江枫谷文旅发展有限公司</td>
+              <td>3.6 亿元</td>
+              <td>2022-11</td>
+              <td><span class="badge b-ok">在建</span></td>
+            </tr>
+            <tr>
+              <td>漭江古镇水乡夜游项目</td>
+              <td>漭江文旅集团有限公司</td>
+              <td>0.9 亿元</td>
+              <td>2023-01</td>
+              <td><span class="badge b-ok">在建</span></td>
+            </tr>
+            <tr>
+              <td>佟家岭旅游公路提升工程</td>
+              <td>漭江市交通运输局</td>
+              <td>1.4 亿元</td>
+              <td>2022-07</td>
+              <td><span class="badge b-ok">已通车</span></td>
+            </tr>
+          </table>
+        </div>
+        <div class="tip">
+          说明：项目入库不等同于已取得立项、用地、环评、施工等行政许可。详细审批进展请查阅
+          <a href="zhengce.html" style="color: #7eb0f2; text-decoration: none">《漭江市文旅产业扶持政策与重点项目公示》</a>。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">通知公告</div>
+        <ul class="newslist">
+          <li><a href="env.html">漭江市生态环境局关于蛮牢山生态修复与旅游开发项目环境影响评价文件拟审批公示</a><span class="dt">2024-01-05</span></li>
+          <li><a href="bidding.html">漭江市公共资源交易中心关于佟家岭景区游客服务中心装修工程中标结果公告</a><span class="dt">2023-11-28</span></li>
+          <li><a href="gov.html">漭江市防汛防台指挥部关于进入汛期的通告</a><span class="dt">2024-01-01</span></li>
+          <li><a href="gov.html">漭江市市场监督管理局关于开展 2024 年度企业年报公示工作的公告</a><span class="dt">2023-09-22</span></li>
+          <li><a href="gov.html">漭江市交通运输局关于佟家岭旅游公路（Y302 线）养护施工的公告</a><span class="dt">2023-09-06</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">2023 年四季度漭江市经济运行情况</div>
+        <div class="card-body">
+          <div class="stats" style="margin-bottom: 16px">
+            <div class="stat"><b>148.6<span style="font-size: 12px">亿</span></b><span>地区生产总值</span></div>
+            <div class="stat"><b>5.4<span style="font-size: 12px">%</span></b><span>同比增长</span></div>
+            <div class="stat"><b>21.3<span style="font-size: 12px">亿</span></b><span>旅游综合收入</span></div>
+            <div class="stat"><b>286<span style="font-size: 12px">万</span></b><span>接待游客人次</span></div>
+          </div>
+          <table>
+            <tr><th style="width: 200px">指标</th><th style="width: 140px">本期值</th><th style="width: 140px">上年同期</th><th>说明</th></tr>
+            <tr><td>规模以上文化企业营业收入</td><td>9.8 亿元</td><td>8.4 亿元</td><td>含文化创意、演艺、工艺美术品制造等行业</td></tr>
+            <tr><td>住宿餐饮业营业额</td><td>6.2 亿元</td><td>5.1 亿元</td><td>受节假日客流带动明显</td></tr>
+            <tr><td>重点景区门票收入</td><td>1.34 亿元</td><td>1.28 亿元</td><td>不含景区内二次消费</td></tr>
+          </table>
+          <div class="tip" style="border-top: 1px solid #fff3cd; margin-top: 14px">
+            本页数据由漭江市统计局提供，为初步核算数。本页面为游戏内虚构政务网站，所有数据均为虚构。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">部门与服务平台直通</div>
+        <div class="card-body" style="padding: 0">
+          <table>
+            <tr><th style="width: 220px">部门 / 平台</th><th style="width: 250px">可办理 / 查询事项</th><th>入口</th></tr>
+            <tr><td>漭江市政务公开 · 政策文件</td><td>市政府及办公室文件、政策解读</td><td><a href="zhengce.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>漭江市生态环境局</td><td>环境质量、环评审批、排污许可、行政处罚</td><td><a href="env.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>漭江市公共资源交易中心</td><td>招标公告、中标结果、合同订立信息</td><td><a href="bidding.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>信用中国（漭江）</td><td>企业信用档案、红黑名单、信用修复</td><td><a href="credit.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>漭江市地理信息公共服务平台</td><td>地图服务、专题图层、兴趣点查询</td><td><a href="map.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>国家企业信用信息公示系统</td><td>企业登记、股东出资、股权出质、行政处罚</td><td><a href="gsxt.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+            <tr><td>工业和信息化部备案管理系统</td><td>网站 / APP / 小程序备案信息查询</td><td><a href="beian.html" style="color: #7eb0f2; text-decoration: none">进入 &gt;</a></td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  主办：漭江市人民政府办公室　　承办：漭江市政务服务和数据管理局<br>
+  网站标识码：0000000000　　本页面为游戏内虚构政务网站，所有政策文件、项目信息均为虚构
+</div>
+<script src="game-bridge.js"></script>
+<script src="hover-hint.js"></script>
+</body>
+</html>

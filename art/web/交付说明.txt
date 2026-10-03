@@ -1,0 +1,135 @@
+网页素材 · 像素风改造交付包
+====================================================
+
+【风格基准】参考图 14209276044537.jpg（像素游戏对话框）
+  纯黑底 #000000 | 金色面板 #c18225 | 亮斜面 #e3ac4e | 暗斜面 #7e5410
+  深棕内嵌 #4b2a0b | 白点阵字 #ffffff | 金框 3px
+  字体 Zpix 点阵 12px（原生步进 13px，与参考图一致）
+  三要素：无圆角、无渐变、无模糊
+
+【目录结构】
+  *.html              27 个页面（已注入 pixel-theme.css）
+  pixel-theme.css     全站像素主题（视觉令牌集中定义）
+  assets/             30 张像素化 PNG + zpix.ttf / zpix.woff2
+  preview/            效果截图 + 修正前后对照图
+  交付说明.txt        本文件
+
+【第一轮】HTML 像素风改造
+  25 个页面统一覆写为像素主题；新增 pixel-theme.css，不改动原 HTML 结构与内容。
+
+【第二轮】字体网格校正
+  问题：原页面字号 13/14/15/11/12.5px 等脱离 Zpix 12px 点阵网格
+        → 浏览器插值缩放，笔画发虚、粗细不均
+  修正：字号全部吸附至 12/24/36/48px 四个网格点（319 处）
+        行高统一偶数整数（91 处）| 字距取整（17 处）
+        关闭 kerning / ligatures / 合成斜体 / 亚像素字形定位
+  实测依据：
+    · 网格内字号中间灰阶 19.9%  vs  网格外 61.5%  → 锐利度提升 67.6%
+    · 12px 字形 ASCII 渲染笔画边界干净；13/14px 边缘大量灰阶过渡
+    · italic 触发合成倾斜（灰阶 34.0% → 58.4%），已归正
+    · bold 实测无影响（642px / 34.0% 三档一致），予以保留
+
+【第三轮】HTML → 图片 + 参考图项目比对 + 新增页面
+  ① 全部页面转为 PNG（DPR=2 整数倍、1440 宽视口、整页截图）
+     输出目录：C:/Users/Cooper/Pictures/概念图/网页素材-像素风-图片/
+  ② 比对参考图 微信图片_2026-10-02_193343_869.png（游戏内调查路线 / 成就对照表）
+     已有项目 19 条节点全部覆盖，未做改动
+     识别出 2 项新增：股权穿透、政府政策公示 → 已生成同像素风页面
+  ③ 新增页面 2 个：
+       equity.html   股权穿透图谱      www.gsxt.gov.cn
+       zhengce.html  政府政策与项目公示 mangjiang.gov.cn/zhengce
+  ④ 入链同步：search.html +2 条结果、game-nav.html +1 分组、
+     gsxt.html / business.html 各追加 1 处穿透与政策入口（均为追加，未删改）
+
+【页面清单 27 个】
+   1. ai.html                 7.2 KB
+   2. business.html          10.3 KB
+   3. chuangyeshi.html        8.7 KB
+   4. cninfo.html             7.4 KB
+   5. equity.html            16.2 KB  ← 新增
+   6. game-nav.html          14.6 KB
+   7. gsxt.html              10.5 KB
+   8. index.html             22.4 KB
+   9. news.html               9.3 KB
+  10. newspaper.html          9.4 KB
+  11. ranking.html           10.9 KB
+  12. search.html            11.2 KB
+  13. shenmai.html            8.8 KB
+  14. shenpan.html            8.5 KB
+  15. tax.html                7.6 KB
+  16. tianyancha.html        11.4 KB
+  17. tieba.html             10.3 KB
+  18. tieba_post1.html       14.1 KB
+  19. tieba_post2.html        6.9 KB
+  20. tieba_post3.html        6.5 KB
+  21. tieba_post4.html        8.0 KB
+  22. tieba_post5.html        7.7 KB
+  23. tieba_post6.html        7.1 KB
+  24. wenshu.html             9.3 KB
+  25. zhengce.html           20.6 KB  ← 新增
+  26. zhipin.html             8.6 KB
+  27. zhixing.html            8.2 KB
+
+【素材清单 30 张】
+  av-books.png                av-boots.png                av-bowl.png               
+  av-camera.png               av-duck.png                 av-helmet.png             
+  av-melon.png                av-mountain.png             av-notebook.png           
+  av-paper.png                av-pickaxe.png              av-road.png               
+  av-wheel.png                av-window.png               brand-mark.png            
+  gallery-interior.png        hero-scenic-aerial.png      hero-sunset-aerial.png    
+  hero-visitor-center.png     news-award-ceremony.png     news-museum-opening.png   
+  news-tour-road.png          news-train-crowd.png        newspaper-page.png        
+  old-mine-before.png         proj-eco-boardwalk.png      proj-eco-restoration.png  
+  proj-museum-exterior.png    proj-rail-sunset.png        shenmai-crypt.png         
+
+  assets/zpix.woff2   Zpix 点阵字体（966 KB）
+  assets/zpix.ttf     Zpix 点阵字体（4.68 MB，兜底）
+
+【图片产物 27 张】
+  C:/Users/Cooper/Pictures/概念图/网页素材-像素风-图片
+  含 _manifest.json（各页高度与文件大小）
+
+【预览图 32 张】
+  game-nav_对比.png
+  index_对比.png
+  newspaper_对比.png
+  tianyancha_对比.png
+  tieba_对比.png
+  效果_ai.png
+  效果_business.png
+  效果_chuangyeshi.png
+  效果_cninfo.png
+  效果_equity.png
+  效果_game-nav.png
+  效果_gsxt.png
+  效果_index.png
+  效果_news.png
+  效果_newspaper.png
+  效果_ranking.png
+  效果_search.png
+  效果_shenmai.png
+  效果_shenpan.png
+  效果_tax.png
+  效果_tianyancha.png
+  效果_tieba.png
+  效果_tieba_post1.png
+  效果_tieba_post2.png
+  效果_tieba_post3.png
+  效果_tieba_post4.png
+  效果_tieba_post5.png
+  效果_tieba_post6.png
+  效果_wenshu.png
+  效果_zhengce.png
+  效果_zhipin.png
+  效果_zhixing.png
+
+【验证结论】
+  字体加载      27/27 页面通过（body 12px，Zpix 生效）
+  字号网格      27/27 页面 100% 落在 12/24/36/48px
+  文字对比度    问题元素 0 处（WCAG AA）
+  合成斜体      0 处（已全部归正）
+  横向溢出      0 px
+  样式注入      27/27 页面均已链接 pixel-theme.css
+  版面高度      平均 -6.9%%（字号由 13/14px 归至 12px 的合理压缩）
+
+生成时间：2026-10-02 20:11:05

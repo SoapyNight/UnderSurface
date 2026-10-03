@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晶脉文旅调查 - 网页资源导航</title>
+<style>
+*{margin: 0; padding: 0; box-sizing: border-box}
+body{font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace; background: #12131a; color: #c8cad4; font-size: 12px; line-height: 24px}
+.wrap{max-width: 1000px; margin: 0 auto; padding: 32px 20px 60px}
+h1{font-size: 24px; color: #fff; margin-bottom: 6px}
+.sub{font-size: 12px; color: #b0b3bf; margin-bottom: 28px}
+.group{background: #1a1c26; border: 1px solid #262a38; border-radius: 0; margin-bottom: 18px; overflow: hidden}
+.group-head{padding: 12px 18px; background: #20232f; border-bottom: 1px solid #262a38; display: flex; align-items: center; gap: 10px}
+.group-head h2{font-size: 12px; color: #e8eaf2; font-weight: bold}
+.group-head .cnt{font-size: 12px; color: #b0b3bf; background: #262a38; padding: 2px 8px; border-radius: 0}
+.group-head .badge{margin-left: auto; font-size: 12px; padding: 2px 10px; border-radius: 0}
+.b-clue{background: #2d1f2a; color: #e06a9a; border: 1px solid #52303f}
+.b-fake{background: #1f2a2d; color: #6ab8c4; border: 1px solid #30505a}
+.b-mix{background: #2a271f; color: #c4a96a; border: 1px solid #504830}
+table{width: 100%; border-collapse: collapse; font-size: 12px}
+th{background: #1a1c26; padding: 9px 18px; text-align: left; color: #b0b3bf; font-size: 12px; font-weight: normal; border-bottom: 1px solid #262a38}
+td{padding: 10px 18px; border-bottom: 1px solid #1f222d; vertical-align: top}
+tr:last-child td{border-bottom: 0}
+td.f{width: 190px}
+td.u{width: 250px}
+a{color: #7aa2f7; text-decoration: none}
+a:hover{text-decoration: underline; color: #a5c0ff}
+code{background: #20232f; padding: 2px 7px; border-radius: 0; font-size: 12px; color: #9ece6a; font-family: 'Zpix','Zpix12','Fusion Pixel 12px','Courier New',monospace}
+.tag{display: inline-block; font-size: 12px; padding: 1px 7px; border-radius: 0; margin-left: 6px}
+.t-clue{background: #2d1f2a; color: #e06a9a}
+.t-fake{background: #1f2a2d; color: #6ab8c4}
+.d{color: #b0b3bf; font-size: 12px; margin-top: 3px}
+.note{background: #1a1c26; border-left: 3px solid #c4a96a; padding: 14px 18px; margin: 22px 0; font-size: 12px; color: #8b8fa3; line-height: 24px; border-radius: 0}
+.note b{color: #e8eaf2}
+.foot{margin-top: 28px; padding-top: 18px; border-top: 1px solid #262a38; font-size: 12px; color: #adb1c2; text-align: center; line-height: 22px}
+</style>
+<!-- pixel-theme: 依据参考图 14209276044537.jpg 的字体与风格改写，仅覆写样式，未改动页面内容与结构 -->
+<link rel="stylesheet" href="pixel-theme.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>晶脉文旅调查 · 网页资源导航</h1>
+  <div class="sub">游戏内全部可访问网页清单 · 共 20 个 HTML 文件</div>
+
+  <div class="note">
+    <b>使用说明</b><br>
+    所有文件位于同一目录，页面之间通过相对链接互相跳转，直接用浏览器打开 <code>search.html</code> 即可作为游戏内的调查入口。<br>
+    <b>线索 / 误导标记</b>仅供开发对照，游戏内页面本身不会出现任何提示性文字。标注"误导"的页面呈现的是完全正常的信息，需要玩家自己发现不对劲的地方。
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>入口</h2><span class="cnt">1</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>搜索引擎结果页<span class="tag t-fake">入口</span>
+          <div class="d">搜索"晶脉文旅有限公司"后的结果，汇总全部下游入口</div></td>
+        <td class="f"><a href="search.html">search.html</a></td>
+        <td class="u"><code>www.mangjiang-search.com/s?wd=晶脉文旅</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>论坛贴吧</h2><span class="cnt">7</span><span class="badge b-mix">含 1 条线索</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>贴吧列表页<span class="tag t-fake">入口</span>
+          <div class="d">6 个帖子，"加载更多"后才出现帖子6</div></td>
+        <td class="f"><a href="tieba.html">tieba.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/f?kw=晶脉文旅</code></td>
+      </tr>
+      <tr>
+        <td>帖子1 如何评价晶脉？<span class="tag t-fake">误导</span>
+          <div class="d">唯一有人回复的帖子，13楼清一色好评</div></td>
+        <td class="f"><a href="tieba_post1.html">tieba_post1.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8821001</code></td>
+      </tr>
+      <tr>
+        <td>帖子2 对漭江市的贡献<span class="tag t-fake">误导</span>
+          <div class="d">长篇数据文，含基建对比表格，0回复</div></td>
+        <td class="f"><a href="tieba_post2.html">tieba_post2.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8821244</code></td>
+      </tr>
+      <tr>
+        <td>帖子3 真正的良心企业<span class="tag t-fake">误导</span>
+          <div class="d">本地人情感视角长文，0回复</div></td>
+        <td class="f"><a href="tieba_post3.html">tieba_post3.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8822915</code></td>
+      </tr>
+      <tr>
+        <td>帖子4 佟家岭景区体验<span class="tag t-fake">误导</span>
+          <div class="d">详细游玩测评，含评分表，0回复</div></td>
+        <td class="f"><a href="tieba_post4.html">tieba_post4.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8824378</code></td>
+      </tr>
+      <tr>
+        <td>帖子5 公司创业史<span class="tag t-fake">误导</span>
+          <div class="d">时间线整理，末尾埋了几处客观事实，0回复</div></td>
+        <td class="f"><a href="tieba_post5.html">tieba_post5.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8825660</code></td>
+      </tr>
+      <tr>
+        <td>帖子6 没有人觉得诡异吗<span class="tag t-clue">线索</span>
+          <div class="d">被限流、无回复；提到禁区围墙、念诵声、官网源码里的隐藏IP</div></td>
+        <td class="f"><a href="tieba_post6.html">tieba_post6.html</a></td>
+        <td class="u"><code>tieba.mangjiang.com/p/8830147</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>公司自有渠道</h2><span class="cnt">3</span><span class="badge b-mix">含 1 条隐藏线索</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>公司官网<span class="tag t-clue">隐藏线索</span>
+          <div class="d">页面本身全是正面内容；打开时浏览器自动发出站点请求，响应预览的注释里藏着隐藏IP</div></td>
+        <td class="f"><a href="index.html">index.html</a></td>
+        <td class="u"><code>www.jingmai.com.cn</code></td>
+      </tr>
+      <tr>
+        <td>神脉教会<span class="tag t-clue">线索</span>
+          <div class="d">由隐藏IP 134.200.15.42 打开，教义/修行/联系方式</div></td>
+        <td class="f"><a href="shenmai.html">shenmai.html</a></td>
+        <td class="u"><code>134.200.15.42</code></td>
+      </tr>
+      <tr>
+        <td>招聘网站<span class="tag t-fake">误导</span>
+          <div class="d">6个在招岗位、薪资福利齐全，看起来在正常扩张</div></td>
+        <td class="f"><a href="zhipin.html">zhipin.html</a></td>
+        <td class="u"><code>www.zhipin.com/gongsi/jingmai-wenlu</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>媒体与内容平台</h2><span class="cnt">5</span><span class="badge b-fake">全部为误导项</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>漭江新闻网<span class="tag t-fake">误导</span>
+          <div class="d">5条正面报道，全是通稿，无深度调查</div></td>
+        <td class="f"><a href="news.html">news.html</a></td>
+        <td class="u"><code>news.mangjiang.com</code></td>
+      </tr>
+      <tr>
+        <td>报纸数字报<span class="tag t-fake">误导</span>
+          <div class="d">检索到4篇消息类稿件，明确说明"无调查报道"</div></td>
+        <td class="f"><a href="newspaper.html">newspaper.html</a></td>
+        <td class="u"><code>paper.mangjiangdaily.com.cn</code></td>
+      </tr>
+      <tr>
+        <td>创业专题文章<span class="tag t-fake">误导</span>
+          <div class="d">完整创业传奇长文，励志叙事，无财务数据</div></td>
+        <td class="f"><a href="chuangyeshi.html">chuangyeshi.html</a></td>
+        <td class="u"><code>www.chuangyeshi.com/article/20231206</code></td>
+      </tr>
+      <tr>
+        <td>AI问答<span class="tag t-fake">误导</span>
+          <div class="d">回答中立偏正面，客观陈述已知信息，不下结论</div></td>
+        <td class="f"><a href="ai.html">ai.html</a></td>
+        <td class="u"><code>chat.deepsleep.com</code></td>
+      </tr>
+      <tr>
+        <td>行业排名榜单<span class="tag t-fake">误导</span>
+          <div class="d">全国百强未收录，但地方名录已收录；附收录范围说明</div></td>
+        <td class="f"><a href="ranking.html">ranking.html</a></td>
+        <td class="u"><code>www.china-tourism-rank.org.cn/2023</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>政务与官方资质查询</h2><span class="cnt">3</span><span class="badge b-mix">含 1 条线索</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>纳税信用查询<span class="tag t-fake">误导</span>
+          <div class="d">A级纳税人，页面附信用等级评定口径说明</div></td>
+        <td class="f"><a href="tax.html">tax.html</a></td>
+        <td class="u"><code>www.chinatax.gov.cn/nsfw/a-grade</code></td>
+      </tr>
+      <tr>
+        <td>企业信用信息公示系统<span class="tag t-clue">线索</span>
+          <div class="d">行政处罚1条、经营异常1条、股权出质100%给天吴集团</div></td>
+        <td class="f"><a href="gsxt.html">gsxt.html</a></td>
+        <td class="u"><code>www.gsxt.gov.cn</code></td>
+      </tr>
+      <tr>
+        <td>晶脉文旅官网 · 产业规模<span class="tag t-fake">误导</span>
+          <div class="d">官网的自述数据：产业规模、核心运营指标、功能板块与规划；无立项无环评记录</div></td>
+        <td class="f"><a href="business.html">business.html</a></td>
+        <td class="u"><code>www.jingmai.com.cn/business</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>股权穿透与政策公示</h2><span class="cnt">2</span><span class="badge b-clue">全部为线索项</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>股权穿透图谱<span class="tag t-clue">线索</span>
+          <div class="d">3 层穿透：谢某 100% → 天吴集团 → 衡大地产；双向关联、循环持股、衡大地产实缴 0 元且参保 0 人</div></td>
+        <td class="f"><a href="equity.html">equity.html</a></td>
+        <td class="u"><code>www.gsxt.gov.cn</code></td>
+      </tr>
+      <tr>
+        <td>政府政策与项目公示<span class="tag t-clue">线索</span>
+          <div class="d">文旅扶持办法 + 市重点项目库；蛮牢山项目 5.6 亿立项、环评尚未批复、林地使用未办理</div></td>
+        <td class="f"><a href="zhengce.html">zhengce.html</a></td>
+        <td class="u"><code>www.mangjiang.gov.cn/zhengce</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group">
+    <div class="group-head">
+      <h2>商业查询与司法平台</h2><span class="cnt">5</span><span class="badge b-clue">全部为线索项</span>
+    </div>
+    <table>
+      <tr><th>模块</th><th>文件</th><th>游戏内网址</th></tr>
+      <tr>
+        <td>天眼查<span class="tag t-clue">线索</span>
+          <div class="d">12条风险分类统计，含司法案件、开庭、被执行、股权出质</div></td>
+        <td class="f"><a href="tianyancha.html">tianyancha.html</a></td>
+        <td class="u"><code>www.tianyancha.com/company/jingmai-wenlu</code></td>
+      </tr>
+      <tr>
+        <td>巨潮资讯网<span class="tag t-clue">线索</span>
+          <div class="d">检索0结果，附非上市企业披露范围说明</div></td>
+        <td class="f"><a href="cninfo.html">cninfo.html</a></td>
+        <td class="u"><code>www.cninfo.com.cn</code></td>
+      </tr>
+      <tr>
+        <td>中国裁判文书网<span class="tag t-clue">线索</span>
+          <div class="d">3起劳动争议：1败诉赔5万、1调解付3万、1审理中</div></td>
+        <td class="f"><a href="wenshu.html">wenshu.html</a></td>
+        <td class="u"><code>wenshu.court.gov.cn</code></td>
+      </tr>
+      <tr>
+        <td>中国执行信息公开网<span class="tag t-clue">线索</span>
+          <div class="d">被执行人1条，8万元，逾期未主动履行后被强制执行</div></td>
+        <td class="f"><a href="zhixing.html">zhixing.html</a></td>
+        <td class="u"><code>zxgk.court.gov.cn</code></td>
+      </tr>
+      <tr>
+        <td>中国审判流程信息公开网<span class="tag t-clue">线索</span>
+          <div class="d">2起2024年新立合同纠纷，含286万工程款、47万货款及财产保全</div></td>
+        <td class="f"><a href="shenpan.html">shenpan.html</a></td>
+        <td class="u"><code>splcgk.court.gov.cn</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <b>线索分布统计</b><br>
+    网页端线索共 10 条：神脉教会（1）、官网隐藏IP（1）、公示系统行政处罚+经营异常+股权出质（1）、股权穿透（1）、政府政策与项目公示（1）、天眼查风险聚合（1）、巨潮非上市（1）、裁判文书（1）、执行信息（1）、审判流程（1）。<br>
+    加上实地调查的 5 条（矿洞异响、官网不符、设施损坏、禁区咒文墙、村民两项传闻），全线路索上限 15 条，达标线 10 条。
+  </div>
+
+  <div class="foot">
+    晶脉文旅调查 · 游戏内网页资源 · 全部内容均为虚构<br>
+    本导航页不属于游戏内容，仅供开发对照
+  </div>
+</div>
+</body>
+</html>
